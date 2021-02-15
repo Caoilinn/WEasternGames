@@ -27,7 +27,7 @@ namespace AI.States
 
             if (!_fieldOfView.PlayerSpotted)
             {
-                _animator.SetBool(Idle, true);
+                //_animator.SetBool(Idle, true);
             }
             else
             {

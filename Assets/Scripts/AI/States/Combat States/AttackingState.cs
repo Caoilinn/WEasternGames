@@ -33,7 +33,13 @@ public class AttackingState : State
 
     private static readonly int LightAttack = Animator.StringToHash("LightAttack");
     private static readonly int HeavyAttack = Animator.StringToHash("HeavyAttack");
-
+    
+    
+    private static readonly int Attack1 = Animator.StringToHash("Attack1");
+    private static readonly int Attack2 = Animator.StringToHash("Attack2");
+    private static readonly int Attack3 = Animator.StringToHash("Attack3");
+    private static readonly int MassiveAttack = Animator.StringToHash("MassiveAttack");
+    
     #endregion
     
     public AttackingState(GameObject go, StateMachine sm) : base(go, sm)
@@ -48,6 +54,7 @@ public class AttackingState : State
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _rnd = new Random();
         _attackStateCountDown = 7f;
+        Debug.Log("Entering Combat State");
     }
 
     public override void FixedUpdate()
@@ -97,7 +104,7 @@ public class AttackingState : State
         isReadyNextATK = false;
         isCDOn = true;
         AttackCD = AttackCDVal;
-        _anim.SetTrigger(LightAttack);
+        _anim.SetTrigger(MassiveAttack);
         _enemyAction.action = EnemyAction2.EnemyActionType.LightAttack;
     }
 
