@@ -14,6 +14,9 @@ public class EnemyAction2 : MonoBehaviour
         PerfectBlockOnly,
     }
 
+    
+    private bool jkdefh;
+    
     public EnemyActionType action;
         
     public bool isPerfectBlock = false;

@@ -4,10 +4,14 @@ namespace AI.States
 {
     public class FollowState : State
     {
-        private FieldOfView _fieldOfView;
-        private Animator _animator;
         private float _moveSpeed;
-
+        
+        private FieldOfView _fieldOfView;
+        private FieldOfView _fieldOfViewR;
+        private FieldOfView _fieldOfViewL;
+        
+        private Animator _animator;
+        
         #region Animation Triggers
         
         private static readonly int IsWalking = Animator.StringToHash("isWalking");
@@ -27,6 +31,8 @@ namespace AI.States
         {
             base.Enter();
             _fieldOfView = _go.GetComponent<FieldOfView>();
+            _fieldOfViewR = _go.transform.Find("RightFOV").GetComponent<FieldOfView>();
+            _fieldOfViewL = _go.transform.Find("LeftFOV").GetComponent<FieldOfView>();
             _animator = _go.GetComponent<Animator>();
             _moveSpeed = 8f;
             _zVelHash = Animator.StringToHash("enemyVelZ");

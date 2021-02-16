@@ -19,7 +19,7 @@ namespace AI
         public float DistanceToPlayer => Vector3.Distance(_player.transform.position, transform.position);
         
         //To be deleted once debugging is no longer needed, that is the only purpose of this function
-        /*private void OnDrawGizmos()
+        private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, lookRadius);
@@ -36,7 +36,7 @@ namespace AI
             
             Gizmos.color = Color.black;
             Gizmos.DrawRay(_rayCastOrigin.position, transform.forward * lookRadius);
-        }*/
+        }
 
        private void Detection()
         {
