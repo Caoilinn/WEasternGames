@@ -32,11 +32,6 @@ namespace AI.States
         public override void FixedUpdate()
         {
             base.FixedUpdate();
-                
-            Debug.Log("Field of View Front: " + _fieldOfView.PlayerSpotted);
-            Debug.Log("Field of View Right: " + _fieldOfViewR.PlayerSpotted);
-            Debug.Log("Field of View Left: " + _fieldOfViewL.PlayerSpotted);
-            
             if (!_fieldOfView.PlayerSpotted)
             {
                 //_animator.SetBool(Idle, true);

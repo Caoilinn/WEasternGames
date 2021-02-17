@@ -82,12 +82,12 @@ public class PlayerStats : MonoBehaviour
 
     void setStaminaUI()
     {
-        staminaUI.setStaminaSlider(stamina);
+        //staminaUI.setStaminaSlider(stamina);
     }
 
     void setHealthUI()
     {
-        hpUI.setHealth(health);
+        //hpUI.setHealth(health);
     }
 
     void loseCondition()

@@ -180,6 +180,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 633342201}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &448092678 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5621000077098193525, guid: 4b5e62c514fd65846a6c51425335083d,
+    type: 3}
+  m_PrefabInstance: {fileID: 633342201}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &448929236
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,6 +702,21 @@ PrefabInstance:
       propertyPath: playerCamera
       value: 
       objectReference: {fileID: 987575996}
+    - target: {fileID: 2264000407243029345, guid: 4b5e62c514fd65846a6c51425335083d,
+        type: 3}
+      propertyPath: _anim
+      value: 
+      objectReference: {fileID: 448092678}
+    - target: {fileID: 2264000407243029345, guid: 4b5e62c514fd65846a6c51425335083d,
+        type: 3}
+      propertyPath: animatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: 159982c21f35f70479089a9414e4e457, type: 2}
+    - target: {fileID: 2264000407243029345, guid: 4b5e62c514fd65846a6c51425335083d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2264000407243029358, guid: 4b5e62c514fd65846a6c51425335083d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4b5e62c514fd65846a6c51425335083d, type: 3}
@@ -1718,7 +1739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6c395d73750d93498c470190bffba1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fieldOfViewAngle: 20
+  fieldOfViewAngle: 100
   lookRadius: 10
   _rayCastOrigin: {fileID: 1733185873}
 --- !u!114 &919132147564110500

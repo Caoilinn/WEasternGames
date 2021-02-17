@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyAnimation : MonoBehaviour
 {
     public Animator _anim;
-    private EnemyAction enemyAction;
+    private EnemyAction2 enemyAction;
     public GameObject player;
     public GameObject enemy;
     private Collider collider;
@@ -15,7 +15,7 @@ public class EnemyAnimation : MonoBehaviour
     {
         _anim = GetComponent<Animator>();
         _anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimationController/TestEnemyAnimator"); //Load controller at runtime https://answers.unity.com/questions/1243273/runtimeanimatorcontroller-not-loading-from-script.html
-        enemyAction = GetComponent<EnemyAction>();
+        enemyAction = GetComponent<EnemyAction2>();
         collider = this.enemy.transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/" +
             "PoleArm").gameObject.GetComponent<BoxCollider>(); // to find a child game object by name   //https://docs.unity3d.com/ScriptReference/Transform.Find.html
     }
