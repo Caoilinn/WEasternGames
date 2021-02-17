@@ -9,7 +9,6 @@ public class AIController : MonoBehaviour
 {
     private StateMachine _sm;
 
-
     private void Awake()
     {
         _sm = new StateMachine();

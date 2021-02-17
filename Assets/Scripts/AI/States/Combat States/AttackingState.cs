@@ -25,11 +25,16 @@ public class AttackingState : State
     private int _sequenceCount = 0;
 
     private bool _actionFlag;
+    private bool _isNextSequenceReady = true;
     
-    private const float AttackCDVal = 2f; 
     private bool isReadyNextATK = true;
     private float AttackCD;
     private bool isCDOn = false;
+    
+    private readonly int[] _sequence1 = {0, 0, 0};
+    private readonly int[] _sequence2 = {1, 1, 1};
+    private readonly int[] _sequence3 = {2, 2, 2};
+    private readonly int[] _sequence4 = {3, 3, 3};
     
     
     //This is how long the AI will remain in this state during combat
@@ -73,42 +78,21 @@ public class AttackingState : State
                _attackActions.Add(new AnimationAction(clip));
             }
         }
-        
-        int[] sequence = {2, 1, 3};
-
-        foreach (var t in sequence)
-        {
-            _actionSequence.Add(_attackActions[t]);
-        }
     }
 
     public override void FixedUpdate()
     {
         base.FixedUpdate();
 
-       if (isReadyNextATK)
-        {
-            /*int action = Random.Range(0,2);
-            _actionType = (CombatActionType) action;
-
-            switch (_actionType)
-            {
-                case CombatActionType.HeavyAttack:
-                    // DoHeavyAttack();
-                    DoLightAttack();
-                    break;
-                case CombatActionType.LightAttack:
-                    DoLightAttack();
-                    break;
-
-            }*/
-            
-            PerformActions();
-        }
+       if (isReadyNextATK) 
+           PerformActions();
+        
         ResetAttackCD();
 
         _attackStateCountDown -= Time.fixedDeltaTime;
         
+        //Currently Changes state to blocking 
+        //TODO: Change how the Attacking State transitions to blocking, make it transition based on health
         if (_attackStateCountDown <= 0)
         {
             int action = Random.Range(0,2);
@@ -123,20 +107,23 @@ public class AttackingState : State
         {
             _sm._CurState = new FollowState(_go, _sm);
         }
-
     }
 
 
     private void PerformActions()
     {
+        if (_isNextSequenceReady)
+        {
+            GetNextSequence();
+            return;
+        }
+
         AnimationAction currentAction = GetNextAction(_actionSequence);
 
         isReadyNextATK = false;
         isCDOn = true;
         _enemyAction.action = EnemyAction2.EnemyActionType.LightAttack;
-        
-        Debug.Log(currentAction.AnimationClipName);
-        
+    
         switch (currentAction.AnimationClipName)
         {
             case "Attack 1":
@@ -151,8 +138,11 @@ public class AttackingState : State
             case "Attack 4":
                 _anim.SetTrigger(MassiveAttack);
                 break;
+            default:
+                //Step forward code here 
+                break;
         }
-        
+    
         float animClipLength = currentAction.AnimationClipLength;
         AttackCD = animClipLength;
         _sequenceCount++;
@@ -160,45 +150,50 @@ public class AttackingState : State
 
     private AnimationAction GetNextAction(List<AnimationAction> actions)
     {
-        if (_sequenceCount == 3)
+        if (_sequenceCount == actions.Count)
+        {
             _sequenceCount = 0;
-
+            _isNextSequenceReady = true;
+            
+            return null;
+        }
+        
         return actions[_sequenceCount];
     }
 
-    private void DoLightAttack()
+    //Returns the next sequence that the AI needs to use
+    private void GetNextSequence()
     {
-        isReadyNextATK = false;
-        isCDOn = true;
-        _anim.SetTrigger(MassiveAttack);
-        _enemyAction.action = EnemyAction2.EnemyActionType.LightAttack;
+        int rnd = Random.Range(0, 3);
+        int[] seq = new int[] { };
 
-        AnimationClip animClipLength = _anim.GetCurrentAnimatorClipInfo(0)[0].clip;
-        
-        //Debug.Log("Clip Name: " + animClipLength.name);
-        //Debug.Log("Clip Length: " + animClipLength.length);
-        
-        AttackCD = animClipLength.length;
-        
-        
-        /*
-        AnimationClip[] clips = _anim.runtimeAnimatorController.animationClips;
-         
-        foreach (AnimationClip clip in clips)
+        Debug.Log("Getting next sequence: " + rnd);
+        switch (rnd)
         {
-            Debug.Log("Clip Name: " + clip.name + " Clip Length: " + clip.length);
-        }*/
-        
-    }
+            case 0:
+                seq = _sequence1;
+                break;
+            case 1:
+                seq = _sequence2;
+                break;
+            case 2:
+                seq = _sequence3;
+                break;
+            case 3:
+                seq = _sequence4;
+                break;
+        }
 
-    private void DoHeavyAttack()
-    {
-        isReadyNextATK = false;
-        isCDOn = true;
-        AttackCD = AttackCDVal;
-        _anim.SetTrigger(HeavyAttack);
-        _enemyAction.action = EnemyAction2.EnemyActionType.HeavyAttack;
+        _actionSequence.Clear();
+        
+        foreach (int action in seq)
+        {
+            _actionSequence.Add(_attackActions[action]);
+        }
+
+        _isNextSequenceReady = false;
     }
+        
     
     private void ResetAttackCD()
     {
@@ -213,5 +208,4 @@ public class AttackingState : State
             isReadyNextATK = true;
         }
     }
-    
 }
