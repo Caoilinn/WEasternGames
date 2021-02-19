@@ -9,6 +9,8 @@ public class CutsceneManager : MonoBehaviour
     public GameObject player;
     public GameObject playerCamera;
     public GameObject cutsceneCamera;
+
+    public GameObject cutsceneLocation;
     private bool isAllDead = false;
     private PlayableDirector playableDirector;
 
@@ -37,6 +39,12 @@ public class CutsceneManager : MonoBehaviour
     }
 
     void OnCutscenePlayed(PlayableDirector director) {
+        // move all characters in the cutscene to the cutscene location, reset local rotation to 0,0,0.
+        player.transform.parent = cutsceneLocation.transform;
+        
+        player.transform.localPosition = new Vector3(0,0,0);
+        player.transform.localEulerAngles = new Vector3(0,0,0);
+
         // deactivate the player
         player.GetComponent<PlayerMovement>().enabled = false;
         player.GetComponent<PlayerAnimation>().enabled = false;
