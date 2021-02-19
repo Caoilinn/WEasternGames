@@ -8,7 +8,7 @@ public class PlayerCollision : MonoBehaviour
     PlayerStats playerStats;
     PlayerMovement playerMovement;
     PlayerAction playerAction;
-    FieldOfView playerFieldOfView;
+    BlockRadius playerFieldOfView;
 
     void Awake()
     {
@@ -16,7 +16,7 @@ public class PlayerCollision : MonoBehaviour
         playerStats = this.GetComponent<PlayerStats>();
         playerMovement = this.GetComponent<PlayerMovement>();
         playerAction = this.GetComponent<PlayerAction>();
-        playerFieldOfView = this.GetComponent<FieldOfView>();
+        playerFieldOfView = this.GetComponent<BlockRadius>();
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -26,7 +26,7 @@ public class PlayerCollision : MonoBehaviour
         {
             Enemy enemy = collision.gameObject.GetComponent<EnemyWeaponCollision>().enemy.GetComponent<Enemy>();
             EnemyWeaponCollision enemyWeaponCollision = collision.gameObject.GetComponent<EnemyWeaponCollision>();
-            bool isInPlayerFov = this.GetComponent<FieldOfView>().EnemyInFOV(enemy);
+            bool isInPlayerFov = this.GetComponent<BlockRadius>().EnemyInFOV(enemy);
             #region Player Blocking Collision Logic
             // player is blocking and get hit by enemy
             if (collision.gameObject.GetComponent<Collider>().isTrigger == false &&

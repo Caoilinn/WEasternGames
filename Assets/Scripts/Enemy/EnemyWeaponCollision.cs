@@ -32,7 +32,7 @@ public class EnemyWeaponCollision : MonoBehaviour
             PlayerAction playerAction = collision.gameObject.GetComponent<PlayerAction>();
 
             Enemy enemy = this.enemy.GetComponent<Enemy>();
-            bool isInPlayerFov = collision.gameObject.GetComponent<FieldOfView>().EnemyInFOV(enemy);
+            bool isInPlayerFov = collision.gameObject.GetComponent<BlockRadius>().EnemyInFOV(enemy);
             //get player perfect block
             if (collision.gameObject.GetComponent<PlayerAction>().isPerfectBlock == true && this.GetComponent<Collider>().isTrigger == false)
             {

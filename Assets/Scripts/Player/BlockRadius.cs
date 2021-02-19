@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldOfView : MonoBehaviour
+public class BlockRadius : MonoBehaviour
 {
     public float maxAngle;
 
