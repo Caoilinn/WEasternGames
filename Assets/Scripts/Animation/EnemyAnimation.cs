@@ -93,6 +93,11 @@ public class EnemyAnimation : MonoBehaviour
 
     }
 
+    public void OnAnimation_isStunFinished()
+    {
+
+    }
+
     public void OnAnimation_isBlockStunFinished()
     {
 

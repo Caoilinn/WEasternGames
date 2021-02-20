@@ -22,7 +22,7 @@ public class EnemyBehaviour : MonoBehaviour
         playerDistance = Vector3.Distance(this.transform.position, testPlayer.transform.position);
         if (playerDistance < 5)
         {
-            this.transform.LookAt(new Vector3(testPlayer.transform.position.x, this.transform.position.y, testPlayer.transform.position.z)); // only rotate y axis
+           // this.transform.LookAt(new Vector3(testPlayer.transform.position.x, this.transform.position.y, testPlayer.transform.position.z)); // only rotate y axis
             
         }
     } 
