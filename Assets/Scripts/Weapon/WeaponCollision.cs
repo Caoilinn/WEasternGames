@@ -30,6 +30,7 @@ public class WeaponCollision : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             EnemyAction enemyAction = collision.gameObject.GetComponent<EnemyAction>();
             EnemyAnimation enemyAnimation = collision.gameObject.GetComponent<EnemyAnimation>();
+            bool isInEnemyFOV = enemy.PlayerInFOV(player);
 
             #region Enemy Blocking Collision Logic
             // enemy is blocking and get hit by player
@@ -55,8 +56,9 @@ public class WeaponCollision : MonoBehaviour
 
                 #region get enemy light attack
                 //get enemy light attack
-                if (enemy.hitStunValue > 0 && 
-                    playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT"))
+                if (enemy.hitStunValue > 0 &&
+                    playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT") &&
+                    isInEnemyFOV)
                 {
                     enemy.DecreaseHPStamina(1.25f, 1.25f);
                     enemy.hitStunValue -= 10;
@@ -80,8 +82,16 @@ public class WeaponCollision : MonoBehaviour
                         enemyAnimation._anim.SetTrigger("isInjured");
                     }
                 }
-                #endregion
-                this.GetComponent<Collider>().isTrigger = true;
+                else if (enemy.hitStunValue > 0 &&
+                    playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT") &&
+                    !isInEnemyFOV)
+                {
+                    enemy.DecreaseHPStamina(5, 5);
+                    enemy.readyToRestoreStaminaTime = 5.0f;
+                    enemyAnimation._anim.ResetTrigger("isInjured");
+                    enemyAnimation._anim.SetTrigger("isInjured");
+                }
+                    #endregion
             }
 
             // enemy is in blocking impact status and get hit
@@ -90,13 +100,36 @@ public class WeaponCollision : MonoBehaviour
                 enemyAction.isPerfectBlock == false &&
                 enemyAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("BI"))
             {
-                enemy.hitStunValue -= 20;
-                enemyAnimation._anim.ResetTrigger("isGetBlockingImpact");
-                enemyAnimation._anim.SetTrigger("isGetBlockingImpact");
-                this.GetComponent<Collider>().isTrigger = true;
+                if(isInEnemyFOV)
+                {
+                    enemy.hitStunValue -= 20;
+                    enemyAnimation._anim.ResetTrigger("isGetBlockingImpact");
+                    enemyAnimation._anim.SetTrigger("isGetBlockingImpact");
+                    this.GetComponent<Collider>().isTrigger = true;
 
-                // spawn sword clash effect
-                enemy.GetComponent<SwordEffectSpawner>().SpawnSwordClash();
+                    // spawn sword clash effect
+                    enemy.GetComponent<SwordEffectSpawner>().SpawnSwordClash();
+                }
+                else
+                {
+                    if(playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("HT"))
+                    {
+                        this.GetComponent<Collider>().isTrigger = true;
+                        enemy.DecreaseHPStamina(10, 10); 
+                        enemy.readyToRestoreStaminaTime = 5.0f;
+                        //playerMovement.isSprinting = false;
+                        enemyAnimation._anim.ResetTrigger("isInjured");
+                        enemyAnimation._anim.SetTrigger("isInjured");
+                    }
+                    else if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT"))
+                    {
+                        this.GetComponent<Collider>().isTrigger = true;
+                        enemy.DecreaseHPStamina(5, 5); 
+                        enemy.readyToRestoreStaminaTime = 5.0f;
+                        enemyAnimation._anim.ResetTrigger("isInjured");
+                        enemyAnimation._anim.SetTrigger("isInjured");
+                    }
+                }
             }
             #endregion
 
@@ -107,7 +140,7 @@ public class WeaponCollision : MonoBehaviour
                enemyAction.isPerfectBlock == false)
             {
                 this.GetComponent<Collider>().isTrigger = true;
-                enemy.DecreaseHPStamina(10, 10);   //  actual is 20
+                enemy.DecreaseHPStamina(10, 10); 
                 enemy.readyToRestoreStaminaTime = 5.0f;
                 //playerMovement.isSprinting = false;
                 enemyAnimation._anim.ResetTrigger("isInjured");
@@ -151,14 +184,25 @@ public class WeaponCollision : MonoBehaviour
                       enemyAction.isKeepBlocking == true &&
                       playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT"))
             {
-                enemy.DecreaseHPStamina(5, 5);   //  actual is 10
-                enemy.hitStunValue -= 5;
-                enemyAnimation._anim.ResetTrigger("isGetBlockingImpact");
-                enemyAnimation._anim.SetTrigger("isGetBlockingImpact");
-                enemy.readyToRestoreStaminaTime = 5.0f;
-                //playerMovement.isSprinting = false;
-                this.GetComponent<Collider>().isTrigger = true;
-                enemy.GetComponent<SwordEffectSpawner>().SpawnSwordClash();
+                if(isInEnemyFOV)
+                {
+                    enemy.DecreaseHPStamina(5, 5);
+                    enemy.hitStunValue -= 5;
+                    enemyAnimation._anim.ResetTrigger("isGetBlockingImpact");
+                    enemyAnimation._anim.SetTrigger("isGetBlockingImpact");
+                    enemy.readyToRestoreStaminaTime = 5.0f;
+                    //playerMovement.isSprinting = false;
+                    this.GetComponent<Collider>().isTrigger = true;
+                    enemy.GetComponent<SwordEffectSpawner>().SpawnSwordClash();
+                }
+                else
+                {
+                    this.GetComponent<Collider>().isTrigger = true;
+                    enemy.DecreaseHPStamina(5, 5);
+                    enemy.readyToRestoreStaminaTime = 5.0f;
+                    enemyAnimation._anim.ResetTrigger("isInjured");
+                    enemyAnimation._anim.SetTrigger("isInjured");
+                }
             }
 
             else if (enemyAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("GH"))
@@ -179,15 +223,32 @@ public class WeaponCollision : MonoBehaviour
             // enemy is in perfect block
             if (collision.gameObject.GetComponent<EnemyAction>().isPerfectBlock == true)
             {
-                player.GetComponent<PlayerAnimation>()._anim.ResetTrigger("isGetEnemyPerfectBlock");
-                player.GetComponent<PlayerAnimation>()._anim.SetTrigger("isGetEnemyPerfectBlock");
-                playerAction.isPlayerAttacking = false;
-                playerStats.isHitStun = true;
+                if(isInEnemyFOV)
+                {
+                    player.GetComponent<PlayerAnimation>()._anim.ResetTrigger("isGetEnemyPerfectBlock");
+                    player.GetComponent<PlayerAnimation>()._anim.SetTrigger("isGetEnemyPerfectBlock");
+                    playerAction.isPlayerAttacking = false;
+                    playerStats.isHitStun = true;
 
-                // spawn sword clash effect
-                collision.gameObject.GetComponentInParent<SwordEffectSpawner>().SpawnBigSwordClash();
-                this.GetComponent<Collider>().isTrigger = true;
+                    // spawn sword clash effect
+                    collision.gameObject.GetComponentInParent<SwordEffectSpawner>().SpawnBigSwordClash();
+                }
+                else
+                {
+                    if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT"))
+                    {
+                        enemy.DecreaseHPStamina(5, 5);  
+                    }
+                    else if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("HT"))
+                    {
+                        enemy.DecreaseHPStamina(10, 10); 
+                    }
+                    enemyAnimation._anim.ResetTrigger("isInjured");
+                    enemyAnimation._anim.SetTrigger("isInjured");
+                    enemy.readyToRestoreStaminaTime = 5.0f;
+                }
             }
+            this.GetComponent<Collider>().isTrigger = true;
         }
     }
 }
