@@ -8,6 +8,7 @@ public class CombatWalk : State
 {
     private Animator _anim;
     private Transform _player;
+    
     private float _moveSpeed;
     private bool _forward;
     

@@ -20,11 +20,14 @@ namespace AI.States
         private float _zVel;
         private int _zVelHash;
 
+        private int _sequence;
+        
         #endregion
 
 
-        public FollowState(GameObject go, StateMachine sm) : base(go, sm)
+        public FollowState(GameObject go, StateMachine sm, int sequence = 0) : base(go, sm)
         {
+            _sequence = sequence;
         }
 
         public override void Enter()
@@ -57,7 +60,7 @@ namespace AI.States
             {
                 _zVel = 0;
                 _animator.SetFloat(_zVelHash, _zVel);
-                _sm._CurState = new AttackingState(_go, _sm);
+                _sm._CurState = new BlockingState(_go, _sm);
             }
         }
     }

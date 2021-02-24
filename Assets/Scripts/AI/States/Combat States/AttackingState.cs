@@ -1,9 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using AI;
 using AI.States;
 using UnityEngine;
 using UnityTemplateProjects.Animation;
+using Random = UnityEngine.Random;
 
 
 enum CombatActionType
@@ -14,48 +17,62 @@ enum CombatActionType
 
 public class AttackingState : State
 {
+
+    private float _dashSpeed = 2f;
+    private float _dashTime = 0.2f;
+    private float _startDashTime = 0.1f;
+    
+    private Rigidbody _rigidBody;
     private Animator _anim;
     private List<int> _attackPatterns;
     private Random _rnd;
     private CombatActionType _actionType;
     private EnemyAction2 _enemyAction;
     private Transform _playerTransform;
-    private List<AnimationAction> _attackActions;
+    private CapsuleCollider _collider;
+    private float _colliderRadius;
+    private float _colliderHeight;
+    
+    private List<AnimationAction> _actions;
     private List<AnimationAction> _actionSequence;
     private int _sequenceCount = 0;
+    private int _origionalSequence;
 
+
+    private float _origY;
+    
     private bool _actionFlag;
     private bool _isNextSequenceReady = true;
+    private bool _rolling = false;
     
     private bool isReadyNextATK = true;
     private float AttackCD;
     private bool isCDOn = false;
     
-    private readonly int[] _sequence1 = {0, 0, 0};
-    private readonly int[] _sequence2 = {1, 1, 1};
-    private readonly int[] _sequence3 = {2, 2, 2};
-    private readonly int[] _sequence4 = {3, 3, 3};
+    private readonly int[] _sequence1 = {0, 1, 3, 4, 1, 3, 4, 1, 1};
+    private readonly int[] _sequence2 = {0, 1, 2, 4, 1, 2, 1, 2, 1};
+    private readonly int[] _sequence3 = {0, 1, 2, 4, 1, 2, 4, 1, 1};
+    private readonly int[] _sequence4 = {0, 1, 2, 4, 1, 3, 3, 2, 4};
     
     
     //This is how long the AI will remain in this state during combat
     private float _attackStateCountDown;
     
     #region Animation Triggers
-
-    private static readonly int LightAttack = Animator.StringToHash("LightAttack");
-    private static readonly int HeavyAttack = Animator.StringToHash("HeavyAttack");
-    
-    
     private static readonly int Attack1 = Animator.StringToHash("Attack1");
     private static readonly int Attack2 = Animator.StringToHash("Attack2");
     private static readonly int Attack3 = Animator.StringToHash("Attack3");
     private static readonly int MassiveAttack = Animator.StringToHash("MassiveAttack");
+    private static readonly int CombatRoll = Animator.StringToHash("CombatRoll");
+    
     private static readonly int TakeDamage = Animator.StringToHash("TakeDamage");
     
     #endregion
     
-    public AttackingState(GameObject go, StateMachine sm) : base(go, sm)
+    public AttackingState(GameObject go, StateMachine sm, int sequence = 0) : base(go, sm)
     {
+        if (sequence != 0)
+            _sequenceCount = sequence;
     }
 
     public override void Enter()
@@ -66,27 +83,42 @@ public class AttackingState : State
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _rnd = new Random();
         _attackStateCountDown = 7f;
-        _attackActions = new List<AnimationAction>();
+        _actions = new List<AnimationAction>();
         _actionSequence = new List<AnimationAction>();
+        _collider = _go.GetComponent<CapsuleCollider>();
+        _colliderRadius = _collider.radius;
+        _colliderHeight = _collider.height;
+        _rigidBody = _go.GetComponent<Rigidbody>();
+
         
         AnimationClip[] clips = _anim.runtimeAnimatorController.animationClips;
        
-        foreach (var clip in clips)
+        foreach (AnimationClip clip in clips)
         {
-            if (clip.name.Contains("Attack"))
+            if (clip.name.Contains("Attack") || clip.name.Contains("roll"))
             {
-               _attackActions.Add(new AnimationAction(clip));
+                _actions.Add(new AnimationAction(clip));
             }
         }
     }
-
+    
     public override void FixedUpdate()
     {
         base.FixedUpdate();
 
-       if (isReadyNextATK) 
-           PerformActions();
+        if (isReadyNextATK)
+        {
+            _collider.radius = _colliderRadius;
+            _collider.height = _colliderHeight;
+            _rolling = false;
+            _rigidBody.velocity = Vector3.zero;
+            PerformActions(); 
+        }
+           
         
+       if(_rolling)
+           DoCombatRoll();
+           
         ResetAttackCD();
 
         _attackStateCountDown -= Time.fixedDeltaTime;
@@ -103,15 +135,18 @@ public class AttackingState : State
                 _sm._CurState = new BlockingState(_go, _sm);
         }
 
-        if (Vector3.Distance(_playerTransform.position, _go.transform.position) > 3f)
+        if (Vector3.Distance(_playerTransform.position, _go.transform.position) > 3f && !_rolling)
         {
-            _sm._CurState = new FollowState(_go, _sm);
+            _sm._CurState = new FollowState(_go, _sm, _sequenceCount);
         }
     }
 
 
     private void PerformActions()
     {
+
+        
+        
         if (_isNextSequenceReady)
         {
             GetNextSequence();
@@ -123,38 +158,61 @@ public class AttackingState : State
         isReadyNextATK = false;
         isCDOn = true;
         _enemyAction.action = EnemyAction2.EnemyActionType.LightAttack;
-    
+
+        float animClipLength = 0f;
+        
         switch (currentAction.AnimationClipName)
         {
             case "Attack 1":
                 _anim.SetTrigger(Attack1);
+                animClipLength = currentAction.AnimationClipLength;
                 break;
             case "Attack 2":
                 _anim.SetTrigger(Attack2);
+                animClipLength = currentAction.AnimationClipLength;
                 break;
             case "Attack 3":
                 _anim.SetTrigger(Attack3);
+                animClipLength = currentAction.AnimationClipLength;
                 break;
             case "Attack 4":
                 _anim.SetTrigger(MassiveAttack);
+                animClipLength = currentAction.AnimationClipLength;
+                break;
+            case "roll":
+                _go.transform.Rotate(new Vector3(0, 90,0));
+                _anim.SetTrigger(CombatRoll);
+                _collider.radius = 0.51f;
+                _collider.height = 0;
+                animClipLength = currentAction.AnimationClipLength;
+                DoCombatRoll();
+                _rolling = true;
                 break;
             default:
                 //Step forward code here 
                 break;
         }
-    
-        float animClipLength = currentAction.AnimationClipLength;
+        
         AttackCD = animClipLength;
         _sequenceCount++;
     }
 
     private AnimationAction GetNextAction(List<AnimationAction> actions)
     {
-        if (_sequenceCount == actions.Count)
+        Debug.Log("Actions Count: " + actions.Count);
+        Debug.Log("Sequence Count: " + _sequenceCount);
+       
+        /*if (_origionalSequence != 0)
         {
+            _sequenceCount = _origionalSequence -1;
+            _origionalSequence = 0;
+        }*/
+        
+        if (_sequenceCount >= actions.Count)
+        {
+            Debug.Log("Resetting for Next Sequence");
             _sequenceCount = 0;
             _isNextSequenceReady = true;
-            
             return null;
         }
         
@@ -167,7 +225,6 @@ public class AttackingState : State
         int rnd = Random.Range(0, 3);
         int[] seq = new int[] { };
 
-        Debug.Log("Getting next sequence: " + rnd);
         switch (rnd)
         {
             case 0:
@@ -188,13 +245,38 @@ public class AttackingState : State
         
         foreach (int action in seq)
         {
-            _actionSequence.Add(_attackActions[action]);
+            _actionSequence.Add(_actions[action]);
         }
 
         _isNextSequenceReady = false;
     }
+
+    private void DoCombatRoll()
+    {
+        _go.transform.position += _go.transform.forward * (2f * Time.fixedDeltaTime);
+    }
+
+    private void DoDash()
+    {
+        /*if (_dashTime <= 0)
+            _dashTime = _startDashTime;
+        else
+        {
+            _dashTime -= Time.fixedDeltaTime;
+            _rigidBody.velocity = Vector3.left * _dashSpeed;
+        }*/
+
+        float dashDistance = 5f;
         
-    
+        if(_dashTime <= 0)
+            _dashTime = _startDashTime;
+        else
+        {
+            _dashTime -= Time.fixedDeltaTime;
+            _go.transform.position += _go.transform.forward * _dashSpeed;
+        }
+    }
+
     private void ResetAttackCD()
     {
         if (AttackCD > 0 && isCDOn)
