@@ -258,9 +258,11 @@ public class PlayerMovementV2 : MonoBehaviour
     //dodge
     public void OnRunningKeyPressed(){
         //Dodge();
+        animator.SetBool("isRunning", true);
         this.isRunning = true;
     }
     public void OnRunningKeyReleased() {
+        animator.SetBool("isRunning", false);
         this.isRunning = false;
     }
     #endregion
