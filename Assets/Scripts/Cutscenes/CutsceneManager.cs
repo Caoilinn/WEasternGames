@@ -21,6 +21,7 @@ public class CutsceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check if all enemies have been defeated
         for (int i = 0; i < enemies.Length; i++) {
             if (enemies[i].activeSelf) {
                 return;
