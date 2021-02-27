@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovementV2 : MonoBehaviour
 {
     public Transform playerCameraTransform;
-    public float runningSpeed = 2;
-    public float walkingSpeed = 1;
-    public float rotationSpeed = 1;
+    public float playerSpeed;
+    public float runningSpeed = 8;
+    public float walkingSpeed = 4;
+    public float hitSpeed = 1;
+    public float rotationSpeed = 500;
     public float gravity = 9.81f;
     public float groundedThreshold = 10;
     public LayerMask groundLayerMask;
@@ -16,10 +19,10 @@ public class PlayerMovementV2 : MonoBehaviour
     private bool isGoingBackward;
     private bool isGoingLeft;
     private bool isGoingRight;
-    private bool isRunning;
-    private bool isDodging;
-    private bool isIdle;
-    private bool isGrounded = false;
+    public bool isRunning;
+    public bool isDodging;
+    public bool isIdle;
+    public bool isGrounded = false;
     private float VerticalSpeed = 0f;
     private float currentSpeed = 0f;
     private float currentRotationSpeed = 0f;
@@ -31,16 +34,23 @@ public class PlayerMovementV2 : MonoBehaviour
     private Vector3 forward;
     private Rigidbody playerRigidbody;
     private Animator animator;
-    
+    PlayerStats playerStats;
+    public float consumeStaminaSpeedTime = 0;
+    public float DodgeTime = 0f;
+    public float speedDebuffTime = 0f;
+    public bool moveKeyPressed = false;
+
     // Initialize variables and register input events
     void Start()
     {
+        playerSpeed = 4;
         inputList = new List<KeyCode>();
         playerRigidbody = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         oldPosition = playerRigidbody.position;
         forward = gameObject.transform.forward;
         RegisterInputEvents();
+        playerStats = GetComponent<PlayerStats>();
     }
 
     void Update() {
@@ -69,6 +79,69 @@ public class PlayerMovementV2 : MonoBehaviour
 
         // check if ground is close enough, if it is then player is falling
         CheckIfFalling();
+
+        //slow down player's speed when get hit
+        slowDownSpeed();
+
+        dodgeAndRunningStats();
+
+    }
+
+    private void dodgeAndRunningStats()
+    {
+        #region Dodge
+        if (isDodging)
+        {
+            DodgeTime = 0.2f;
+        }
+        if (DodgeTime > 0)
+        {
+            DodgeTime -= Time.deltaTime;
+            playerRigidbody.AddRelativeForce(Vector3.forward * 150);
+
+        }
+        if (DodgeTime <= 0)
+        {
+            isDodging = false;
+            animator.ResetTrigger("Dodge");
+        }
+        #endregion
+        if (playerStats.stamina > 0 && isRunning && !animator.GetCurrentAnimatorStateInfo(0).IsTag("A"))
+        {
+            playerStats.speed = 8f;
+            playerStats.readyToRestoreStaminaTime = playerStats.setReadyToRestoreStaminaTime(3.0f);
+
+            if (consumeStaminaSpeedTime <= 0)
+            {
+                playerStats.stamina -= 1;
+                consumeStaminaSpeedTime = setConsumeStaminaTime(0.1f);
+            }
+            if (consumeStaminaSpeedTime > 0 && GameObject.Find("Player").transform.hasChanged == true)
+            {
+                consumeStaminaSpeedTime -= Time.fixedDeltaTime;
+            }
+        }
+
+        bool forwardPressed = Input.GetKey(KeyCode.W);
+        bool rightPressed = Input.GetKey(KeyCode.D);
+        bool leftPressed = Input.GetKey(KeyCode.A);
+        bool backPressed = Input.GetKey(KeyCode.S);
+        if (forwardPressed || rightPressed || leftPressed || backPressed)
+        {
+            moveKeyPressed = true;
+        }
+        else if (!forwardPressed || !rightPressed || !leftPressed || !backPressed)
+        {
+            moveKeyPressed = false;
+        }
+    }
+
+    private void slowDownSpeed()
+    {
+        if(speedDebuffTime > 0)
+        {
+            speedDebuffTime -= Time.fixedDeltaTime;
+        }
     }
 
     private void CheckInputs() {
@@ -78,34 +151,49 @@ public class PlayerMovementV2 : MonoBehaviour
         this.isGoingLeft = false;
         this.isGoingRight = false;
 
-        if (inputList.Count == 0) { 
-            animator.SetBool("isIdle", true); 
-            isIdle = true;
-            return;
-        } else {
-            animator.SetBool("isIdle", false);
-            isIdle = false;
-        }
-
-        // check from the input list, which is pressed first back or front
-        foreach (KeyCode keycode in inputList) {
-            if (keycode == KeyCode.W) {
-                isGoingForward = true;
-                isGoingBackward = false;
-            } else if (keycode == KeyCode.S) {
-                isGoingBackward = true;
-                isGoingForward = false;
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("BI") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("PB")
+            && !animator.GetCurrentAnimatorStateInfo(0).IsTag("LT") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("HT") && !playerStats.isHitStun)
+        {
+            if (inputList.Count == 0)
+            {
+                animator.SetBool("isIdle", true);
+                isIdle = true;
+                return;
             }
-        }
+            else
+            {
+                animator.SetBool("isIdle", false);
+                isIdle = false;
+            }
 
-        // check from the input list, which is pressed first left or right
-        foreach (KeyCode keycode in inputList) {
-            if (keycode == KeyCode.A) {
-                isGoingLeft = true;
-                isGoingRight = false;
-            } else if (keycode == KeyCode.D) {
-                isGoingRight = true;
-                isGoingLeft = false;
+            // check from the input list, which is pressed first back or front
+            foreach (KeyCode keycode in inputList)
+            {
+                if (keycode == KeyCode.W)
+                {
+                    isGoingForward = true;
+                    isGoingBackward = false;
+                }
+                else if (keycode == KeyCode.S)
+                {
+                    isGoingBackward = true;
+                    isGoingForward = false;
+                }
+            }
+
+            // check from the input list, which is pressed first left or right
+            foreach (KeyCode keycode in inputList)
+            {
+                if (keycode == KeyCode.A)
+                {
+                    isGoingLeft = true;
+                    isGoingRight = false;
+                }
+                else if (keycode == KeyCode.D)
+                {
+                    isGoingRight = true;
+                    isGoingLeft = false;
+                }
             }
         }
     }
@@ -135,11 +223,30 @@ public class PlayerMovementV2 : MonoBehaviour
     }
 
     private void UpdateVelocity() {
-        // check whether running or walking, assign speed accordingly
-        float speed = (isRunning) ? runningSpeed : walkingSpeed;
+
+        if(!isIdle && speedDebuffTime <= 0)
+        {
+            // check whether running or walking, assign speed accordingly
+            playerSpeed = (isRunning) ? runningSpeed : walkingSpeed;
+        }
+        else if(!isIdle && speedDebuffTime > 0)
+        {
+            playerSpeed = hitSpeed;
+        }
+        if(isIdle)
+        {
+            playerSpeed = 0;
+        }
+        #region change player speed when on block action
+        if (animator.GetCurrentAnimatorStateInfo(0).IsTag("B"))
+        {
+            playerSpeed = 2f;
+            isRunning = false;
+        }
+        #endregion
 
         // scale the current direction by the speed
-        this.velocity = this.direction * speed;
+        this.velocity = this.direction * playerSpeed;
 
         // set the velocity relative to camera rotation.
         this.velocity = Quaternion.AngleAxis(playerCameraTransform.rotation.eulerAngles.y, Vector3.up) * this.velocity;
@@ -158,8 +265,8 @@ public class PlayerMovementV2 : MonoBehaviour
     private void UpdatePlayerModelRotation() {
         if (!isIdle) {
             Vector3 velocityXZonly = new Vector3(this.velocity.x, 0, this.velocity.z);
-            float crossProduct = Vector3.Cross(gameObject.transform.forward, velocityXZonly).normalized.y;
-            float angleInBetween = Vector3.Angle(gameObject.transform.forward, velocityXZonly);
+            float crossProduct = Vector3.Cross(this.transform.forward, velocityXZonly).normalized.y;
+            float angleInBetween = Vector3.Angle(this.transform.forward, velocityXZonly);
             float rotateBy = rotationSpeed * Time.deltaTime;
             
 
@@ -255,13 +362,12 @@ public class PlayerMovementV2 : MonoBehaviour
         this.inputList.Remove(KeyCode.D);
     }
 
-    //dodge
     public void OnRunningKeyPressed(){
-        //Dodge();
         this.isRunning = true;
     }
     public void OnRunningKeyReleased() {
         this.isRunning = false;
+        consumeStaminaSpeedTime = setConsumeStaminaTime(0.1f);
     }
     #endregion
 
@@ -285,4 +391,15 @@ public class PlayerMovementV2 : MonoBehaviour
         return this.direction;
     }
     #endregion
+
+    float setConsumeStaminaTime(float num)
+    {
+        return num;
+    }
+
+    public void setSpeedDebuffTime(float num)
+    {
+        speedDebuffTime = num;
+    }
+    
 }

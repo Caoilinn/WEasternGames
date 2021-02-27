@@ -7,7 +7,7 @@ public class PlayerControl : MonoBehaviour
 {
     PlayerAction playerAction;
     PlayerJump playerJump;
-    PlayerMovement playerMovement;
+    PlayerMovementV2 playerMovement;
     PlayerStats playerStats;
     PlayerAnimation playerAnimation;
     public float onHoldTime = 0;
@@ -18,7 +18,7 @@ public class PlayerControl : MonoBehaviour
     {
         playerAction = GetComponent<PlayerAction>();
         playerJump = GetComponent<PlayerJump>();
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = GetComponent<PlayerMovementV2>();
         playerStats = GetComponent<PlayerStats>();
         playerAnimation = GetComponent<PlayerAnimation>();
         sprintTrigger = false;
@@ -39,9 +39,18 @@ public class PlayerControl : MonoBehaviour
             Sprint();
             changeAction();
         }
+        releaseButton();
+    }
+
+    private void releaseButton()
+    {
         if (Input.GetMouseButtonUp(1))
         {
             playerAction.isKeepBlocking = false;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            playerMovement.isRunning = false;
         }
     }
 
@@ -81,7 +90,7 @@ public class PlayerControl : MonoBehaviour
             {
                 sprintCD = 1.0f;
                 sprintTrigger = true;
-                playerMovement.isSprinting = true;
+                playerMovement.isRunning = true;
                 playerMovement.isDodging = true;
                 playerAction.action = ActionType.Dodge;
             }
@@ -94,10 +103,7 @@ public class PlayerControl : MonoBehaviour
         {
             sprintTrigger = false;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            playerMovement.isSprinting = false;
-        }
+
     }
 
     void AttackType()
