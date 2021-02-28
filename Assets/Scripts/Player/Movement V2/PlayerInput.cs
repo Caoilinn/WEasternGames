@@ -28,6 +28,7 @@ public class PlayerInput : MonoBehaviour
     public delegate void RightClickPressed();
     public delegate void RightClickHold();
     public delegate void RightClickReleased();
+    public delegate void JumpButtonPressed();
 
     // events
     public event ForwardKeyPressed OnForwardKeyPressed;
@@ -51,6 +52,7 @@ public class PlayerInput : MonoBehaviour
     public event RightClickPressed OnRightClickPressed;
     public event RightClickHold OnRightClickHold;
     public event RightClickReleased OnRightClickReleased;
+    public event JumpButtonPressed OnJumpButtonPressed;
 
     #endregion
 
@@ -139,6 +141,11 @@ public class PlayerInput : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(2)) {
             OnRightClickReleased?.Invoke();
+        }
+        #endregion
+        #region "Jump (Spacebar)"
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            OnJumpButtonPressed?.Invoke();
         }
         #endregion
     }

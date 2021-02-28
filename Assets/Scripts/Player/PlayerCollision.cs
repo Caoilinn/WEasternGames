@@ -6,7 +6,7 @@ public class PlayerCollision : MonoBehaviour
 {
     PlayerAnimation playerAnimation;
     PlayerStats playerStats;
-    PlayerMovement playerMovement;
+    PlayerMovementV2 playerMovement;
     PlayerAction playerAction;
     BlockRadius playerFieldOfView;
 
@@ -14,7 +14,7 @@ public class PlayerCollision : MonoBehaviour
     {
         playerAnimation = this.GetComponent<PlayerAnimation>();
         playerStats = this.GetComponent<PlayerStats>();
-        playerMovement = this.GetComponent<PlayerMovement>();
+        playerMovement = this.GetComponent<PlayerMovementV2>();
         playerAction = this.GetComponent<PlayerAction>();
         playerFieldOfView = this.GetComponent<BlockRadius>();
     }
@@ -127,7 +127,7 @@ public class PlayerCollision : MonoBehaviour
                         playerAnimation._anim.ResetTrigger("isInjured");
                         playerAnimation._anim.SetTrigger("isInjured");
                         playerStats.isHitStun = true;
-                        playerMovement.isSprinting = false;
+                        playerMovement.isRunning = false;
                         playerAction.isPlayerAttacking = false;
                         collision.gameObject.GetComponent<Collider>().isTrigger = true;
                     }
@@ -144,7 +144,7 @@ public class PlayerCollision : MonoBehaviour
                 collision.gameObject.GetComponent<Collider>().isTrigger = true;
                 playerStats.DecreaseHPStamina(10, 10); 
                 playerStats.readyToRestoreStaminaTime = 5.0f;
-                playerMovement.isSprinting = false;
+                playerMovement.isRunning = false;
                 playerAnimation._anim.ResetTrigger("isInjured");
                 playerAnimation._anim.SetTrigger("isInjured");
                 playerStats.isHitStun = true;
@@ -179,7 +179,7 @@ public class PlayerCollision : MonoBehaviour
                 playerAnimation._anim.ResetTrigger("isInjured");
                 playerAnimation._anim.SetTrigger("isInjured");
                 playerStats.isHitStun = true;
-                playerMovement.isSprinting = false;
+                playerMovement.isRunning = false;
                 playerAction.isPlayerAttacking = false;
                 collision.gameObject.GetComponent<Collider>().isTrigger = true;
             }
@@ -199,7 +199,7 @@ public class PlayerCollision : MonoBehaviour
                     playerAnimation._anim.ResetTrigger("isGetBlockingImpact");
                     playerAnimation._anim.SetTrigger("isGetBlockingImpact");
                     playerStats.readyToRestoreStaminaTime = 5.0f;
-                    playerMovement.isSprinting = false;
+                    playerMovement.isRunning = false;
                     playerAction.isPlayerAttacking = false;
                     collision.gameObject.GetComponent<Collider>().isTrigger = true;
                     this.GetComponent<SwordEffectSpawner>().SpawnSwordClash();

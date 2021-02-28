@@ -1124,6 +1124,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: japanesehouseSmall3
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 2786534777698132407, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1768,6 +1773,10 @@ PrefabInstance:
     - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_Name
       value: Japanese Street Lamp (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3170,6 +3179,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: japanesehouse
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 2786534777698132407, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3213,6 +3227,10 @@ PrefabInstance:
     - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_Name
       value: Japanese Street Lamp (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4925,6 +4943,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Japanese Street Lamp
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.8999663
@@ -6007,6 +6029,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Japanese Street Lamp (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.62
@@ -6182,6 +6208,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: japanesehouseSmall2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 2786534777698132407, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
@@ -9293,6 +9324,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: japanesehouseMain
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 2786534777698132407, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12012,6 +12048,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Japanese Street Lamp (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.63
@@ -12188,6 +12228,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: japanesehouseSmall1
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_TagString
+      value: Building
+      objectReference: {fileID: 0}
     - target: {fileID: 2786534777698132407, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12344,6 +12389,10 @@ PrefabInstance:
     - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_Name
       value: Japanese Street Lamp (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13864,6 +13913,10 @@ PrefabInstance:
     - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_Name
       value: Japanese Street Lamp (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -17947,6 +18000,10 @@ PrefabInstance:
     - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_Name
       value: Japanese Street Lamp (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_TagString
+      value: Building
       objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32328,14 +32385,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCameraTransform: {fileID: 1966021268}
+  playerSpeed: 0
   runningSpeed: 15
   walkingSpeed: 8
+  hitSpeed: 1
+  airAcceleration: 10
+  maxAirSpeed: 10
   rotationSpeed: 900
-  gravity: 18
-  groundedThreshold: 1
+  dodgeAcceleration: 30
+  dodgeDeceleration: 40
+  jumpForce: 12
+  doubleJumpBoost: 0
+  gravity: 30
+  groundedThreshold: 1.5
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 4096
+  isRunning: 0
+  isDodging: 0
+  isIdle: 0
+  isGrounded: 0
+  consumeStaminaSpeedTime: 0
+  DodgeTime: 0
+  speedDebuffTime: 0
+  moveKeyPressed: 0
 --- !u!114 &8179728686340255273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33233,7 +33306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 8179728686340255270}
-  animatorController: {fileID: 9100000, guid: 6bc72f666845f0d4b9ea4bc8e2e88456, type: 2}
+  animatorController: {fileID: 9100000, guid: 59136841288a340458d7c5ef262f9c23, type: 2}
   collider: {fileID: 8712116367856152360}
 --- !u!114 &8712116369550264002
 MonoBehaviour:
@@ -33315,7 +33388,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 3
+  m_CollisionDetection: 2
 --- !u!114 &8712116369550264023
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33323,7 +33396,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8179728686340255269}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8bb82e89aa2f0e4db9b3791334d8a34, type: 3}
   m_Name: 
@@ -33404,7 +33477,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8179728686340255269}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab378e64ba51f9a47b69a528989bab21, type: 3}
   m_Name: 
@@ -33427,7 +33500,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8179728686340255269}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c61ec64e5a4e58946a2b4fc6be808ad9, type: 3}
   m_Name: 

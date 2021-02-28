@@ -1132,6 +1132,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8198679}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8198684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8198683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771b2b5353cbedc488cf3f31ea888758, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8198685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1285,7 +1297,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8198683}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d90a237bcc0101448cbae0a1210985c, type: 3}
   m_Name: 
@@ -1303,6 +1315,37 @@ MonoBehaviour:
   isSprinting: 0
   consumeStaminaSpeedTime: 0
   player2: 0
+--- !u!114 &8198695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8198683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8afae78db2b308488988a004ba85d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCameraTransform: {fileID: 1156372509}
+  playerSpeed: 0
+  runningSpeed: 8
+  walkingSpeed: 4
+  hitSpeed: 1
+  rotationSpeed: 500
+  gravity: 9.81
+  groundedThreshold: 10
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  isRunning: 0
+  isDodging: 0
+  isIdle: 0
+  isGrounded: 0
+  consumeStaminaSpeedTime: 0
+  DodgeTime: 0
+  speedDebuffTime: 0
+  moveKeyPressed: 0
 --- !u!114 &8198696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1354,7 +1397,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 1
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 112
