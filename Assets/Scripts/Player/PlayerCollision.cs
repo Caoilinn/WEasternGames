@@ -9,6 +9,7 @@ public class PlayerCollision : MonoBehaviour
     PlayerMovementV2 playerMovement;
     PlayerAction playerAction;
     BlockRadius playerFieldOfView;
+    PlayerControl playerControl;
 
     void Awake()
     {
@@ -17,12 +18,13 @@ public class PlayerCollision : MonoBehaviour
         playerMovement = this.GetComponent<PlayerMovementV2>();
         playerAction = this.GetComponent<PlayerAction>();
         playerFieldOfView = this.GetComponent<BlockRadius>();
+        playerControl = this.GetComponent<PlayerControl>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         #region Player Get Enemy Hit
-        if (collision.gameObject.tag == "EnemyWeapon")
+        if (collision.gameObject.tag == "EnemyWeapon" && !playerStats.isDeath)
         {
             Enemy enemy = collision.gameObject.GetComponent<EnemyWeaponCollision>().enemy.GetComponent<Enemy>();
             EnemyWeaponCollision enemyWeaponCollision = collision.gameObject.GetComponent<EnemyWeaponCollision>();
@@ -90,6 +92,8 @@ public class PlayerCollision : MonoBehaviour
                 }
                 #endregion
                 playerAction.isPlayerAttacking = false;
+                playerControl.comboHit = 0;
+                playerControl.comboValidTime = 0;
             }
 
             // player is in blocking impact status and get hit
@@ -132,6 +136,8 @@ public class PlayerCollision : MonoBehaviour
                         collision.gameObject.GetComponent<Collider>().isTrigger = true;
                     }
                 }
+                playerControl.comboHit = 0;
+                playerControl.comboValidTime = 0;
             }
             #endregion
 
@@ -149,6 +155,8 @@ public class PlayerCollision : MonoBehaviour
                 playerAnimation._anim.SetTrigger("isInjured");
                 playerStats.isHitStun = true;
                 playerAction.isPlayerAttacking = false;
+                playerControl.comboHit = 0;
+                playerControl.comboValidTime = 0;
             }
 
             // player is not in block action and get hit by enemy  (light attack)
@@ -162,8 +170,9 @@ public class PlayerCollision : MonoBehaviour
                 playerStats.readyToRestoreStaminaTime = 5.0f;
                 playerAnimation._anim.ResetTrigger("isInjured");
                 playerAnimation._anim.SetTrigger("isInjured");
-
                 playerAction.isPlayerAttacking = false;
+                playerControl.comboHit = 0;
+                playerControl.comboValidTime = 0;
             }
 
             // player is in perfect block Transistion but not in perfect block timing (Heavy attack)
@@ -181,6 +190,8 @@ public class PlayerCollision : MonoBehaviour
                 playerStats.isHitStun = true;
                 playerMovement.isRunning = false;
                 playerAction.isPlayerAttacking = false;
+                playerControl.comboHit = 0;
+                playerControl.comboValidTime = 0;
                 collision.gameObject.GetComponent<Collider>().isTrigger = true;
             }
 
@@ -214,12 +225,16 @@ public class PlayerCollision : MonoBehaviour
 
                     playerAction.isPlayerAttacking = false;
                 }
+                playerControl.comboHit = 0;
+                playerControl.comboValidTime = 0;
             }
 
             else if ((playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("HT") ||
                  playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT")))
             {
                 playerAction.isPlayerAttacking = false;
+                playerControl.comboHit = 0;
+                playerControl.comboValidTime = 0;
             }
 
             else if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("GH"))
@@ -237,9 +252,9 @@ public class PlayerCollision : MonoBehaviour
                 playerAnimation._anim.SetTrigger("isInjured");
                 playerStats.readyToRestoreStaminaTime = 5.0f;
                 playerAction.isPlayerAttacking = false;
+                playerControl.comboHit = 0;
+                playerControl.comboValidTime = 0;
             }
-
-
             #endregion
         }
     }

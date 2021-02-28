@@ -90,10 +90,6 @@ public class PlayerMovementV2 : MonoBehaviour
     private void dodgeAndRunningStats()
     {
         #region Dodge
-        if (isDodging)
-        {
-            DodgeTime = 0.2f;
-        }
         if (DodgeTime > 0)
         {
             DodgeTime -= Time.deltaTime;
