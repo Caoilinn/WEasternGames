@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
@@ -16,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
     public Collider collider;
     private float oldSpeed;
     PlayerMovementV2 playerMovementV2;
+    Rigidbody rigidbody;
 
     void Start()
     {
@@ -28,14 +30,25 @@ public class PlayerAnimation : MonoBehaviour
         doubleJump = GetComponent<DoubleJump>();
         playerStats = GetComponent<PlayerStats>();
         playerMovementV2 = GetComponent<PlayerMovementV2>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
     {
         initialiseAnimatorBool();
         stopDodging();
+        playDeathAnimation();
     }
 
+    private void playDeathAnimation()
+    {
+        if(playerStats.playDeathOnce)
+        {
+            _anim.SetTrigger("isPlayerDead");
+            playerStats.playDeathOnce = false;
+            rigidbody.useGravity = true;
+        }
+    }
 
     private void stopDodging()
     {
@@ -66,6 +79,8 @@ public class PlayerAnimation : MonoBehaviour
         _anim.SetBool("isHitStun", playerStats.isHitStun);
         _anim.SetBool("isBlockStun", playerStats.isBlockStun);
         _anim.SetBool("moveKeyPressed", playerMovementV2.moveKeyPressed);
+        _anim.SetFloat("comboValidTime", playerControl.comboValidTime);
+        _anim.SetInteger("comboHit", playerControl.comboHit);
         #endregion
     }
 
@@ -90,7 +105,6 @@ public class PlayerAnimation : MonoBehaviour
         playerAction.isKeepBlocking = false;
     }
     #endregion
-
 
     #region Player Attack Logic 
     public void OnAnimation_IsHeavyAttackActive()
@@ -131,6 +145,12 @@ public class PlayerAnimation : MonoBehaviour
     public void OnAnimation_isLightAttackingEnd()
     {
         playerAction.isPlayerAttacking = false;
+    }
+
+    public void OnAnimation_isLastLightAttackEnd()
+    {
+        playerAction.isPlayerAttacking = false;
+        playerControl.comboHit = 0;
     }
     #endregion
 

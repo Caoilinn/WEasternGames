@@ -13,6 +13,8 @@ public class PlayerControl : MonoBehaviour
     public float onHoldTime = 0;
     public float sprintCD = 0;
     public bool sprintTrigger;
+    public float comboValidTime = 0;
+    public int comboHit = 0;
 
     void Awake()
     {
@@ -27,28 +29,58 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         Control();
-        //Debug.Log(GamePreload.images[1].name);
     }
 
     void Control()
     {
-        if(!playerStats.isBlockStun && !playerStats.isHitStun && !playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("BI"))
+        if(!playerStats.isBlockStun && !playerStats.isHitStun && !playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("BI") && !playerAction.isPlayerAttacking)
         {
             AttackType();
             Block();
             Sprint();
-            changeAction();
+            //changeAction();
         }
+        attackButtonPressing();
         releaseButton();
+        comboTimeAlgorithm();
+    }
+
+    private void comboTimeAlgorithm()
+    {
+        if(comboValidTime > 0)
+        {
+            comboValidTime -= Time.deltaTime;
+        }
+        if(comboValidTime <= 0)
+        {
+            comboValidTime = 0;
+            comboHit = 0;
+        }
+    }
+
+    private void attackButtonPressing()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            onHoldTime += Time.deltaTime;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            onHoldTime += Time.deltaTime;
+        }
+        if(playerAction.isPlayerAttacking)
+        {
+            onHoldTime = 0;
+        }
     }
 
     private void releaseButton()
     {
-        if (Input.GetMouseButtonUp(1))
+        if (Input.GetMouseButtonUp(1) || !Input.GetMouseButton(1))
         {
             playerAction.isKeepBlocking = false;
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
             playerMovement.isRunning = false;
         }
@@ -93,6 +125,7 @@ public class PlayerControl : MonoBehaviour
                 sprintTrigger = true;
                 playerMovement.isRunning = true;
                 playerMovement.isDodging = true;
+                playerMovement.DodgeTime = 0.3f;
                 playerAction.action = ActionType.Dodge;
             }
         }
@@ -109,30 +142,41 @@ public class PlayerControl : MonoBehaviour
 
     void AttackType()
     {
-        if(!playerAction.isPlayerAttacking && !playerStats.isHitStun) //if the player didnt do any attack action
+        if(!playerAction.isPlayerAttacking && Input.GetMouseButton(0))
         {
-            if (Input.GetMouseButtonDown(0))
+            if (onHoldTime >= 0.35f)
             {
-                onHoldTime += Time.deltaTime;
+                playerAction.action = ActionType.HeavyAttack;
+                onHoldTime = 0;
+                playerAction.isPlayerAttacking = true;
+                comboHit = 0;
+                comboValidTime = 0;
             }
-
-            if (Input.GetMouseButton(0))
+        }
+        if(!playerAction.isPlayerAttacking && Input.GetMouseButtonUp(0))
+        {
+            if (onHoldTime < 0.35f)
             {
-                onHoldTime += Time.deltaTime;
-                if (onHoldTime >= 0.4f)
-                {
-                    playerAction.action = ActionType.HeavyAttack;
-                    onHoldTime = 0;
-                }
-            }
-
-            if (Input.GetMouseButtonUp(0))
-            {
-                if (onHoldTime < 0.25f)
+                onHoldTime = 0;
+                comboHit++;
+                if(comboHit == 1)
                 {
                     playerAction.action = ActionType.LightAttack;
+                    comboValidTime = 3;
+                    playerAction.isPlayerAttacking = true;
                 }
-                onHoldTime = 0;
+                else if(comboHit == 2)
+                {
+                    playerAction.action = ActionType.LightAttackCombo2;
+                    comboValidTime = 5;
+                    playerAction.isPlayerAttacking = true;
+                }
+                else if (comboHit == 3)
+                {
+                    playerAction.action = ActionType.LightAttackCombo3;
+                    comboValidTime = 5;
+                    playerAction.isPlayerAttacking = true;
+                }
             }
         }
     }
