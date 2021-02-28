@@ -46,7 +46,7 @@ public class PlayerAnimation : MonoBehaviour
         {
             _anim.SetTrigger("isPlayerDead");
             playerStats.playDeathOnce = false;
-            rigidbody.useGravity = true;
+            //rigidbody.useGravity = true;
         }
     }
 

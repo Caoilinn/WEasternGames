@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerMovementV2 : MonoBehaviour
 {
+    public bool enableMovement = true;
     public Transform playerCameraTransform;
     public float playerSpeed;
     public float runningSpeed = 8;
@@ -173,8 +174,12 @@ public class PlayerMovementV2 : MonoBehaviour
         this.isGoingLeft = false;
         this.isGoingRight = false;
 
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("BI") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("PB")
-            && !animator.GetCurrentAnimatorStateInfo(0).IsTag("LT") && !animator.GetCurrentAnimatorStateInfo(0).IsTag("HT") && !playerStats.isHitStun)
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsTag("BI") && 
+            !animator.GetCurrentAnimatorStateInfo(0).IsTag("PB") && 
+            !animator.GetCurrentAnimatorStateInfo(0).IsTag("LT") && 
+            !animator.GetCurrentAnimatorStateInfo(0).IsTag("HT") && 
+            !playerStats.isHitStun &&
+            this.enableMovement)
         {
             if (inputList.Count == 0)
             {
