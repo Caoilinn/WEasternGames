@@ -695,6 +695,8 @@ MonoBehaviour:
   hitStunValue: 0
   hitStunRestoreSecond: 0
   isStunRestoreTimeFinished: 1
+  enemyTransform: {fileID: 0}
+  maxAngle: 0
   readyToRestoreStaminaTime: 0
 --- !u!114 &28025450
 MonoBehaviour:
@@ -4449,8 +4451,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa91f620e9f9364f81817aafacbeee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 28025441}
+  enemy: {fileID: 0}
   enemyActionType: 4
+  collider: {fileID: 0}
 --- !u!65 &457997259
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23158,6 +23161,8 @@ MonoBehaviour:
   hitStunValue: 0
   hitStunRestoreSecond: 0
   isStunRestoreTimeFinished: 1
+  enemyTransform: {fileID: 0}
+  maxAngle: 0
   readyToRestoreStaminaTime: 0
 --- !u!54 &3187377376392559129
 Rigidbody:
@@ -24082,6 +24087,8 @@ MonoBehaviour:
   hitStunValue: 0
   hitStunRestoreSecond: 0
   isStunRestoreTimeFinished: 1
+  enemyTransform: {fileID: 0}
+  maxAngle: 0
   readyToRestoreStaminaTime: 0
 --- !u!114 &3187377376783872952
 MonoBehaviour:
@@ -25421,6 +25428,8 @@ MonoBehaviour:
   hitStunValue: 0
   hitStunRestoreSecond: 0
   isStunRestoreTimeFinished: 1
+  enemyTransform: {fileID: 0}
+  maxAngle: 0
   readyToRestoreStaminaTime: 0
 --- !u!114 &3187377377960266968
 MonoBehaviour:
@@ -32704,7 +32713,6 @@ GameObject:
   - component: {fileID: 8712116369550264007}
   - component: {fileID: 8712116369550264000}
   - component: {fileID: 8712116369550264001}
-  - component: {fileID: 8712116369550264002}
   - component: {fileID: 8712116369550264028}
   - component: {fileID: 8712116369550264029}
   - component: {fileID: 8712116369550264031}
@@ -32714,6 +32722,8 @@ GameObject:
   - component: {fileID: 8712116369550264023}
   - component: {fileID: 8179728686340255270}
   - component: {fileID: 8179728686340255271}
+  - component: {fileID: 8179728686340255273}
+  - component: {fileID: 8179728686340255272}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -32750,6 +32760,56 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fc6e62d3057bcdf4ca40c3cb675dd551, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8179728686340255272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179728686340255269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8afae78db2b308488988a004ba85d23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableMovement: 1
+  playerCameraTransform: {fileID: 1966021268}
+  playerSpeed: 0
+  runningSpeed: 8
+  walkingSpeed: 4
+  hitSpeed: 1
+  airAcceleration: 1
+  maxAirSpeed: 0.25
+  rotationSpeed: 500
+  dodgeAcceleration: 2
+  dodgeDeceleration: 5
+  jumpForce: 10
+  doubleJumpBoost: 0
+  gravity: 9.81
+  groundedThreshold: 10
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  isRunning: 0
+  isDodging: 0
+  isIdle: 0
+  isGrounded: 0
+  consumeStaminaSpeedTime: 0
+  DodgeTime: 0
+  speedDebuffTime: 0
+  moveKeyPressed: 0
+--- !u!114 &8179728686340255273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8179728686340255269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771b2b5353cbedc488cf3f31ea888758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8181953262307353674
@@ -33674,31 +33734,6 @@ MonoBehaviour:
   _anim: {fileID: 8179728686340255270}
   animatorController: {fileID: 9100000, guid: 6bc72f666845f0d4b9ea4bc8e2e88456, type: 2}
   collider: {fileID: 8712116367856152360}
---- !u!114 &8712116369550264002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8179728686340255269}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d90a237bcc0101448cbae0a1210985c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 1966021268}
-  turnSmooth: 0.1
-  horizontalVelocity: 0
-  _sprinting: 0
-  moveKeyPressed: 0
-  verticalVelocity: 0
-  myController: {fileID: 0}
-  isOnKnockBack: 0
-  isDodging: 0
-  DodgeTime: 0
-  isSprinting: 0
-  consumeStaminaSpeedTime: 0
-  player2: 0
 --- !u!114 &8712116369550264006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33768,6 +33803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   action: 0
+  _anim: {fileID: 0}
   isPerfectBlock: 0
   isKeepBlocking: 0
   isBlockingEnd: 0
@@ -33858,6 +33894,8 @@ MonoBehaviour:
   isHitStun: 0
   isStunRestoreTimeFinished: 1
   isBlockStun: 0
+  isDeath: 0
+  playDeathOnce: 0
   readyToRestoreStaminaTime: 0
 --- !u!114 &8712116369550264031
 MonoBehaviour:
@@ -33874,6 +33912,8 @@ MonoBehaviour:
   onHoldTime: 0
   sprintCD: 0
   sprintTrigger: 0
+  comboValidTime: 0
+  comboHit: 0
 --- !u!1 &8712116369571678512
 GameObject:
   m_ObjectHideFlags: 0

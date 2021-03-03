@@ -74,7 +74,7 @@ public class PlayerAnimation : MonoBehaviour
         _anim.SetInteger("jumpTimes", playerJump.jumpTimes);
         #endregion
         #region Sprint
-        _anim.SetBool("isSprinting", playerMovementV2.isRunning);
+        _anim.SetBool("isRunning", playerMovementV2.isRunning);
         _anim.SetBool("isDodging", playerMovementV2.isDodging);
         _anim.SetBool("isHitStun", playerStats.isHitStun);
         _anim.SetBool("isBlockStun", playerStats.isBlockStun);

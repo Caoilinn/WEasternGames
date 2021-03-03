@@ -306,12 +306,14 @@ public class PlayerMovementV2 : MonoBehaviour
     }
 
     private void Jump() {
+
         // can't jump if already falling in the air, only double jump 
         if (isFalling) { 
             DoubleJump();
             return; 
         }
 
+        this.animator.SetTrigger("Jump");
         this.isFalling = true;
         this.moveVelocity /= 2;
         this.fallingSpeed = 0f;
@@ -320,7 +322,7 @@ public class PlayerMovementV2 : MonoBehaviour
 
     private void DoubleJump() {
         if (alreadyDoubleJumped) { return; }
-
+        this.animator.SetTrigger("doubleJump");
         // if (!isIdle) {
         //     this.moveVelocity = this.moveVelocity.magnitude * this.direction;
         // }

@@ -26,6 +26,7 @@ public class PlayerCollision : MonoBehaviour
         #region Player Get Enemy Hit
         if (collision.gameObject.tag == "EnemyWeapon" && !playerStats.isDeath)
         {
+            collision.gameObject.GetComponent<Collider>().isTrigger = true;
             Enemy enemy = collision.gameObject.GetComponent<EnemyWeaponCollision>().enemy.GetComponent<Enemy>();
             EnemyWeaponCollision enemyWeaponCollision = collision.gameObject.GetComponent<EnemyWeaponCollision>();
             bool isInPlayerFov = this.GetComponent<BlockRadius>().EnemyInFOV(enemy);

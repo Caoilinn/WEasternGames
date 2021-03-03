@@ -6,7 +6,7 @@ public class EnemyWeaponCollision : MonoBehaviour
 {
     public Enemy enemy;
     public EnemyAction.EnemyActionType enemyActionType;
-    public Collider collider;
+    private Collider collider;
     EnemyAction enemyAction;
 
     void Start()

@@ -56,7 +56,7 @@ public class WeaponCollision : MonoBehaviour
                 }
                 #endregion
 
-                #region get enemy light attack
+                #region get player light attack
                 //get enemy light attack
                 if (enemy.hitStunValue > 0 &&
                     playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT") &&
