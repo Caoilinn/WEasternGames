@@ -114,13 +114,12 @@ public class PlayerControl : MonoBehaviour
 
     void Sprint()
     {
-        if(playerJump.isJump == false && !playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT") && 
+        if(/*playerJump.isJump == false &&*/ !playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT") && 
             !playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("HT") && 
             playerAction.isKeepBlocking == false && playerStats.stamina > 0 && !sprintTrigger)
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                playerMovement.DodgeTime = 0.3f;
                 sprintCD = 1.0f;
                 sprintTrigger = true;
                 playerMovement.isRunning = true;

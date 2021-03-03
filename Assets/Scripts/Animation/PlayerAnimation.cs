@@ -65,14 +65,15 @@ public class PlayerAnimation : MonoBehaviour
         _anim.SetBool("isPerfectBlock", playerAction.isPerfectBlock);
         _anim.SetBool("isAttackTriggered", collider.isTrigger);
         #endregion
+
         #region Jump
-        _anim.SetBool("isFirstJump", playerJump.isJump);
-        _anim.SetBool("isSecondJump", doubleJump.isDoubleJump);
-        _anim.SetBool("isFalling", playerJump.isFalling);
-        _anim.SetBool("isGrounded", playerJump.isGrounded);
-        _anim.SetBool("FallingToGround", playerJump.fallingToGround);
-        _anim.SetInteger("jumpTimes", playerJump.jumpTimes);
+        // _anim.SetBool("isSecondJump", doubleJump.isDoubleJump);
+        // _anim.SetBool("isFalling", playerJump.isFalling);
+        // _anim.SetBool("isGrounded", playerJump.isGrounded);
+        // _anim.SetBool("FallingToGround", playerJump.fallingToGround);
+        // _anim.SetInteger("jumpTimes", playerJump.jumpTimes);
         #endregion
+
         #region Sprint
         _anim.SetBool("isSprinting", playerMovementV2.isRunning);
         _anim.SetBool("isDodging", playerMovementV2.isDodging);

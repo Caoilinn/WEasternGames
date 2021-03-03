@@ -10,6 +10,8 @@ public class PlayerCollision : MonoBehaviour
     PlayerAction playerAction;
     BlockRadius playerFieldOfView;
     PlayerControl playerControl;
+    public delegate void HitPlayer();
+    public event HitPlayer OnHitPlayer;
 
     void Awake()
     {
@@ -36,6 +38,7 @@ public class PlayerCollision : MonoBehaviour
                 playerAction.isPerfectBlock == false &&
                 playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("B"))
             {
+
                 #region get enemy heavy attack
                 if (playerStats.hitStunValue > 0 &&
                     enemyWeaponCollision.enemyActionType == EnemyAction.EnemyActionType.HeavyAttack)
@@ -140,6 +143,8 @@ public class PlayerCollision : MonoBehaviour
                 playerControl.comboValidTime = 0;
             }
             #endregion
+
+            OnHitPlayer?.Invoke();
 
             // player is not in block action and get hit by enemy (Heavy attack)
             if (enemyWeaponCollision.enemyActionType == EnemyAction.EnemyActionType.HeavyAttack &&
