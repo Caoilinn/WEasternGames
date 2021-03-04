@@ -16,7 +16,11 @@ public class PlayerControl : MonoBehaviour
     public float comboValidTime = 0;
     public int comboHit = 0;
     CameraManager cameraManager;
-    AnimatorStateInfo _stateInfo;
+
+    private void Start()
+    {
+        playerAnimation = GetComponent<PlayerAnimation>();
+    }
 
     void Awake()
     {
@@ -27,14 +31,11 @@ public class PlayerControl : MonoBehaviour
         playerAnimation = GetComponent<PlayerAnimation>();
         sprintTrigger = false;
         cameraManager = GameObject.FindGameObjectWithTag("GameSetting").GetComponent<CameraManager>();
-
-        AnimatorStateInfo _stateInfo = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
     }
 
     void Update()
     {
         Control();
-
     }
 
     void Control()
@@ -61,8 +62,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (cameraManager.enemyCursor <= cameraManager.EnemyLockOnList.Count - 1)
             {
-                //cameraManager.sortEnemyListFromNearToFar();
-                cameraManager.enemyCursor += 1;
+               cameraManager.enemyCursor += 1;
             }
             if(cameraManager.enemyCursor == cameraManager.EnemyLockOnList.Count)
             {
@@ -83,7 +83,6 @@ public class PlayerControl : MonoBehaviour
                 cameraManager.playerCamera.gameObject.GetComponent<AudioListener>().enabled = false;
                 cameraManager.lockOnCamera.gameObject.GetComponent<AudioListener>().enabled = true;
                 playerMovement.playerCameraTransform = cameraManager.lockOnCamera.transform;
-                cameraManager.sortEnemyListFromNearToFar();
             }
             else
             {
@@ -97,7 +96,6 @@ public class PlayerControl : MonoBehaviour
             }
         }
     }
-
 
     private void comboTimeAlgorithm()
     {
@@ -191,7 +189,6 @@ public class PlayerControl : MonoBehaviour
         {
             sprintTrigger = false;
         }
-
     }
 
     void AttackType()
@@ -213,22 +210,32 @@ public class PlayerControl : MonoBehaviour
             {
                 onHoldTime = 0;
                 comboHit++;
-                if(comboHit == 1)
+                comboValidTime = 2;
+                if (comboHit == 1)
                 {
                     playerAction.action = ActionType.LightAttack;
-                    comboValidTime = 3;
+                    if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT"))
+                    {
+                        comboValidTime = playerAnimation._anim.GetCurrentAnimatorStateInfo(0).length + 1;
+                    }
                     playerAction.isPlayerAttacking = true;
                 }
                 else if(comboHit == 2)
                 {
                     playerAction.action = ActionType.LightAttackCombo2;
-                    comboValidTime = 5;
+                    if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT"))
+                    {
+                        comboValidTime = playerAnimation._anim.GetCurrentAnimatorStateInfo(0).length + 1;
+                    }
                     playerAction.isPlayerAttacking = true;
                 }
                 else if (comboHit == 3)
                 {
                     playerAction.action = ActionType.LightAttackCombo3;
-                    comboValidTime = 5;
+                    if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT"))
+                    {
+                        comboValidTime = playerAnimation._anim.GetCurrentAnimatorStateInfo(0).length + 1;
+                    }
                     playerAction.isPlayerAttacking = true;
                 }
             }

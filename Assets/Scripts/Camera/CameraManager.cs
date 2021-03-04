@@ -33,6 +33,20 @@ public class CameraManager : MonoBehaviour
         checkIfLockOnListEmpty();
         autoTurnOffLockOn();
         lockDotTrigger();
+        checkIfEnemyIsDead();
+    }
+
+    private void checkIfEnemyIsDead()
+    {
+        foreach(Enemy enemies in EnemyLockOnList)
+        {
+            if(enemies.HP <= 0)
+            {
+                EnemyLockOnList.Remove(enemies);
+                sortEnemyListFromNearToFar();
+                enemyCursor = 0;
+            }
+        }
     }
 
     private void lockDotTrigger()
