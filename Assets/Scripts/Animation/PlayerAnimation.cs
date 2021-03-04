@@ -75,7 +75,7 @@ public class PlayerAnimation : MonoBehaviour
         #endregion
 
         #region Sprint
-        _anim.SetBool("isSprinting", playerMovementV2.isRunning);
+        _anim.SetBool("isRunning", playerMovementV2.isRunning);
         _anim.SetBool("isDodging", playerMovementV2.isDodging);
         _anim.SetBool("isHitStun", playerStats.isHitStun);
         _anim.SetBool("isBlockStun", playerStats.isBlockStun);
@@ -169,7 +169,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void OnAnimation_isBlockStun()
     {
-        playerMovementV2.GetComponent<PlayerMovement>().isDodging = false;
+        playerMovementV2.GetComponent<PlayerMovementV2>().isDodging = false;
     }
     #endregion
 

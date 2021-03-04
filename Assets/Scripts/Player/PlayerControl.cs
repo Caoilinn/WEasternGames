@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public bool attackEnabled = true;
     PlayerAction playerAction;
     PlayerJump playerJump;
     PlayerMovementV2 playerMovement;
@@ -15,6 +16,8 @@ public class PlayerControl : MonoBehaviour
     public bool sprintTrigger;
     public float comboValidTime = 0;
     public int comboHit = 0;
+    CameraManager cameraManager;
+    AnimatorStateInfo _stateInfo;
 
     void Awake()
     {
@@ -24,11 +27,15 @@ public class PlayerControl : MonoBehaviour
         playerStats = GetComponent<PlayerStats>();
         playerAnimation = GetComponent<PlayerAnimation>();
         sprintTrigger = false;
+        cameraManager = GameObject.FindGameObjectWithTag("GameSetting").GetComponent<CameraManager>();
+
+        AnimatorStateInfo _stateInfo = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
     }
 
     void Update()
     {
         Control();
+
     }
 
     void Control()
@@ -43,7 +50,55 @@ public class PlayerControl : MonoBehaviour
         attackButtonPressing();
         releaseButton();
         comboTimeAlgorithm();
+        switchToLockOnCamera();
+        switchToDifferentEnemy();
     }
+
+    private void switchToDifferentEnemy()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && 
+            cameraManager.isLockOnMode && 
+            cameraManager.EnemyLockOnList.Count >= 1)
+        {
+            if (cameraManager.enemyCursor <= cameraManager.EnemyLockOnList.Count - 1)
+            {
+                //cameraManager.sortEnemyListFromNearToFar();
+                cameraManager.enemyCursor += 1;
+            }
+            if(cameraManager.enemyCursor == cameraManager.EnemyLockOnList.Count)
+            {
+                cameraManager.enemyCursor = 0;
+            }
+        }
+    }
+
+    private void switchToLockOnCamera()
+    {
+        if (Input.GetKeyDown(KeyCode.F) && cameraManager.canLockOn)
+        {
+            if (!cameraManager.isLockOnMode)
+            {
+                cameraManager.playerCamera.enabled =false;
+                cameraManager.lockOnCamera.enabled = true;
+                cameraManager.isLockOnMode = true;
+                cameraManager.playerCamera.gameObject.GetComponent<AudioListener>().enabled = false;
+                cameraManager.lockOnCamera.gameObject.GetComponent<AudioListener>().enabled = true;
+                playerMovement.playerCameraTransform = cameraManager.lockOnCamera.transform;
+                cameraManager.sortEnemyListFromNearToFar();
+            }
+            else
+            {
+                cameraManager.playerCamera.enabled = true;
+                cameraManager.lockOnCamera.enabled = false;
+                cameraManager.isLockOnMode = false;
+                cameraManager.playerCamera.gameObject.GetComponent<AudioListener>().enabled = true;
+                cameraManager.lockOnCamera.gameObject.GetComponent<AudioListener>().enabled = false;
+                cameraManager.enemyCursor = 0;
+                playerMovement.playerCameraTransform = cameraManager.playerCamera.transform;
+            }
+        }
+    }
+
 
     private void comboTimeAlgorithm()
     {
@@ -60,6 +115,8 @@ public class PlayerControl : MonoBehaviour
 
     private void attackButtonPressing()
     {
+        if (!attackEnabled) { return; }
+
         if (Input.GetMouseButtonDown(0))
         {
             onHoldTime += Time.deltaTime;
@@ -141,6 +198,8 @@ public class PlayerControl : MonoBehaviour
 
     void AttackType()
     {
+        if (!attackEnabled) { return; }
+        
         if(!playerAction.isPlayerAttacking && Input.GetMouseButton(0))
         {
             if (onHoldTime >= 0.35f)

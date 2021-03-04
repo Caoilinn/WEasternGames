@@ -146,6 +146,8 @@ public class PlayerCollision : MonoBehaviour
 
             OnHitPlayer?.Invoke();
 
+            Debug.Log("enemyActionType: " + enemyWeaponCollision.enemyActionType);
+
             // player is not in block action and get hit by enemy (Heavy attack)
             if (enemyWeaponCollision.enemyActionType == EnemyAction.EnemyActionType.HeavyAttack &&
                collision.gameObject.GetComponent<Collider>().isTrigger == false &&

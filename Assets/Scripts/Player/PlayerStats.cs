@@ -148,8 +148,9 @@ public class PlayerStats : MonoBehaviour
         {
             stamina = 0;
             speed = 4;
-            GetComponent<PlayerMovement>().isSprinting = false;
-            GetComponent<PlayerMovement>()._sprinting = false;
+            // GetComponent<PlayerMovement>().isSprinting = false;
+            // GetComponent<PlayerMovement>()._sprinting = false;
+            GetComponent<PlayerMovementV2>().OnRunningKeyReleased();
 
         }
         //Debug.Log(readyToRestoreStaminaTime);
