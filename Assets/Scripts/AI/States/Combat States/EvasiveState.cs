@@ -2,6 +2,7 @@
 using AI.States;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Playables;
 
 //https://answers.unity.com/questions/433791/rotate-object-around-moving-object.html
 //Resource used to calculate new circular motion that did not lock the Y 
@@ -38,6 +39,11 @@ public class EvasiveState : State
         
         //For the blend tree animation
         _xVelHash = Animator.StringToHash("enemyVelX");
+
+        // for triggering trash talk dialogue
+        if (_sm.playableDirector.state == PlayState.Playing) { return; }
+        _sm.playableDirector.playableAsset = _sm.trashTalkDialogue;
+        _sm.playableDirector.Play();
     }
 
     public override void FixedUpdate()

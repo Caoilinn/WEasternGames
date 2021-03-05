@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using TMPro;
 
 public class AttackingTutorialObjective : Objective
@@ -14,6 +15,9 @@ public class AttackingTutorialObjective : Objective
 
     public override void OnObjectiveCompleted()
     {
+        // Musashi says Nice Sachi!!
+        objSys.StartCoroutine(PlayCutscene(objSys.AfterAttackTutorialDialogue));
+
         tutorialTextComponent.text = "";
 
         //resume time
@@ -39,5 +43,13 @@ public class AttackingTutorialObjective : Objective
 
     public void OnAttackButtonPressed() {
         this.ObjectiveCompleted();
+    }
+
+    private IEnumerator PlayCutscene(PlayableAsset cutscene) {
+        float duration = (float)cutscene.duration;
+        objSys.playableDirector.playableAsset = cutscene;
+        objSys.playableDirector.Play();
+        yield return new WaitForSeconds(duration);
+        objSys.playableDirector.Stop();
     }
 }

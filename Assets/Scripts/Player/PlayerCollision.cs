@@ -13,6 +13,9 @@ public class PlayerCollision : MonoBehaviour
     public delegate void HitPlayer();
     public event HitPlayer OnHitPlayer;
 
+    public delegate void PlayerHurt();
+    public event PlayerHurt OnPlayerHurt;
+
     void Awake()
     {
         playerAnimation = this.GetComponent<PlayerAnimation>();
@@ -146,14 +149,14 @@ public class PlayerCollision : MonoBehaviour
 
             OnHitPlayer?.Invoke();
 
-            Debug.Log("enemyActionType: " + enemyWeaponCollision.enemyActionType);
-
             // player is not in block action and get hit by enemy (Heavy attack)
             if (enemyWeaponCollision.enemyActionType == EnemyAction.EnemyActionType.HeavyAttack &&
                collision.gameObject.GetComponent<Collider>().isTrigger == false &&
                playerAction.isKeepBlocking == false &&
                !playerMovement.isDodging)
             {
+                OnPlayerHurt?.Invoke();
+
                 collision.gameObject.GetComponent<Collider>().isTrigger = true;
                 playerStats.DecreaseHPStamina(10, 10); 
                 playerStats.readyToRestoreStaminaTime = 5.0f;
@@ -172,6 +175,8 @@ public class PlayerCollision : MonoBehaviour
                      playerAction.isKeepBlocking == false &&
                      !playerMovement.isDodging)
             {
+                OnPlayerHurt?.Invoke();
+                
                 collision.gameObject.GetComponent<Collider>().isTrigger = true;
                 playerStats.DecreaseHPStamina(5, 5); 
                 playerStats.readyToRestoreStaminaTime = 5.0f;

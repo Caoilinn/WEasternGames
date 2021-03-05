@@ -1,23 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using TMPro;
 using AI;
 
 public class LockOnTutorialObjective : Objective
 {
     private TextMeshProUGUI tutorialTextComponent;
-    private FieldOfView tutorialEnemyFOV;
     public LockOnTutorialObjective(ObjectiveSystem objSys) : base(objSys) {
         tutorialTextComponent = objSys.tutorialText.GetComponent<TextMeshProUGUI>();
-        tutorialEnemyFOV = objSys.tutorialEnemy.GetComponent<FieldOfView>();
+    }
+
+    public override void OnObjectiveStart()
+    {
+
+        objSys.StartCoroutine(PlayCutscene(objSys.lockOnTutorialDialogue));
     }
 
     public override void OnObjectiveCompleted()
     {
-        // switch On the AI
-        tutorialEnemyFOV.enabled = true;
-
         //resume time
         objSys.timeManager.ChangeTimescale(1);
 
@@ -27,18 +29,32 @@ public class LockOnTutorialObjective : Objective
         objSys.playerInput.OnLockOnButtonPressed -= OnLockOnPressed;
     }
 
-    public override void OnObjectiveStart()
-    {
+    public void OnLockOnPressed() {
+        this.ObjectiveCompleted();
+    }
+
+    public void OnDialogueFinishedPlaying() {
+        // prompt the tutorial
+        
+        // set black background
+
         // register to input event
         objSys.playerInput.OnLockOnButtonPressed += OnLockOnPressed;
         
         // stop time
         objSys.timeManager.ChangeTimescale(0);
 
+        // set text
+        tutorialTextComponent.color = new Color(1,1,1,1);
         tutorialTextComponent.text = "Press F to lock on to an enemy";
     }
-
-    public void OnLockOnPressed() {
-        this.ObjectiveCompleted();
+    
+    private IEnumerator PlayCutscene(PlayableAsset cutscene) {
+        float duration = (float)cutscene.duration;
+        objSys.playableDirector.playableAsset = cutscene;
+        objSys.playableDirector.Play();
+        yield return new WaitForSeconds(duration);
+        objSys.playableDirector.Stop();
+        this.OnDialogueFinishedPlaying();
     }
 }

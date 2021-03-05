@@ -12,12 +12,16 @@ public class PerfectBlockTutorialObjective : Objective
 
     public override void OnObjectiveStart()
     {
+        // stop any playing dialogues
+        objSys.playableDirector.Stop();
+
         // Register to Input Event
         objSys.playerInput.OnRightClickPressed += OnBlockingButtonPressed;
 
         // stop time 
         objSys.timeManager.ChangeTimescale(0);
 
+        tutorialTextComponent.color = new Color(1,1,1,1);
         tutorialTextComponent.text = "Press Right Click at the right time to do a Perfect Block";
     }
 

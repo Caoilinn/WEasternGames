@@ -107,7 +107,6 @@ public class PlayerStats : MonoBehaviour
     {
         if (health <= 0)
         {
-            GetComponent<SwordCombat>().enabled = false;
             GetComponent<PlayerMovementV2>().enableMovement = false;
             GetComponent<PlayerAction>().enabled = false;
         }
