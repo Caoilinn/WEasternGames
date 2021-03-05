@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
@@ -11,10 +12,12 @@ public class PlayerAnimation : MonoBehaviour
     private PlayerControl playerControl;
     private PlayerJump playerJump;
     private DoubleJump doubleJump;
-    private PlayerMovement playerMovement;
     private PlayerStats playerStats;
     private AnimatorClipInfo[] clipInfo;
     public Collider collider;
+    private float oldSpeed;
+    PlayerMovementV2 playerMovementV2;
+    Rigidbody rigidbody;
 
     void Start()
     {
@@ -25,29 +28,33 @@ public class PlayerAnimation : MonoBehaviour
         playerControl = GetComponent<PlayerControl>();
         playerJump = GetComponent<PlayerJump>();
         doubleJump = GetComponent<DoubleJump>();
-        playerMovement = GetComponent<PlayerMovement>();
         playerStats = GetComponent<PlayerStats>();
-        //clipInfo = _anim.GetCurrentAnimatorClipInfo(0); // get name of current animation state   https://stackoverflow.com/questions/34846287/get-name-of-current-animation-state
-
-        // collider = this.transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/" +
-        //      "katana").gameObject.GetComponent<BoxCollider>(); // to find a child game object by name   //https://docs.unity3d.com/ScriptReference/Transform.Find.html
-
-        //collider = this.transform.Find("metarig/spine/spine.007/spine.001/spine.002/spine.003/shoulder.R/upper_arm.R/forearm.R/hand.R/" +
-        //"katana").gameObject.GetComponent<BoxCollider>(); // to find a child game object by name   //https://docs.unity3d.com/ScriptReference/Transform.Find.html
+        playerMovementV2 = GetComponent<PlayerMovementV2>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     void FixedUpdate()
     {
         initialiseAnimatorBool();
         stopDodging();
+        playDeathAnimation();
     }
 
+    private void playDeathAnimation()
+    {
+        if(playerStats.playDeathOnce)
+        {
+            _anim.SetTrigger("isPlayerDead");
+            playerStats.playDeathOnce = false;
+            //rigidbody.useGravity = true;
+        }
+    }
 
     private void stopDodging()
     {
         if(_anim.GetCurrentAnimatorStateInfo(0).IsTag("GH") || _anim.GetCurrentAnimatorStateInfo(0).IsTag("GEPB") || _anim.GetCurrentAnimatorStateInfo(0).IsTag("BI"))
         {
-            playerMovement.isDodging = false;
+            playerMovementV2.isDodging = false;
         }
     }
 
@@ -67,11 +74,13 @@ public class PlayerAnimation : MonoBehaviour
         _anim.SetInteger("jumpTimes", playerJump.jumpTimes);
         #endregion
         #region Sprint
-        _anim.SetBool("isSprinting", playerMovement.isSprinting);
-        _anim.SetBool("isDodging", playerMovement.isDodging);
+        _anim.SetBool("isRunning", playerMovementV2.isRunning);
+        _anim.SetBool("isDodging", playerMovementV2.isDodging);
         _anim.SetBool("isHitStun", playerStats.isHitStun);
         _anim.SetBool("isBlockStun", playerStats.isBlockStun);
-        _anim.SetBool("moveKeyPressed", playerMovement.moveKeyPressed);
+        _anim.SetBool("moveKeyPressed", playerMovementV2.moveKeyPressed);
+        _anim.SetFloat("comboValidTime", playerControl.comboValidTime);
+        _anim.SetInteger("comboHit", playerControl.comboHit);
         #endregion
     }
 
@@ -96,7 +105,6 @@ public class PlayerAnimation : MonoBehaviour
         playerAction.isKeepBlocking = false;
     }
     #endregion
-
 
     #region Player Attack Logic 
     public void OnAnimation_IsHeavyAttackActive()
@@ -138,13 +146,19 @@ public class PlayerAnimation : MonoBehaviour
     {
         playerAction.isPlayerAttacking = false;
     }
+
+    public void OnAnimation_isLastLightAttackEnd()
+    {
+        playerAction.isPlayerAttacking = false;
+        playerControl.comboHit = 0;
+    }
     #endregion
 
     #region Player Get Hurt Logic
     public void OnAnimation_isGetCriticalHit()
     {
-        
-        playerMovement.isDodging = false;
+        playerMovementV2.setSpeedDebuffTime(0.5f);
+        playerMovementV2.isDodging = false;
     }
 
     public void OnAnimation_isStunFinished()
@@ -154,22 +168,14 @@ public class PlayerAnimation : MonoBehaviour
 
     public void OnAnimation_isBlockStun()
     {
-        // playerStats.isBlockStun = true;
-        playerMovement.GetComponent<PlayerMovement>().isDodging = false;
+        playerMovementV2.GetComponent<PlayerMovement>().isDodging = false;
     }
-
-    public void OnAnimation_isBlockStunFinished()
-    {
-       // playerStats.isBlockStun = false;
-    }
-
-
     #endregion
 
     #region Player Dodge
     public void OnAnimation_isDodging()
     {
-        playerMovement.isDodging = false;
+        playerMovementV2.isDodging = false;
     }
     #endregion
 

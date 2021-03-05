@@ -18,6 +18,8 @@ public class PlayerStats : MonoBehaviour
     public bool isHitStun;
     public bool isStunRestoreTimeFinished = true;
     public bool isBlockStun;
+    public bool isDeath;
+    public bool playDeathOnce;
     #endregion
 
     #region Trigger
@@ -36,7 +38,8 @@ public class PlayerStats : MonoBehaviour
         maxStamina = stamina;
         restorePerSecond = maxStamina * 1 / 50;
         isHitStun = false;
-
+        isDeath = false;
+        playDeathOnce = false;
         #region UI
         //hpUI.SetMaxHP(health);
         //staminaUI.SetMaxStaminaSlider(stamina);
@@ -50,6 +53,16 @@ public class PlayerStats : MonoBehaviour
         Stun();
         setHealthUI();
         setStaminaUI();
+        isDead();
+    }
+
+    private void isDead()
+    {
+        if(health <= 0 && isDeath == false)
+        {
+            playDeathOnce = true;
+            isDeath = true;
+        }
     }
 
     private void Stun()
@@ -95,14 +108,14 @@ public class PlayerStats : MonoBehaviour
         if (health <= 0)
         {
             GetComponent<SwordCombat>().enabled = false;
-            GetComponent<PlayerMovement>().enabled = false;
+            GetComponent<PlayerMovementV2>().enableMovement = false;
             GetComponent<PlayerAction>().enabled = false;
         }
     }
 
     void restoreStamina()
     {
-        if (GetComponent<PlayerMovement>().isSprinting == false)
+        if (GetComponent<PlayerMovementV2>().isRunning == false)
         {
             if(readyToRestoreStaminaTime > 0) // Time preparation before restore stamina
             {
