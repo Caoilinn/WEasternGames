@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour
     public Camera playerCamera;
     public Camera lockOnCamera;
     public GameObject player;
+    public GameObject topOfHead;
     public bool isLockOnMode;
     public bool canLockOn;
     public List<Enemy> EnemyLockOnList;
@@ -33,6 +34,20 @@ public class CameraManager : MonoBehaviour
         checkIfLockOnListEmpty();
         autoTurnOffLockOn();
         lockDotTrigger();
+        checkIfEnemyIsDead();
+    }
+
+    private void checkIfEnemyIsDead()
+    {
+        foreach(Enemy enemies in EnemyLockOnList)
+        {
+            if(enemies.HP <= 0)
+            {
+                EnemyLockOnList.Remove(enemies);
+                sortEnemyListFromNearToFar();
+                enemyCursor = 0;
+            }
+        }
     }
 
     private void lockDotTrigger()

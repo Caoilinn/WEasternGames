@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 2521131}
   - component: {fileID: 2521130}
   - component: {fileID: 2521129}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1065,6 +1065,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2066525434}
     m_Modifications:
+    - target: {fileID: -8961359253771211100, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1135,16 +1140,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.009749869
       objectReference: {fileID: 0}
+    - target: {fileID: -8153468022190502949, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -7918335002988649766, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 039f24046f44fb0428625ab2bc0378a5, type: 2}
+    - target: {fileID: -7029948723529949830, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -7023974396876390944, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 13a6459ec24ca0c449050d1ea806d15e, type: 2}
+    - target: {fileID: -5049032948309972686, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -2268138116939433651, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1155,6 +1175,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d1d63aecb1606094d91dac2e3600de36, type: 2}
+    - target: {fileID: -1857309847194865932, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -1063203228461421988, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -241587437493983680, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1175,6 +1205,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Building
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 921391927218321214, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 2786534777698132407, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1185,11 +1225,31 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5b8f19fa6ff940b4eb2923e607b2b143, type: 2}
+    - target: {fileID: 4767400413853537203, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148817236446094103, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394693769120690257, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 5670784105149147771, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 18d876c808bf8ce40836b12811470fd9, type: 2}
+    - target: {fileID: 6507901977716847365, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7339356831882890532, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1394,7 +1454,7 @@ GameObject:
   m_Component:
   - component: {fileID: 125279403}
   - component: {fileID: 125279404}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 'Point Light '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1555,7 +1615,7 @@ GameObject:
   m_Component:
   - component: {fileID: 129232617}
   - component: {fileID: 129232618}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1824,6 +1884,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Building
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.632
@@ -1893,7 +1957,7 @@ GameObject:
   - component: {fileID: 158870571}
   - component: {fileID: 158870573}
   - component: {fileID: 158870572}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2319,7 +2383,7 @@ GameObject:
   m_Component:
   - component: {fileID: 200813609}
   - component: {fileID: 200813610}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2801,7 +2865,7 @@ GameObject:
   - component: {fileID: 270210998}
   - component: {fileID: 270211000}
   - component: {fileID: 270210999}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3021,7 +3085,7 @@ GameObject:
   m_Component:
   - component: {fileID: 297673700}
   - component: {fileID: 297673701}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3184,6 +3248,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2066525434}
     m_Modifications:
+    - target: {fileID: -8961359253771211100, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3254,16 +3323,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.016257318
       objectReference: {fileID: 0}
+    - target: {fileID: -8153468022190502949, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -7918335002988649766, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 039f24046f44fb0428625ab2bc0378a5, type: 2}
+    - target: {fileID: -7029948723529949830, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -7023974396876390944, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 13a6459ec24ca0c449050d1ea806d15e, type: 2}
+    - target: {fileID: -5049032948309972686, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -2268138116939433651, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3274,6 +3358,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d1d63aecb1606094d91dac2e3600de36, type: 2}
+    - target: {fileID: -1857309847194865932, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -1063203228461421988, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -241587437493983680, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3294,6 +3388,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Building
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 921391927218321214, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 2786534777698132407, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3304,11 +3408,31 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5b8f19fa6ff940b4eb2923e607b2b143, type: 2}
+    - target: {fileID: 4767400413853537203, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148817236446094103, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394693769120690257, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 5670784105149147771, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 18d876c808bf8ce40836b12811470fd9, type: 2}
+    - target: {fileID: 6507901977716847365, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7339356831882890532, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -3341,6 +3465,10 @@ PrefabInstance:
     - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_TagString
       value: Building
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3531,7 +3659,7 @@ GameObject:
   m_Component:
   - component: {fileID: 349800645}
   - component: {fileID: 349800646}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4008,7 +4136,7 @@ GameObject:
   - component: {fileID: 417346928}
   - component: {fileID: 417346930}
   - component: {fileID: 417346929}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4308,7 +4436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 443717096}
   - component: {fileID: 443717097}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 'Point Light '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4561,7 +4689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 471521598}
   - component: {fileID: 471521599}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4660,7 +4788,7 @@ GameObject:
   - component: {fileID: 482510791}
   - component: {fileID: 482510790}
   - component: {fileID: 482510789}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5064,6 +5192,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Building
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.8999663
@@ -5207,7 +5339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 611366589}
   - component: {fileID: 611366590}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5300,7 +5432,7 @@ GameObject:
   - component: {fileID: 617209681}
   - component: {fileID: 617209683}
   - component: {fileID: 617209682}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5501,7 +5633,7 @@ GameObject:
   m_Component:
   - component: {fileID: 660089423}
   - component: {fileID: 660089424}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5593,7 +5725,7 @@ GameObject:
   m_Component:
   - component: {fileID: 667564774}
   - component: {fileID: 667564775}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5685,7 +5817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 674452808}
   - component: {fileID: 674452809}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6120,6 +6252,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Building
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.62
@@ -6191,6 +6327,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2066525434}
     m_Modifications:
+    - target: {fileID: -8961359253771211100, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6261,16 +6402,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.009749869
       objectReference: {fileID: 0}
+    - target: {fileID: -8153468022190502949, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -7918335002988649766, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 039f24046f44fb0428625ab2bc0378a5, type: 2}
+    - target: {fileID: -7029948723529949830, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -7023974396876390944, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 13a6459ec24ca0c449050d1ea806d15e, type: 2}
+    - target: {fileID: -5049032948309972686, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -2268138116939433651, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6281,6 +6437,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d1d63aecb1606094d91dac2e3600de36, type: 2}
+    - target: {fileID: -1857309847194865932, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -1063203228461421988, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -241587437493983680, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6301,6 +6467,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Building
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 921391927218321214, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 2786534777698132407, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6311,11 +6487,31 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5b8f19fa6ff940b4eb2923e607b2b143, type: 2}
+    - target: {fileID: 4767400413853537203, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148817236446094103, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394693769120690257, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 5670784105149147771, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 18d876c808bf8ce40836b12811470fd9, type: 2}
+    - target: {fileID: 6507901977716847365, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7339356831882890532, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -6345,7 +6541,7 @@ GameObject:
   - component: {fileID: 778827771}
   - component: {fileID: 778827770}
   - component: {fileID: 778827769}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6914,7 +7110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 838397379}
   - component: {fileID: 838397380}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7411,7 +7607,7 @@ GameObject:
   - component: {fileID: 906904891}
   - component: {fileID: 906904893}
   - component: {fileID: 906904892}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7598,6 +7794,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: torii
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a218a8024bc1dfd41bd95aea19cc8d78,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8164078558771037576, guid: a218a8024bc1dfd41bd95aea19cc8d78,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a218a8024bc1dfd41bd95aea19cc8d78, type: 3}
@@ -7866,7 +8072,7 @@ GameObject:
   - component: {fileID: 974264892}
   - component: {fileID: 974264894}
   - component: {fileID: 974264893}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8656,6 +8862,7 @@ MonoBehaviour:
   playerCamera: {fileID: 1966021274}
   lockOnCamera: {fileID: 1492936217}
   player: {fileID: 8179728686340255269}
+  topOfHead: {fileID: 1623123477}
   isLockOnMode: 0
   canLockOn: 0
   EnemyLockOnList: []
@@ -8816,7 +9023,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1119033265}
   - component: {fileID: 1119033266}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9228,7 +9435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1148338873}
   - component: {fileID: 1148338874}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9482,7 +9689,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1156360551}
   - component: {fileID: 1156360552}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9609,8 +9816,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraDistance: 10
+  maxCameraHeight: 2
   cameraManager: {fileID: 0}
   playerMovement: {fileID: 0}
+  CameraYaxisMultiplier: 0
+  playerToEnemyDistance: 0
+  collisionMask:
+    serializedVersion: 2
+    m_Bits: 12288
 --- !u!65 &1156980433
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9631,6 +9844,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2066525434}
     m_Modifications:
+    - target: {fileID: -8961359253771211100, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9701,16 +9919,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.016257318
       objectReference: {fileID: 0}
+    - target: {fileID: -8153468022190502949, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -7918335002988649766, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 039f24046f44fb0428625ab2bc0378a5, type: 2}
+    - target: {fileID: -7029948723529949830, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -7023974396876390944, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 13a6459ec24ca0c449050d1ea806d15e, type: 2}
+    - target: {fileID: -5049032948309972686, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -2268138116939433651, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9721,6 +9954,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d1d63aecb1606094d91dac2e3600de36, type: 2}
+    - target: {fileID: -1857309847194865932, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -1063203228461421988, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -241587437493983680, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9746,6 +9989,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 921391927218321214, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 2786534777698132407, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -9756,11 +10009,31 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5b8f19fa6ff940b4eb2923e607b2b143, type: 2}
+    - target: {fileID: 4767400413853537203, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148817236446094103, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394693769120690257, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 5670784105149147771, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 18d876c808bf8ce40836b12811470fd9, type: 2}
+    - target: {fileID: 6507901977716847365, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7339356831882890532, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12499,6 +12772,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Building
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.63
@@ -12570,6 +12847,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2066525434}
     m_Modifications:
+    - target: {fileID: -8961359253771211100, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12640,16 +12922,31 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.009749869
       objectReference: {fileID: 0}
+    - target: {fileID: -8153468022190502949, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -7918335002988649766, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 039f24046f44fb0428625ab2bc0378a5, type: 2}
+    - target: {fileID: -7029948723529949830, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -7023974396876390944, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 13a6459ec24ca0c449050d1ea806d15e, type: 2}
+    - target: {fileID: -5049032948309972686, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -2268138116939433651, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12660,6 +12957,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d1d63aecb1606094d91dac2e3600de36, type: 2}
+    - target: {fileID: -1857309847194865932, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: -1063203228461421988, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: -241587437493983680, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12680,6 +12987,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Building
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 921391927218321214, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 2786534777698132407, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12690,11 +13007,31 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5b8f19fa6ff940b4eb2923e607b2b143, type: 2}
+    - target: {fileID: 4767400413853537203, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5148817236446094103, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 5394693769120690257, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 5670784105149147771, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 18d876c808bf8ce40836b12811470fd9, type: 2}
+    - target: {fileID: 6507901977716847365, guid: ea338ef9b5a123b49abd74463102ccb5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7339356831882890532, guid: ea338ef9b5a123b49abd74463102ccb5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -12724,7 +13061,7 @@ GameObject:
   - component: {fileID: 1372713301}
   - component: {fileID: 1372713303}
   - component: {fileID: 1372713302}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12841,6 +13178,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Building
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.709
@@ -12915,7 +13256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1386088724}
   - component: {fileID: 1386088725}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 'Point Light '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13602,7 +13943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1481973183}
   - component: {fileID: 1481973184}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: 'Point Light '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13759,6 +14100,7 @@ GameObject:
   - component: {fileID: 1492936217}
   - component: {fileID: 1492936221}
   - component: {fileID: 1492936220}
+  - component: {fileID: 1492936218}
   m_Layer: 0
   m_Name: LockOnCamera
   m_TagString: LockOnCamera
@@ -13809,6 +14151,24 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1492936218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492936216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b96d594134f6a754cad59cf2df020867, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  cameraManager: {fileID: 0}
+  ignoreMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  isOnHit: 0
 --- !u!114 &1492936220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13873,7 +14233,7 @@ GameObject:
   - component: {fileID: 1503996108}
   - component: {fileID: 1503996110}
   - component: {fileID: 1503996109}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13985,7 +14345,7 @@ GameObject:
   - component: {fileID: 1523858302}
   - component: {fileID: 1523858304}
   - component: {fileID: 1523858303}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14325,6 +14685,10 @@ PrefabInstance:
     - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_TagString
       value: Building
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14852,6 +15216,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1623123477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1623123478}
+  m_Layer: 0
+  m_Name: TopOfHead
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1623123478
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623123477}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.318, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8849550497725707423}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1629158510
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15081,7 +15475,7 @@ GameObject:
   - component: {fileID: 1654998742}
   - component: {fileID: 1654998741}
   - component: {fileID: 1654998740}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15193,7 +15587,7 @@ GameObject:
   - component: {fileID: 1685188983}
   - component: {fileID: 1685188985}
   - component: {fileID: 1685188984}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15317,7 +15711,7 @@ GameObject:
   - component: {fileID: 1763638787}
   - component: {fileID: 1763638789}
   - component: {fileID: 1763638788}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15434,7 +15828,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1768873861}
   - component: {fileID: 1768873862}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15527,7 +15921,7 @@ GameObject:
   - component: {fileID: 1774538309}
   - component: {fileID: 1774538311}
   - component: {fileID: 1774538310}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15930,7 +16324,7 @@ GameObject:
   - component: {fileID: 1862801908}
   - component: {fileID: 1862801910}
   - component: {fileID: 1862801909}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16764,7 +17158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1955989134}
   - component: {fileID: 1955989135}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17767,7 +18161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2031388667}
   - component: {fileID: 2031388668}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17946,7 +18340,7 @@ GameObject:
   - component: {fileID: 2046489293}
   - component: {fileID: 2046489295}
   - component: {fileID: 2046489294}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18058,7 +18452,7 @@ GameObject:
   - component: {fileID: 2051473529}
   - component: {fileID: 2051473531}
   - component: {fileID: 2051473530}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18245,7 +18639,7 @@ GameObject:
   - component: {fileID: 2058537539}
   - component: {fileID: 2058537538}
   - component: {fileID: 2058537537}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Fire (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18678,6 +19072,10 @@ PrefabInstance:
     - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_TagString
       value: Building
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012828375150, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4000012910057650, guid: d3a86a245c874f341815b25579c74e3e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -34621,6 +35019,7 @@ Transform:
   - {fileID: 8712116368822726923}
   - {fileID: 8712116369571678513}
   - {fileID: 1439948073}
+  - {fileID: 1623123478}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: -266.38998, z: 0}
