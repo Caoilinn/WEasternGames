@@ -17,7 +17,7 @@ public class AttackingState : State
     private List<int> _attackPatterns;
     private Random _rnd;
     private CombatActionType _actionType;
-    private EnemyAction2 _enemyAction;
+    private EnemyAction _enemyAction;
     private Transform _playerTransform;
 
     private const float AttackCDVal = 2f; 
@@ -44,7 +44,7 @@ public class AttackingState : State
     {
         base.Enter();
         _anim = _go.GetComponent<Animator>();
-        _enemyAction = _go.GetComponent<EnemyAction2>();
+        _enemyAction = _go.GetComponent<EnemyAction>();
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _rnd = new Random();
         _attackStateCountDown = 7f;
@@ -98,7 +98,7 @@ public class AttackingState : State
         isCDOn = true;
         AttackCD = AttackCDVal;
         _anim.SetTrigger(LightAttack);
-        _enemyAction.action = EnemyAction2.EnemyActionType.LightAttack;
+        _enemyAction.action = EnemyAction.EnemyActionType.LightAttack;
     }
 
     private void DoHeavyAttack()
@@ -107,7 +107,7 @@ public class AttackingState : State
         isCDOn = true;
         AttackCD = AttackCDVal;
         _anim.SetTrigger(HeavyAttack);
-        _enemyAction.action = EnemyAction2.EnemyActionType.HeavyAttack;
+        _enemyAction.action = EnemyAction.EnemyActionType.HeavyAttack;
     }
     
     private void ResetAttackCD()

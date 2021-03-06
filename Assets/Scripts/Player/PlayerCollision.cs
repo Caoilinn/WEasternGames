@@ -10,6 +10,11 @@ public class PlayerCollision : MonoBehaviour
     PlayerAction playerAction;
     BlockRadius playerFieldOfView;
     PlayerControl playerControl;
+    public delegate void HitPlayer();
+    public event HitPlayer OnHitPlayer;
+
+    public delegate void PlayerHurt();
+    public event PlayerHurt OnPlayerHurt;
 
     void Awake()
     {
@@ -26,7 +31,6 @@ public class PlayerCollision : MonoBehaviour
         #region Player Get Enemy Hit
         if (collision.gameObject.tag == "EnemyWeapon" && !playerStats.isDeath)
         {
-            collision.gameObject.GetComponent<Collider>().isTrigger = true;
             Enemy enemy = collision.gameObject.GetComponent<EnemyWeaponCollision>().enemy.GetComponent<Enemy>();
             EnemyWeaponCollision enemyWeaponCollision = collision.gameObject.GetComponent<EnemyWeaponCollision>();
             bool isInPlayerFov = this.GetComponent<BlockRadius>().EnemyInFOV(enemy);
@@ -37,6 +41,7 @@ public class PlayerCollision : MonoBehaviour
                 playerAction.isPerfectBlock == false &&
                 playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("B"))
             {
+
                 #region get enemy heavy attack
                 if (playerStats.hitStunValue > 0 &&
                     enemyWeaponCollision.enemyActionType == EnemyAction.EnemyActionType.HeavyAttack)
@@ -142,12 +147,16 @@ public class PlayerCollision : MonoBehaviour
             }
             #endregion
 
+            OnHitPlayer?.Invoke();
+
             // player is not in block action and get hit by enemy (Heavy attack)
             if (enemyWeaponCollision.enemyActionType == EnemyAction.EnemyActionType.HeavyAttack &&
                collision.gameObject.GetComponent<Collider>().isTrigger == false &&
                playerAction.isKeepBlocking == false &&
                !playerMovement.isDodging)
             {
+                OnPlayerHurt?.Invoke();
+
                 collision.gameObject.GetComponent<Collider>().isTrigger = true;
                 playerStats.DecreaseHPStamina(10, 10); 
                 playerStats.readyToRestoreStaminaTime = 5.0f;
@@ -166,6 +175,8 @@ public class PlayerCollision : MonoBehaviour
                      playerAction.isKeepBlocking == false &&
                      !playerMovement.isDodging)
             {
+                OnPlayerHurt?.Invoke();
+                
                 collision.gameObject.GetComponent<Collider>().isTrigger = true;
                 playerStats.DecreaseHPStamina(5, 5); 
                 playerStats.readyToRestoreStaminaTime = 5.0f;

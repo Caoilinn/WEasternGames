@@ -9,6 +9,7 @@ public class CameraManager : MonoBehaviour
     public Camera playerCamera;
     public Camera lockOnCamera;
     public GameObject player;
+    public GameObject topOfHead;
     public bool isLockOnMode;
     public bool canLockOn;
     public List<Enemy> EnemyLockOnList;

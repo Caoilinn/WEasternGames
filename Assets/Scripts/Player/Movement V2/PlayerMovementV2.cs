@@ -21,6 +21,7 @@ public class PlayerMovementV2 : MonoBehaviour
     public float gravity = 9.81f;
     public float groundedThreshold = 10;
     public LayerMask groundLayerMask;
+    public SwordTrailController swordTrailController;
 
     private bool isGoingForward;
     private bool isGoingBackward;
@@ -50,6 +51,7 @@ public class PlayerMovementV2 : MonoBehaviour
     private Rigidbody playerRigidbody;
     private Animator animator;
     PlayerStats playerStats;
+    PlayerAnimation playerAnimation;
     public float consumeStaminaSpeedTime = 0;
     public float DodgeTime = 0f;
     public float speedDebuffTime = 0f;
@@ -66,6 +68,7 @@ public class PlayerMovementV2 : MonoBehaviour
         forward = gameObject.transform.forward;
         RegisterInputEvents();
         playerStats = GetComponent<PlayerStats>();
+        playerAnimation = GetComponent<PlayerAnimation>();
     }
 
     void Update() {
@@ -312,6 +315,12 @@ public class PlayerMovementV2 : MonoBehaviour
             DoubleJump();
             return; 
         }
+        
+        playerAnimation.OnAnimation_IsLightAttackDeactive();
+        swordTrailController.OnAnimation_IsLightAttackDeactive();
+        swordTrailController.OnAnimation_IsHeavyAttackDeactive();
+
+        this.animator.SetTrigger("Jump");
 
         this.animator.SetTrigger("Jump");
         this.isFalling = true;
@@ -322,6 +331,13 @@ public class PlayerMovementV2 : MonoBehaviour
 
     private void DoubleJump() {
         if (alreadyDoubleJumped) { return; }
+
+        playerAnimation.OnAnimation_IsLightAttackDeactive();
+        swordTrailController.OnAnimation_IsLightAttackDeactive();
+        swordTrailController.OnAnimation_IsHeavyAttackDeactive();
+
+        this.animator.SetTrigger("DoubleJump");
+
         this.animator.SetTrigger("doubleJump");
         // if (!isIdle) {
         //     this.moveVelocity = this.moveVelocity.magnitude * this.direction;
@@ -410,6 +426,9 @@ public class PlayerMovementV2 : MonoBehaviour
         // set animator properties
         animator.SetBool("isFalling", false);
 
+        // set animator properties
+        animator.SetBool("isGrounded", true);
+
         // set booleans
         isFalling = false;
         isGrounded = true;
@@ -466,7 +485,9 @@ public class PlayerMovementV2 : MonoBehaviour
     }
 
     public void OnRunningKeyPressed(){
+        if (playerStats.stamina <= 0) { return; }
         animator.SetBool("isRunning", true);
+        animator.SetBool("isDodging", true);
         this.isRunning = true;
     }
     public void OnRunningKeyReleased() {
@@ -503,6 +524,8 @@ public class PlayerMovementV2 : MonoBehaviour
     public void OnCollisionExit(Collision collidee){
         if (collidee.collider.tag == "Ground") {
             isGrounded = false;
+            // set animator properties
+            animator.SetBool("isGrounded", false);
         }
         if (collidee.collider.tag == "Building") {
             isCollidingWithBuilding = false;

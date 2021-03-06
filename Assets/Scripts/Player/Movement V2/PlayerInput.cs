@@ -29,6 +29,7 @@ public class PlayerInput : MonoBehaviour
     public delegate void RightClickHold();
     public delegate void RightClickReleased();
     public delegate void JumpButtonPressed();
+    public delegate void LockOnButtonPressed();
 
     // events
     public event ForwardKeyPressed OnForwardKeyPressed;
@@ -53,6 +54,7 @@ public class PlayerInput : MonoBehaviour
     public event RightClickHold OnRightClickHold;
     public event RightClickReleased OnRightClickReleased;
     public event JumpButtonPressed OnJumpButtonPressed;
+    public event LockOnButtonPressed OnLockOnButtonPressed;
 
     #endregion
 
@@ -122,30 +124,35 @@ public class PlayerInput : MonoBehaviour
         }
         #endregion
         #region "Left Click (Mouse1)"
-        if (Input.GetMouseButtonDown(1)) {
+        if (Input.GetMouseButtonDown(0)) {
             OnLeftClickPressed?.Invoke();
         }
-        if (Input.GetMouseButton(1)) {
+        if (Input.GetMouseButton(0)) {
             OnLeftClickHold?.Invoke();
         }
-        if (Input.GetMouseButtonUp(1)) {
+        if (Input.GetMouseButtonUp(0)) {
             OnLeftClickReleased?.Invoke();
         }
         #endregion
         #region "Right Click (Mouse2)"
-        if (Input.GetMouseButtonDown(2)) {
+        if (Input.GetMouseButtonDown(1)) {
             OnRightClickPressed?.Invoke();
         }
-        if (Input.GetMouseButton(2)) {
+        if (Input.GetMouseButton(1)) {
             OnRightClickHold?.Invoke();
         }
-        if (Input.GetMouseButtonUp(2)) {
+        if (Input.GetMouseButtonUp(1)) {
             OnRightClickReleased?.Invoke();
         }
         #endregion
         #region "Jump (Spacebar)"
         if (Input.GetKeyDown(KeyCode.Space)) {
             OnJumpButtonPressed?.Invoke();
+        }
+        #endregion
+        #region "Lock On (F)"
+        if (Input.GetKeyDown(KeyCode.F)) {
+            OnLockOnButtonPressed?.Invoke();
         }
         #endregion
     }
