@@ -59,13 +59,11 @@ public class LockOnSystem : MonoBehaviour
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
         Vector3 direction = (cameraManager.lockOnCamera.transform.position - cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center).normalized;
-        Debug.Log("Raycast");
 
         float distanceToCamera = Vector3.Distance(cameraManager.lockOnCamera.transform.position, cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center);
         if (Physics.Raycast(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center, direction, out hit, distanceToCamera, collisionMask))
         {
             Debug.DrawRay(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center, direction * hit.distance, Color.yellow);
-            Debug.Log("Did Hit  " + hit.collider.name);
             cameraManager.lockOnCamera.transform.position = hit.point;
         } else {
              Debug.DrawRay(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center, direction * distanceToCamera, Color.red);
