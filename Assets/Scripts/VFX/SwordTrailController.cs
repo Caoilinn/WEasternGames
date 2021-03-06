@@ -10,7 +10,7 @@ public class SwordTrailController : MonoBehaviour
         weaponTrailComponent.Emit = true;
     }
 
-    public void OnAnimation_isLightAttackingEnd() {
+    public void OnAnimation_IsLightAttackDeactive() {
         weaponTrailComponent.Emit = false;
     }
 

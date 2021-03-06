@@ -30,26 +30,26 @@ public class LockOnCamera : MonoBehaviour
     //https://docs.unity3d.com/ScriptReference/Physics.Raycast.html
     void FixedUpdate()
     {
-        if(cameraManager.EnemyLockOnList.Count != 0)
-        {
-            RaycastHit hit;
-            // Does the ray intersect any objects excluding the player layer
-            Vector3 direction = (this.transform.position - cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center).normalized;
+        // if(cameraManager.EnemyLockOnList.Count != 0)
+        // {
+        //     RaycastHit hit;
+        //     // Does the ray intersect any objects excluding the player layer
+        //     Vector3 direction = (this.transform.position - cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center).normalized;
 
-            if (Physics.Raycast(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center, direction, out hit, 100, ignoreMask))
-            {
-                Debug.DrawRay(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center, direction * hit.distance, Color.yellow);
-                Debug.Log("Did Hit  " + hit.collider.name);
-                cameraManager.lockOnCamera.transform.position = hit.point + 2f * direction;
-                isOnHit = true;
-            }
-            else
-            {
-                Debug.DrawRay(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center, direction * 1000, Color.red);
-                isOnHit = false;
-                Debug.Log("Did not Hit");
-            }
-        }
+        //     if (Physics.Raycast(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center, direction, out hit, 100, ignoreMask))
+        //     {
+        //         Debug.DrawRay(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center, direction * hit.distance, Color.yellow);
+        //         Debug.Log("Did Hit  " + hit.collider.name);
+        //         cameraManager.lockOnCamera.transform.position = hit.point + 2f * direction;
+        //         isOnHit = true;
+        //     }
+        //     else
+        //     {
+        //         Debug.DrawRay(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center, direction * 1000, Color.red);
+        //         isOnHit = false;
+        //         Debug.Log("Did not Hit");
+        //     }
+        // }
 
     }
 }
