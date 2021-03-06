@@ -28,6 +28,7 @@ public class LockOnCamera : MonoBehaviour
     }
 
     //https://docs.unity3d.com/ScriptReference/Physics.Raycast.html
+    //use Raycast to detect if is there any layers were hit on the line of the raycast from the player to the lock on camera
     void FixedUpdate()
     {
         // if(cameraManager.EnemyLockOnList.Count != 0)
