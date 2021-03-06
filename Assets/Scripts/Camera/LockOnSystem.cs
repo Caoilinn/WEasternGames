@@ -12,6 +12,10 @@ public class LockOnSystem : MonoBehaviour
     public float CameraYaxisMultiplier;
     public float playerToEnemyDistance;
     public LayerMask collisionMask;
+    public float cameraRotateSpeed = 10f;
+    public bool isLerping;
+    public float timeStartedLerping;
+    public float timeTakenDuringLerp = 0.5f;
 
     private void Awake()
     {
@@ -50,7 +54,33 @@ public class LockOnSystem : MonoBehaviour
             
             CheckIfCollidingWithObject();
 
-            cameraManager.lockOnCamera.transform.LookAt(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].transform);
+
+            if (isLerping)
+            {
+                float timeSinceStarted;
+                timeSinceStarted = Time.time - timeStartedLerping;
+                float percentageComplete = timeSinceStarted / timeTakenDuringLerp; // http://www.blueraja.com/blog/404/how-to-use-unity-3ds-linear-interpolation-vector3-lerp-correctly  to calculate the usage of time to determine if the slerp function is finished.
+
+                float lerpY = cameraManager.lockOnCamera.transform.rotation.eulerAngles.y;
+                float lerpZ = cameraManager.lockOnCamera.transform.rotation.eulerAngles.z;
+                float lerpTargetY = cameraManager.EnemyLockOnList[cameraManager.enemyCursor].transform.rotation.eulerAngles.y;
+                float lerpTargetZ = cameraManager.EnemyLockOnList[cameraManager.enemyCursor].transform.rotation.eulerAngles.z;
+                float rotationCompleteY = Math.Abs(lerpY - lerpTargetY);
+                float rotationCompleteZ = Math.Abs(lerpZ - lerpTargetZ);
+                //https://forum.unity.com/threads/smooth-look-at.26141/ to rotate the camera more smoothly
+                Quaternion targetRotation = Quaternion.LookRotation(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].transform.position - cameraManager.lockOnCamera.transform.position);
+
+                // Smoothly rotate towards the target point.
+                cameraManager.lockOnCamera.transform.rotation = Quaternion.Slerp(cameraManager.lockOnCamera.transform.rotation, targetRotation, percentageComplete);
+                if (rotationCompleteY <= 5 && rotationCompleteZ <= 5)
+                {
+                    isLerping = false;
+                }
+            }
+            else
+            {
+                cameraManager.lockOnCamera.transform.LookAt(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].transform);
+            }
             cameraManager.lockDot.transform.position = cameraManager.lockOnCamera.WorldToScreenPoint(cameraManager.EnemyLockOnList[cameraManager.enemyCursor].GetComponent<Collider>().bounds.center);
 
         }

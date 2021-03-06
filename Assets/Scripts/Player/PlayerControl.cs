@@ -17,6 +17,7 @@ public class PlayerControl : MonoBehaviour
     public float comboValidTime = 0;
     public int comboHit = 0;
     CameraManager cameraManager;
+    LockOnSystem lockOnSystem;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class PlayerControl : MonoBehaviour
         playerAnimation = GetComponent<PlayerAnimation>();
         sprintTrigger = false;
         cameraManager = GameObject.FindGameObjectWithTag("GameSetting").GetComponent<CameraManager>();
+        lockOnSystem = GameObject.FindGameObjectWithTag("LockOnArea").GetComponent<LockOnSystem>();
     }
 
     void Update()
@@ -61,6 +63,8 @@ public class PlayerControl : MonoBehaviour
             cameraManager.isLockOnMode && 
             cameraManager.EnemyLockOnList.Count >= 1)
         {
+            lockOnSystem.timeStartedLerping = Time.time;
+            lockOnSystem.isLerping = true;
             if (cameraManager.enemyCursor <= cameraManager.EnemyLockOnList.Count - 1)
             {
                cameraManager.enemyCursor += 1;
