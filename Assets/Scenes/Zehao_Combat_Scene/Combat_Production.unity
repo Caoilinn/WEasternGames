@@ -5946,6 +5946,10 @@ MonoBehaviour:
   collisionMask:
     serializedVersion: 2
     m_Bits: 12288
+  cameraRotateSpeed: 10
+  isLerping: 0
+  timeStartedLerping: 0
+  timeTakenDuringLerp: 0.5
 --- !u!1 &334224753 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: 044c326a2424d984e8e45eb9604c5393,
