@@ -57,7 +57,7 @@ Material:
     - _BumpStrength: 0.1
     - _Highlight: 33.207546
     - _Shininess: 1
-    - _WaveScale: 0.02
+    - _WaveScale: 0.0844
     - _bScale: 0.062924534
     - _bTwirl: 0.05
     - _distort: 0.1
