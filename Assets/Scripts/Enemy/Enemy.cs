@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     public bool isStunRestoreTimeFinished = true;
     public Transform enemyTransform;
     public float maxAngle;
+    public int id = 0;
 
     #region Trigger
     public float readyToRestoreStaminaTime = 0;
@@ -27,6 +28,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        id = this.gameObject.GetInstanceID();
         HP = 100;
         stamina = 100;
         maxStamina = stamina;
@@ -164,5 +166,6 @@ public class Enemy : MonoBehaviour
             return false;
         }
     }
+
 }
 

@@ -6,8 +6,10 @@ public class EnemyWeaponCollision : MonoBehaviour
 {
     public Enemy enemy;
     public EnemyAction.EnemyActionType enemyActionType;
-    public Collider collider;
+    private Collider collider;
     EnemyAction enemyAction;
+    public delegate void HitPlayer();
+    public event HitPlayer OnHitPlayer;
 
     void Start()
     {
@@ -26,6 +28,9 @@ public class EnemyWeaponCollision : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            // publish event
+            OnHitPlayer?.Invoke();
+
             PlayerAnimation  playerAnimation = collision.gameObject.GetComponent<PlayerAnimation>();
             PlayerStats playerStats = collision.gameObject.GetComponent<PlayerStats>();
             PlayerMovement playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
@@ -38,9 +43,7 @@ public class EnemyWeaponCollision : MonoBehaviour
             {
                 if(isInPlayerFov)
                 {
-                    enemy.GetComponent<EnemyAnimation>()._anim.SetTrigger("getPlayerPerfectBlockImpact");
-                    // spawn sword clash effect
-                    collision.gameObject.GetComponent<SwordEffectSpawner>().SpawnBigSwordClash();
+                    TriggerPerfectBlock(collision.gameObject);
                 }
                 else
                 {
@@ -62,5 +65,11 @@ public class EnemyWeaponCollision : MonoBehaviour
 
 
         }
+    }
+
+    public void TriggerPerfectBlock(GameObject swordObject) {
+        enemy.GetComponent<EnemyAnimation>()._anim.SetTrigger("getPlayerPerfectBlockImpact");
+        // spawn sword clash effect
+        swordObject.GetComponent<SwordEffectSpawner>().SpawnBigSwordClash();
     }
 }

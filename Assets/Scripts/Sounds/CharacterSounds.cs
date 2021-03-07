@@ -11,6 +11,8 @@ public class CharacterSounds : SoundSystem
     void Start()
     {
         audioSource = head.AddComponent<AudioSource>();
+        audioSource.minDistance = 3.5f;
+        audioSource.dopplerLevel = 0;
         audioSource.spatialBlend = 1.0f; // set 3D
     }
 

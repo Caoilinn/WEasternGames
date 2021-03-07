@@ -8,6 +8,7 @@ public class WeaponCollision : MonoBehaviour
     public PlayerAction playerAction;
     PlayerStats playerStats;
     PlayerAnimation playerAnimation;
+    PlayerControl playerControl;
     GameObject targetEnemy;
 
     void Start()
@@ -16,6 +17,7 @@ public class WeaponCollision : MonoBehaviour
         playerAction = this.player.GetComponent<PlayerAction>();
         playerStats = this.player.GetComponent<PlayerStats>();
         playerAnimation = this.player.GetComponent<PlayerAnimation>();
+        playerControl = this.player.GetComponent<PlayerControl>();
         this.GetComponent<Collider>().isTrigger = true;
     }
 
@@ -54,7 +56,7 @@ public class WeaponCollision : MonoBehaviour
                 }
                 #endregion
 
-                #region get enemy light attack
+                #region get player light attack
                 //get enemy light attack
                 if (enemy.hitStunValue > 0 &&
                     playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT") &&
@@ -225,13 +227,15 @@ public class WeaponCollision : MonoBehaviour
             {
                 if(isInEnemyFOV)
                 {
-                    player.GetComponent<PlayerAnimation>()._anim.ResetTrigger("isGetEnemyPerfectBlock");
-                    player.GetComponent<PlayerAnimation>()._anim.SetTrigger("isGetEnemyPerfectBlock");
+                    playerAnimation._anim.ResetTrigger("isGetEnemyPerfectBlock");
+                    playerAnimation._anim.SetTrigger("isGetEnemyPerfectBlock");
                     playerAction.isPlayerAttacking = false;
                     playerStats.isHitStun = true;
 
                     // spawn sword clash effect
                     collision.gameObject.GetComponentInParent<SwordEffectSpawner>().SpawnBigSwordClash();
+                    playerControl.comboHit = 0;
+                    playerControl.comboValidTime = 0;
                 }
                 else
                 {
