@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shader Graphs_ScrollShader
+  m_Shader: {fileID: -6465566751694194690, guid: 87b5d9b5fb89ab346b153ec99fe9864d,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_1A07013E:
+        m_Texture: {fileID: 2800000, guid: 318f64f6054ca0f40a7a880725f2be01, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_40FDE22B:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_702C45E7: 10
+    - Vector1_DCC30DF8: 12
+    - Vector1_ED6727A: 0.16
+    - Vector1_FD3D3CD1: 0.3
+    m_Colors:
+    - Color_1799019F: {r: 14.727136, g: 14.727136, b: 14.727136, a: 1}
+    - Vector2_4251D339: {r: 0, g: -0.2, b: 0, a: 0}
+    - Vector2_56ED3BAE: {r: 0, g: -0.2, b: 0, a: 0}
