@@ -9,6 +9,8 @@ public enum ActionType
     Idle,
     Jump,
     LightAttack,
+    LightAttackCombo2,
+    LightAttackCombo3,
     HeavyAttack,
     SwordBlock,
     Dodge,
@@ -18,7 +20,7 @@ public class PlayerAction : MonoBehaviour
 {
     public ActionType action;
 
-    private Animator _anim;
+    public Animator _anim;
     PlayerJump playerJump;
     DoubleJump doubleJump;
 
@@ -38,7 +40,7 @@ public class PlayerAction : MonoBehaviour
     {
         action = ActionType.Idle;
         _anim = GetComponent<Animator>();
-        _anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimationController/PlayerAnimator"); //Load controller at runtime https://answers.unity.com/questions/1243273/runtimeanimatorcontroller-not-loading-from-script.html
+        //_anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimationController/PlayerAnimator"); //Load controller at runtime https://answers.unity.com/questions/1243273/runtimeanimatorcontroller-not-loading-from-script.html
     }
 
     void Update()
@@ -50,6 +52,16 @@ public class PlayerAction : MonoBehaviour
 
             case ActionType.LightAttack:
                 LightAttack();
+                action = ActionType.Idle;
+                break;
+
+            case ActionType.LightAttackCombo2:
+                LightAttack2();
+                action = ActionType.Idle;
+                break;
+
+            case ActionType.LightAttackCombo3:
+                LightAttack3();
                 action = ActionType.Idle;
                 break;
 
@@ -81,13 +93,23 @@ public class PlayerAction : MonoBehaviour
 
     void LightAttack()
     {
-        isPlayerAttacking = true;
+        _anim.ResetTrigger("secondAttack");
+        _anim.ResetTrigger("thirdAttack");
         _anim.SetTrigger("isPlayerLightAttack");
+    }
+
+    void LightAttack2()
+    {
+        _anim.SetTrigger("secondAttack");
+    }
+
+    void LightAttack3()
+    {
+        _anim.SetTrigger("thirdAttack");
     }
 
     void HeavyAttack()
     {
-        isPlayerAttacking = true;
         _anim.SetTrigger("isPlayerHeavyAttack");
     }
 

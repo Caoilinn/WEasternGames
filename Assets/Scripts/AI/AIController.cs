@@ -1,7 +1,9 @@
 ﻿using System;
 using AI;
 using AI.States;
-using UnityEngine;using UnityTemplateProjects.Utilities;
+using UnityEngine;
+using UnityTemplateProjects.Utilities;
+using UnityEngine.Playables;
 
 public class AIController : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class AIController : MonoBehaviour
     public int id;
     
     public bool HasAttackFlag { get; set; } = false;
+    public PlayableAsset trashTalkDialogue;
+    public PlayableDirector playableDirector;
 
     public enum InitialAIState
     {
@@ -26,12 +30,15 @@ public class AIController : MonoBehaviour
         _sm._CurState = new EvasiveState(gameObject, _sm);
         _enemyAction = this.GetComponent<EnemyAction>();
         _attacked = 0;
+        _sm.SetTrashTalkDialogue(trashTalkDialogue);
+        _sm.SetPlayableDirector(playableDirector);
         //AIManager.current.OnAttackStateChangeReq += OnAttackStateChange;
     }
 
     private void Start()
     {
         //Debug.Log("AIController " + id + " is printing " + AIManager.current);
+        _sm._CurState = new IdleState(gameObject, _sm);
     }
 
     // Update is called once per frame

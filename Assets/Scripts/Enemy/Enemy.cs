@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour
     public float hitStunValue;
     public float hitStunRestoreSecond;
     public bool isStunRestoreTimeFinished = true;
+    public Transform enemyTransform;
+    public float maxAngle;
+    public int id = 0;
 
     #region Trigger
     public float readyToRestoreStaminaTime = 0;
@@ -25,6 +28,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        id = this.gameObject.GetInstanceID();
         HP = 100;
         stamina = 100;
         maxStamina = stamina;
@@ -34,6 +38,8 @@ public class Enemy : MonoBehaviour
         speed = 4;
         hitStunValue = 0;
         hitStunRestoreSecond = 0f;
+        enemyTransform = this.transform;
+        maxAngle = 45; // can be modified depend on the difficult
     }
 
     void Update()
@@ -142,5 +148,24 @@ public class Enemy : MonoBehaviour
         HP -= hp;
         stamina -= st;
     }
+
+    public bool PlayerInFOV(GameObject player)
+    {
+        Vector3 targetDirection = player.transform.position - this.transform.position;  //to get the direction from the enemy to the player
+
+        // 0 degree will be the enemy's look at direction is the target direction. 
+        // angle = enemy's look at direction - the direction from the enemy to the player
+        float angle = Vector3.Angle(targetDirection, this.transform.forward);
+
+        if (angle <= maxAngle) // if the angle is lower or equal to the given MaxAngle by enemy, for example 45 degrees, this mean the player is in the enemy's fov
+        {
+            return true;
+        }
+        else  // or out of fov means cant see player
+        {
+            return false;
+        }
+    }
+
 }
 

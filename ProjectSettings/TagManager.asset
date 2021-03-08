@@ -11,6 +11,12 @@ TagManager:
   - PlayerWeapon
   - EnemyWeapon
   - Ground
+  - Building
+  - LockOnArea
+  - LockOnCamera
+  - PlayerCamera
+  - GameSetting
+  - LockCursor
   layers:
   - Default
   - TransparentFX
@@ -24,8 +30,8 @@ TagManager:
   - Outlined
   - Environment
   - Characters
-  - 
-  - 
+  - Ground
+  - Buildings
   - 
   - 
   - 

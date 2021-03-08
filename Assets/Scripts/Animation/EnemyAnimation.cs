@@ -10,15 +10,13 @@ public class EnemyAnimation : MonoBehaviour
     private EnemyAction enemyAction;
     public GameObject player;
     public GameObject enemy;
-    private Collider collider;
+    public Collider enemyWeapon;
 
     void Start()
     {
         _anim = GetComponent<Animator>();
         _anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimationController/TestEnemyAnimator"); //Load controller at runtime https://answers.unity.com/questions/1243273/runtimeanimatorcontroller-not-loading-from-script.html
         enemyAction = GetComponent<EnemyAction>();
-        collider = this.enemy.transform.Find("mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/" +
-            "Weapon").gameObject.GetComponent<BoxCollider>(); // to find a child game object by name   //https://docs.unity3d.com/ScriptReference/Transform.Find.html
     }
 
     void FixedUpdate()
@@ -28,7 +26,7 @@ public class EnemyAnimation : MonoBehaviour
 
     void initialiseAnimatorBool()
     {
-        _anim.SetBool("isAttacking", collider.isTrigger);
+        _anim.SetBool("isAttacking", enemyWeapon.isTrigger);
         _anim.SetBool("isKeepBlocking", enemyAction.isKeepBlocking);
         _anim.SetBool("isPerfectBlock", enemyAction.isPerfectBlock);
         _anim.SetBool("isInPerfectBlockOnly", enemyAction.isInPerfectBlockOnly);
@@ -37,27 +35,27 @@ public class EnemyAnimation : MonoBehaviour
     #region Enemy Attack Logic
     public void OnAnimation_IsHeavyAttackActive()
     {
-        collider.isTrigger = false;
+        enemyWeapon.isTrigger = false;
     }
 
     public void OnAnimation_IsHeavyAttackDeactive()
     {
-        collider.isTrigger = true;
+        enemyWeapon.isTrigger = true;
     }
 
     public void OnAnimation_IsLightAttackActive()
     {
-        collider.isTrigger = false;
+        enemyWeapon.isTrigger = false;
     }
 
     public void OnAnimation_IsLightAttackDeactive()
     {
-        collider.isTrigger = true;
+        enemyWeapon.isTrigger = true;
     }
 
     public void OnAnimation_StopAttackCollision()
     {
-        collider.isTrigger = true;
+        enemyWeapon.isTrigger = true;
     }
     #endregion
 
@@ -90,6 +88,11 @@ public class EnemyAnimation : MonoBehaviour
     #endregion
 
     public void OnAnimation_isBlockStun()
+    {
+
+    }
+
+    public void OnAnimation_isStunFinished()
     {
 
     }
