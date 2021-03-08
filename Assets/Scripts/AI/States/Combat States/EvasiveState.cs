@@ -40,8 +40,7 @@ public class EvasiveState : State
         _rotationalSpeed = 30f;
         _flipped = false;
         _flipPosition = Position();
-        Debug.Log(_flipPosition);
-
+        
         AnimationClip[] clips = _anim.runtimeAnimatorController.animationClips;
         
         foreach (AnimationClip clip in clips)
@@ -53,9 +52,9 @@ public class EvasiveState : State
         }
 
         // for triggering trash talk dialogue
-        if (_sm.playableDirector.state == PlayState.Playing) { return; }
+        /*if (_sm.playableDirector.state == PlayState.Playing) { return; }
         _sm.playableDirector.playableAsset = _sm.trashTalkDialogue;
-        _sm.playableDirector.Play();
+        _sm.playableDirector.Play();*/
     }
 
     public override void FixedUpdate()

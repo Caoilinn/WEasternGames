@@ -37,7 +37,6 @@ namespace AI
             
             foreach (GameObject enemy in _enemies)
             {
-                Debug.Log(enemy.name);
                 _enemyControllers.Add(enemy, enemy.GetComponent<AIController>());
             }
         }
@@ -45,7 +44,7 @@ namespace AI
         private void FixedUpdate()
         {
             //Check if enemy has the attack flag
-            CheckForAttack();
+            //CheckForAttack();
         }
 
         public void RequestsAttackState(GameObject reqEnemy)

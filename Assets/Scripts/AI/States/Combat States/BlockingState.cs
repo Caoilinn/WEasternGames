@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using AI;
 using AI.States;
 using UnityEngine;
-using UnityTemplateProjects.Utilities;
+using Utilities;
 
 public class BlockingState : State
 {

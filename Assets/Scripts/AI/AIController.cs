@@ -2,7 +2,7 @@
 using AI;
 using AI.States;
 using UnityEngine;
-using UnityTemplateProjects.Utilities;
+using Utilities;
 using UnityEngine.Playables;
 
 public class AIController : MonoBehaviour
@@ -27,7 +27,6 @@ public class AIController : MonoBehaviour
     private void Awake()
     {
         _sm = new StateMachine();
-        _sm._CurState = new EvasiveState(gameObject, _sm);
         _enemyAction = this.GetComponent<EnemyAction>();
         _attacked = 0;
         _sm.SetTrashTalkDialogue(trashTalkDialogue);
@@ -60,6 +59,7 @@ public class AIController : MonoBehaviour
     
     public void AttackStateChange(AIController controller)
     {
+        Debug.Log("Enter Attack State From AttackStateChange");
         if (controller == this)
             _sm._CurState = new AttackingState(gameObject, _sm);
         //Debug.Log("AI Controller ID is: " + controller.id);

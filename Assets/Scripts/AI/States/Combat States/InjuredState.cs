@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityTemplateProjects.Animation;
-using UnityTemplateProjects.Utilities;
+using Utilities;
 
 public class InjuredState : State
 {

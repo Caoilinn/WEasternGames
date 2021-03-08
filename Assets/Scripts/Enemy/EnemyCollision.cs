@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityTemplateProjects.Utilities;
+using Utilities;
 
 public class EnemyCollision : MonoBehaviour
 {

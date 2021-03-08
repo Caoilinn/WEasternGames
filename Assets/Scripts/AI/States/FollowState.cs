@@ -43,7 +43,6 @@ namespace AI.States
             _animator = _go.GetComponent<Animator>();
             _moveSpeed = 8f;
             _zVelHash = Animator.StringToHash("enemyVelZ");
-            Debug.Log("Follow State");
         }
 
         public override void FixedUpdate()

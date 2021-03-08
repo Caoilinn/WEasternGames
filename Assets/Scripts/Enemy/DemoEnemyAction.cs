@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityTemplateProjects.Utilities;
+using Utilities;
 
-public class DemoEnemyAction : EnemyAction
+public class DemoEnemyAction : MonoBehaviour
 {
     public enum EnemyActionType
     {
@@ -12,20 +12,31 @@ public class DemoEnemyAction : EnemyAction
         HeavyAttack,
         Block,
         PerfectBlockOnly,
+        EnterInjured,
+        Injured
     }
+
+    public bool demo;
 
     public EnemyActionType action;
 
     private Animator _anim;
     EnemyBehaviour enemyBehaviour;
+    
+    
     public bool isPerfectBlock = false;
     public bool isKeepBlocking = false;
     public bool isInPerfectBlockOnly = false;
-
+    
+    #region Debug
+    
     private void Start()
     {
-        _anim = GetComponent<Animator>();
-        _anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimationController/EnemyAnimator"); //Load controller at runtime https://answers.unity.com/questions/1243273/runtimeanimatorcontroller-not-loading-from-script.html
+        if (demo)
+        {
+            _anim = GetComponent<Animator>();
+            _anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimationController/EnemyAnimator"); //Load controller at runtime https://answers.unity.com/questions/1243273/runtimeanimatorcontroller-not-loading-from-script.html
+        }
     }
 
     private void Awake()
@@ -35,33 +46,35 @@ public class DemoEnemyAction : EnemyAction
 
     void Update()
     {
-
-        switch (action)
+        if (demo)
         {
-            case EnemyActionType.Idle:
-                isInPerfectBlockOnly = false;
-                isKeepBlocking = false;
-                break;
+            switch (action)
+            {
+                case EnemyActionType.Idle:
+                    isInPerfectBlockOnly = false;
+                    isKeepBlocking = false;
+                    break;
 
-            case EnemyActionType.LightAttack:
-                LightAttack();
-                isKeepBlocking = false;
-                break;
+                case EnemyActionType.LightAttack:
+                    LightAttack();
+                    isKeepBlocking = false;
+                    break;
 
-            case EnemyActionType.HeavyAttack:
-                HeavyAttack();
-                isKeepBlocking = false;
-                break;
-            case EnemyActionType.Block:
-                Block();
-                break;
-            case EnemyActionType.PerfectBlockOnly:
-                PBlockOnly();
-                isKeepBlocking = false;
-                break;
+                case EnemyActionType.HeavyAttack:
+                    HeavyAttack();
+                    isKeepBlocking = false;
+                    break;
+                case EnemyActionType.Block:
+                    Block();
+                    break;
+                case EnemyActionType.PerfectBlockOnly:
+                    PBlockOnly();
+                    isKeepBlocking = false;
+                    break;
+            }
         }
     }
-
+    
     private void HeavyAttack()
     {
         _anim.SetTrigger("HeavyAttack");
@@ -84,4 +97,6 @@ public class DemoEnemyAction : EnemyAction
         _anim.SetTrigger("PerfectBlockOnly");
         isInPerfectBlockOnly = true;
     }
+    
+    #endregion
 }

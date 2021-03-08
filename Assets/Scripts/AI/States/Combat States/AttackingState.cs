@@ -6,7 +6,7 @@ using AI;
 using AI.States;
 using UnityEngine;
 using UnityTemplateProjects.Animation;
-using UnityTemplateProjects.Utilities;
+using Utilities;
 using Random = UnityEngine.Random;
 
 
@@ -108,7 +108,7 @@ public class AttackingState : State
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-
+        
         if (_isReadyNextAtk)
         {
             _collider.radius = _colliderRadius;
@@ -132,13 +132,14 @@ public class AttackingState : State
             int action = Random.Range(0,2);
 
             if (action == 0)
-                _sm._CurState = new CombatWalk(_go, _sm, false);
+                _sm._CurState = new EvasiveState(_go, _sm);
             else
                 _sm._CurState = new BlockingState(_go, _sm);
         }
 
         if (Vector3.Distance(_playerTransform.position, _go.transform.position) > 3f && !_rolling)
         {
+            Debug.Log("Enter Follow from attack");
             _sm._CurState = new FollowState(_go, _sm, _sequenceCount);
         }
     }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityTemplateProjects.Utilities;
+using Utilities;
 
 public class EnemyAnimation : MonoBehaviour
 {
@@ -15,7 +15,6 @@ public class EnemyAnimation : MonoBehaviour
     void Start()
     {
         _anim = GetComponent<Animator>();
-        _anim.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimationController/TestEnemyAnimator"); //Load controller at runtime https://answers.unity.com/questions/1243273/runtimeanimatorcontroller-not-loading-from-script.html
         enemyAction = GetComponent<EnemyAction>();
     }
 

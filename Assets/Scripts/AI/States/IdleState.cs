@@ -46,6 +46,7 @@ namespace AI.States
             if(_fieldOfView.PlayerSpotted || _fieldOfViewR.PlayerSpotted || _fieldOfViewL.PlayerSpotted)
             {
                 _animator.SetBool(Idle, false);
+                //Debug.Log("Enter Follow from Idle");
                 _sm._CurState = new FollowState(_go, _sm);
             }
         }
