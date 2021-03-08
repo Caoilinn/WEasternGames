@@ -134,7 +134,7 @@ public class WeaponCollision : MonoBehaviour
                 }
             }
             #endregion
-
+            
             // enemy is not in block action and get hit by player (Heavy attack)
             if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("HT") &&
                this.GetComponent<Collider>().isTrigger == false &&
