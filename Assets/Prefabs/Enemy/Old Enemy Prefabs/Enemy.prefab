@@ -1745,6 +1745,7 @@ Transform:
   - {fileID: 940228346077061551}
   - {fileID: 484765038214386269}
   - {fileID: 8361657780248884682}
+  - {fileID: 1862901015803581841}
   m_Father: {fileID: 5770084081332286219}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 6.8925047, y: -13.803563, z: 4.0063677}
@@ -2543,7 +2544,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8322698358332063179}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -3325,7 +3326,18 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
+    'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
+    'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
+    'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
+    'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'Left Strafe Walking'\n\tFrom
+    animation clip 'Left Strafe'\n\tFrom animation clip 'Right Strafe Walking'\n\tFrom
+    animation clip 'Right Strafe'\n\tFrom animation clip 'Running'\n\tFrom animation
+    clip 'Walk With Briefcase'\n\tFrom animation clip 'Idle'\n\tFrom animation clip
+    'Walk Backwards'\n\tFrom animation clip 'EnemyHeavyAttack'\n\tFrom animation
+    clip 'EnemyLightAttack'\n\tand more ..."
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -3494,7 +3506,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fieldOfViewAngle: 20
   lookRadius: 10
-  _player: {fileID: 0}
+  _rayCastOrigin: {fileID: 0}
 --- !u!54 &8322698358806366252
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3563,6 +3575,81 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 9169684937113025522}
   enemyActionType: 0
+--- !u!1001 &1862901015803186961
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7653171325400906091}
+    m_Modifications:
+    - target: {fileID: 100000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_Name
+      value: MeleeWarriorPolearm 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.585
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.033
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.103
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a355aeb38f611ba4d8a5425d68e8e4b3, type: 3}
+--- !u!4 &1862901015803581841 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400000, guid: a355aeb38f611ba4d8a5425d68e8e4b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1862901015803186961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8322698357501907489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3649,6 +3736,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: EnemyWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b208391e92cb3d64499a9e9e4ce32441,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b208391e92cb3d64499a9e9e4ce32441, type: 3}

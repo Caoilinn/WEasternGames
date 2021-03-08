@@ -1,8 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using AI;
 using AI.States;
 using UnityEngine;
+using UnityTemplateProjects.Animation;
+using Utilities;
+using Random = UnityEngine.Random;
 
 
 enum CombatActionType
@@ -13,31 +18,64 @@ enum CombatActionType
 
 public class AttackingState : State
 {
+    private float _dashSpeed = 2f;
+    private float _dashTime = 0.2f;
+    private float _startDashTime = 0.1f;
+    
+    private Rigidbody _rigidBody;
     private Animator _anim;
     private List<int> _attackPatterns;
     private Random _rnd;
     private CombatActionType _actionType;
     private EnemyAction _enemyAction;
     private Transform _playerTransform;
+    private CapsuleCollider _collider;
+    private float _colliderRadius;
+    private float _colliderHeight;
+    
+    private List<AnimationAction> _actions;
+    private List<AnimationAction> _actionSequence;
+    private int _sequenceCount = 0;
+    private int _origionalSequence;
 
-    private const float AttackCDVal = 2f; 
-    private bool isReadyNextATK = true;
-    private float AttackCD;
-    private bool isCDOn = false;
+
+    private float _origY;
+    
+    private bool _actionFlag;
+    private bool _isNextSequenceReady = true;
+    private bool _rolling = false;
+    
+    private bool _isReadyNextAtk = true;
+    private float _attackCd;
+    private bool _isCdOn = false;
+    
+    private readonly int[] _sequence1 = {0, 1, 3, 4, 1, 3, 1, 1, 1};
+    private readonly int[] _sequence2 = {0, 1, 2, 4, 1, 2, 1, 2, 1};
+    private readonly int[] _sequence3 = {0, 1, 2, 4, 1, 2, 1, 1, 1};
+    private readonly int[] _sequence4 = {0, 1, 2, 4, 1, 3, 3, 2, 4};
     
     
     //This is how long the AI will remain in this state during combat
     private float _attackStateCountDown;
     
     #region Animation Triggers
-
-    private static readonly int LightAttack = Animator.StringToHash("LightAttack");
-    private static readonly int HeavyAttack = Animator.StringToHash("HeavyAttack");
-
+    private static readonly int Attack1 = Animator.StringToHash("Attack1");
+    private static readonly int Attack2 = Animator.StringToHash("Attack2");
+    private static readonly int Attack3 = Animator.StringToHash("Attack3");
+    private static readonly int MassiveAttack = Animator.StringToHash("MassiveAttack");
+    private static readonly int CombatRoll = Animator.StringToHash("CombatRoll");
+    
+    private static readonly int TakeDamage = Animator.StringToHash("TakeDamage");
+    
     #endregion
     
-    public AttackingState(GameObject go, StateMachine sm) : base(go, sm)
+    public AttackingState(GameObject go, StateMachine sm, int sequence = 0, float timeRemaining = 0) : base(go, sm)
     {
+        //These checks are in place to make sure the attakcing state picks back up where it left off in the case of a roll
+        if (sequence != 0)
+            _sequenceCount = sequence;
+
+        _attackStateCountDown = timeRemaining != 0 ? timeRemaining : Random.Range(1,2);
     }
 
     public override void Enter()
@@ -47,81 +85,201 @@ public class AttackingState : State
         _enemyAction = _go.GetComponent<EnemyAction>();
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _rnd = new Random();
-        _attackStateCountDown = 7f;
-    }
+        //_attackStateCountDown = 7f;
+        _actions = new List<AnimationAction>();
+        _actionSequence = new List<AnimationAction>();
+        _collider = _go.GetComponent<CapsuleCollider>();
+        _colliderRadius = _collider.radius;
+        _colliderHeight = _collider.height;
+        _rigidBody = _go.GetComponent<Rigidbody>();
 
+        
+        AnimationClip[] clips = _anim.runtimeAnimatorController.animationClips;
+       
+        foreach (AnimationClip clip in clips)
+        {
+            if (clip.name.Contains("Attack") || clip.name.Contains("roll"))
+            {
+                _actions.Add(new AnimationAction(clip));
+            }
+        }
+    }
+    
     public override void FixedUpdate()
     {
         base.FixedUpdate();
         
-        if (isReadyNextATK)
+        if (_isReadyNextAtk)
         {
-            int action = Random.Range(0,2);
-            _actionType = (CombatActionType) action;
-
-            switch (_actionType)
-            {
-                case CombatActionType.HeavyAttack:
-                    // DoHeavyAttack();
-                    DoLightAttack();
-                    break;
-                case CombatActionType.LightAttack:
-                    DoLightAttack();
-                    break;
-
-            }
+            _collider.radius = _colliderRadius;
+            _collider.height = _colliderHeight;
+            _rolling = false;
+            _rigidBody.velocity = Vector3.zero;
+            PerformActions(); 
         }
+
+        if(_rolling)
+            DoCombatRoll();
+           
         ResetAttackCD();
 
         _attackStateCountDown -= Time.fixedDeltaTime;
         
+        //Currently Changes state to blocking 
+        //TODO: Change how the Attacking State transitions to blocking, make it transition based on health
         if (_attackStateCountDown <= 0)
         {
             int action = Random.Range(0,2);
 
             if (action == 0)
-                _sm._CurState = new CombatWalk(_go, _sm, false);
+                _sm._CurState = new EvasiveState(_go, _sm);
             else
                 _sm._CurState = new BlockingState(_go, _sm);
         }
 
-        if (Vector3.Distance(_playerTransform.position, _go.transform.position) > 3f)
+        if (Vector3.Distance(_playerTransform.position, _go.transform.position) > 3f && !_rolling)
         {
-            _sm._CurState = new FollowState(_go, _sm);
+            Debug.Log("Enter Follow from attack");
+            _sm._CurState = new FollowState(_go, _sm, _sequenceCount);
+        }
+    }
+
+
+    private void PerformActions()
+    {
+        if (_isNextSequenceReady)
+        {
+            GetNextSequence();
+            return;
         }
 
-    }
+        AnimationAction currentAction = GetNextAction(_actionSequence);
 
-    private void DoLightAttack()
-    {
-        isReadyNextATK = false;
-        isCDOn = true;
-        AttackCD = AttackCDVal;
-        _anim.SetTrigger(LightAttack);
+        _isReadyNextAtk = false;
+        _isCdOn = true;
         _enemyAction.action = EnemyAction.EnemyActionType.LightAttack;
+
+        float animClipLength = 0f;
+        
+        switch (currentAction.AnimationClipName)
+        {
+            case "Attack 1":
+                _anim.SetTrigger(Attack1);
+                animClipLength = currentAction.AnimationClipLength;
+                break;
+            case "Attack 2":
+                _anim.SetTrigger(Attack2);
+                animClipLength = currentAction.AnimationClipLength;
+                break;
+            case "Attack 3":
+                _anim.SetTrigger(Attack3);
+                animClipLength = currentAction.AnimationClipLength;
+                break;
+            case "Attack 4":
+                _anim.SetTrigger(MassiveAttack);
+                animClipLength = currentAction.AnimationClipLength;
+                break;
+            case "roll":
+                _go.transform.Rotate(new Vector3(0, 90,0));
+                _anim.SetTrigger(CombatRoll);
+                _collider.radius = 0.51f;
+                _collider.height = 0;
+                animClipLength = currentAction.AnimationClipLength;
+                DoCombatRoll();
+                _rolling = true;
+                break;
+            default:
+                //Step forward code here 
+                break;
+        }
+        
+        _attackCd = animClipLength;
+        _sequenceCount++;
     }
 
-    private void DoHeavyAttack()
+    private AnimationAction GetNextAction(List<AnimationAction> actions)
     {
-        isReadyNextATK = false;
-        isCDOn = true;
-        AttackCD = AttackCDVal;
-        _anim.SetTrigger(HeavyAttack);
-        _enemyAction.action = EnemyAction.EnemyActionType.HeavyAttack;
+        //Debug.Log("Actions Count: " + actions.Count);
+        //Debug.Log("Sequence Count: " + _sequenceCount);
+       
+        /*if (_origionalSequence != 0)
+        {
+            _sequenceCount = _origionalSequence -1;
+            _origionalSequence = 0;
+        }*/
+        
+        if (_sequenceCount >= actions.Count)
+        {
+            //Debug.Log("Resetting for Next Sequence");
+            _sequenceCount = 0;
+            _isNextSequenceReady = true;
+            return null;
+        }
+        
+        return actions[_sequenceCount];
     }
-    
+
+    //Returns the next sequence that the AI needs to use
+    private void GetNextSequence()
+    {
+        int rnd = Random.Range(0, 3);
+        int[] seq = new int[] { };
+
+        switch (rnd)
+        {
+            case 0:
+                seq = _sequence1;
+                break;
+            case 1:
+                seq = _sequence2;
+                break;
+            case 2:
+                seq = _sequence3;
+                break;
+            case 3:
+                seq = _sequence4;
+                break;
+        }
+
+        _actionSequence.Clear();
+        
+        foreach (int action in seq)
+        {
+            _actionSequence.Add(_actions[action]);
+        }
+
+        _isNextSequenceReady = false;
+    }
+
+    private void DoCombatRoll()
+    {
+        _go.transform.position += _go.transform.forward * (2f * Time.fixedDeltaTime);
+    }
+
+    private void DoDash()
+    {
+        float dashDistance = 5f;
+        
+        if(_dashTime <= 0)
+            _dashTime = _startDashTime;
+        else
+        {
+            _dashTime -= Time.fixedDeltaTime;
+            _go.transform.position += _go.transform.forward * _dashSpeed;
+        }
+    }
+
     private void ResetAttackCD()
     {
-        if (AttackCD > 0 && isCDOn)
+        if (_attackCd > 0 && _isCdOn)
         {
-            AttackCD -= Time.fixedDeltaTime;
+            _attackCd -= Time.fixedDeltaTime;
         }
 
-        if (AttackCD <= 0 && isCDOn)
+        if (_attackCd <= 0 && _isCdOn)
         {
-            isCDOn = false;
-            isReadyNextATK = true;
+            _isCdOn = false;
+            _isReadyNextAtk = true;
         }
     }
-    
 }

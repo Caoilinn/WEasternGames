@@ -8,6 +8,7 @@ public class CombatWalk : State
 {
     private Animator _anim;
     private Transform _player;
+    
     private float _moveSpeed;
     private bool _forward;
     
@@ -51,7 +52,7 @@ public class CombatWalk : State
         {
             _zVel = -1;
             _go.transform.LookAt(_player.position);
-            _go.transform.position -= _go.transform.forward * (_moveSpeed * Time.fixedDeltaTime);
+            _go.transform.position -= _go.transform.forward * ((_moveSpeed + 2) * Time.fixedDeltaTime);
         }
 
         _anim.SetFloat(_zVelHash, _zVel);

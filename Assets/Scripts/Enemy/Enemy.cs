@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
         maxStamina = stamina;
         restorePerSecond = maxStamina * 1 / 50;
         hpUI.SetMaxHP(HP);
-        staminaUI.SetMaxStaminaSlider(stamina);
+        //staminaUI.SetMaxStaminaSlider(stamina);
         speed = 4;
         hitStunValue = 0;
         hitStunRestoreSecond = 0f;
@@ -140,7 +140,7 @@ public class Enemy : MonoBehaviour
 
     void setStaminaUI()
     {
-        staminaUI.setStaminaSlider(stamina);
+        //staminaUI.setStaminaSlider(stamina);
     }
 
     public void DecreaseHPStamina(float hp, float st)

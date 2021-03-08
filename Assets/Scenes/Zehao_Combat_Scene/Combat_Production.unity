@@ -5267,10 +5267,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 169012384}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1711b3daca6b4b14ebb7f34ae6e707f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 022ce903f71e418b922513019cf1e769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 3
+  Demo: 1
+  action: 0
   isPerfectBlock: 0
   isKeepBlocking: 0
   isInPerfectBlockOnly: 0
@@ -7545,10 +7546,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 406724677}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1711b3daca6b4b14ebb7f34ae6e707f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 022ce903f71e418b922513019cf1e769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 4
+  Demo: 1
+  action: 1
   isPerfectBlock: 0
   isKeepBlocking: 0
   isInPerfectBlockOnly: 0
@@ -9158,10 +9160,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 614810897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1711b3daca6b4b14ebb7f34ae6e707f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 022ce903f71e418b922513019cf1e769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 4
+  Demo: 1
+  action: 2
   isPerfectBlock: 0
   isKeepBlocking: 0
   isInPerfectBlockOnly: 0
@@ -10700,6 +10703,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualEffectObject: {fileID: 612139180}
+--- !u!114 &702004494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 702004482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 022ce903f71e418b922513019cf1e769, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Demo: 1
+  action: 1
+  isPerfectBlock: 0
+  isKeepBlocking: 0
+  isInPerfectBlockOnly: 0
 --- !u!114 &702004495
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10713,22 +10733,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponTrailComponent: {fileID: 1516332795}
---- !u!114 &702004496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 702004482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1711b3daca6b4b14ebb7f34ae6e707f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  action: 1
-  isPerfectBlock: 0
-  isKeepBlocking: 0
-  isInPerfectBlockOnly: 0
 --- !u!1 &706257660 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: 044c326a2424d984e8e45eb9604c5393,
@@ -11897,10 +11901,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 906048053}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1711b3daca6b4b14ebb7f34ae6e707f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 022ce903f71e418b922513019cf1e769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 2
+  Demo: 1
+  action: 3
   isPerfectBlock: 0
   isKeepBlocking: 0
   isInPerfectBlockOnly: 0
@@ -14160,7 +14165,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230134992}
-  m_LocalRotation: {x: 0.1655399, y: -0.0986784, z: 0.01664967, w: 0.9811126}
+  m_LocalRotation: {x: 0.1655399, y: -0.09867844, z: 0.016649676, w: 0.9811126}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -20950,10 +20955,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1894425105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1711b3daca6b4b14ebb7f34ae6e707f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 022ce903f71e418b922513019cf1e769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 0
+  Demo: 1
+  action: 2
   isPerfectBlock: 0
   isKeepBlocking: 0
   isInPerfectBlockOnly: 0
@@ -22586,10 +22592,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1987218358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1711b3daca6b4b14ebb7f34ae6e707f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 022ce903f71e418b922513019cf1e769, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: 1
+  Demo: 1
+  action: 2
   isPerfectBlock: 0
   isKeepBlocking: 0
   isInPerfectBlockOnly: 0
