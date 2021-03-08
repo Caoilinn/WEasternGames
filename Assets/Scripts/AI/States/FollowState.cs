@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace AI.States
 {
@@ -21,13 +22,16 @@ namespace AI.States
         private int _zVelHash;
 
         private int _sequence;
+        private float _timeRemaining;
         
         #endregion
 
-
-        public FollowState(GameObject go, StateMachine sm, int sequence = 0) : base(go, sm)
+        public FollowState(GameObject go, StateMachine sm, int sequence = 0, float timeRemaining = 0) : base(go, sm)
         {
             _sequence = sequence;
+            timeRemaining = timeRemaining;
+            
+            //AIManager.current.OnAttackStateChangeReq += OnAttackStateChange;
         }
 
         public override void Enter()
@@ -39,6 +43,7 @@ namespace AI.States
             _animator = _go.GetComponent<Animator>();
             _moveSpeed = 8f;
             _zVelHash = Animator.StringToHash("enemyVelZ");
+            Debug.Log("Follow State");
         }
 
         public override void FixedUpdate()
@@ -60,8 +65,13 @@ namespace AI.States
             {
                 _zVel = 0;
                 _animator.SetFloat(_zVelHash, _zVel);
-                _sm._CurState = new BlockingState(_go, _sm);
+                _sm._CurState = new AttackingState(_go, _sm, _sequence, _timeRemaining);
             }
         }
+
+        //private void OnAttackStateChange()
+        //{
+       //     Debug.Log("Event Triggered for changing to Attacking State");
+       //}
     }
 }

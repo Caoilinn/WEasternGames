@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityTemplateProjects.Utilities;
 
 public class WeaponCollisionCopy : MonoBehaviour
 {
@@ -28,8 +29,8 @@ public class WeaponCollisionCopy : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            EnemyAction2 enemyAction = collision.gameObject.GetComponent<EnemyAction2>();
-            EnemyAnimationCopy enemyAnimation = collision.gameObject.GetComponent<EnemyAnimationCopy>();
+            EnemyAction enemyAction = collision.gameObject.GetComponent<EnemyAction>();
+            AIEnemyAnimation enemyAnimation = collision.gameObject.GetComponent<AIEnemyAnimation>();
 
             #region Enemy Blocking Collision Logic
             // enemy is blocking and get hit by player
@@ -117,7 +118,7 @@ public class WeaponCollisionCopy : MonoBehaviour
             // enemy is not in block action and get hit by player  (light attack)
             else if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT") &&
                      this.GetComponent<Collider>().isTrigger == false &&
-                     enemy.GetComponent<EnemyAction2>().isKeepBlocking == false &&
+                     enemy.GetComponent<EnemyAction>().isKeepBlocking == false &&
                      enemyAction.isPerfectBlock == false)
             {
                 this.GetComponent<Collider>().isTrigger = true;

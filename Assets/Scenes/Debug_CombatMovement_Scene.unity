@@ -1920,6 +1920,13 @@ MonoBehaviour:
   enemyController: {fileID: 626387321}
   HP: 0
   hpUI: {fileID: 586590066}
+  stamina: 0
+  staminaUI: {fileID: 0}
+  speed: 0
+  hitStunValue: 0
+  hitStunRestoreSecond: 0
+  isStunRestoreTimeFinished: 1
+  readyToRestoreStaminaTime: 0
 --- !u!114 &626387318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1963,6 +1970,7 @@ MonoBehaviour:
   action: 1
   isPerfectBlock: 0
   isKeepBlocking: 0
+  isInPerfectBlockOnly: 0
 --- !u!143 &626387321
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2093,6 +2101,7 @@ MonoBehaviour:
   turnSmooth: 0.1
   horizontalVelocity: 0
   _sprinting: 0
+  moveKeyPressed: 0
   verticalVelocity: 0
   myController: {fileID: 630120001}
   isOnKnockBack: 0
@@ -3791,6 +3800,13 @@ MonoBehaviour:
   enemyController: {fileID: 761137015}
   HP: 0
   hpUI: {fileID: 447408949}
+  stamina: 0
+  staminaUI: {fileID: 0}
+  speed: 0
+  hitStunValue: 0
+  hitStunRestoreSecond: 0
+  isStunRestoreTimeFinished: 1
+  readyToRestoreStaminaTime: 0
 --- !u!114 &761137012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3834,6 +3850,7 @@ MonoBehaviour:
   action: 3
   isPerfectBlock: 0
   isKeepBlocking: 0
+  isInPerfectBlockOnly: 0
 --- !u!143 &761137015
 CharacterController:
   m_ObjectHideFlags: 0
@@ -4087,7 +4104,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b208391e92cb3d64499a9e9e4ce32441,
         type: 3}
       propertyPath: m_Name
-      value: katana
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b208391e92cb3d64499a9e9e4ce32441,
         type: 3}
@@ -4502,6 +4519,7 @@ MonoBehaviour:
   turnSmooth: 0.1
   horizontalVelocity: 0
   _sprinting: 0
+  moveKeyPressed: 0
   verticalVelocity: 0
   myController: {fileID: 1072543737}
   isOnKnockBack: 0
@@ -5918,6 +5936,7 @@ MonoBehaviour:
   action: 2
   isPerfectBlock: 0
   isKeepBlocking: 0
+  isInPerfectBlockOnly: 0
 --- !u!114 &1210315668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5961,6 +5980,13 @@ MonoBehaviour:
   enemyController: {fileID: 1210315672}
   HP: 0
   hpUI: {fileID: 1684154282}
+  stamina: 0
+  staminaUI: {fileID: 0}
+  speed: 0
+  hitStunValue: 0
+  hitStunRestoreSecond: 0
+  isStunRestoreTimeFinished: 1
+  readyToRestoreStaminaTime: 0
 --- !u!136 &1210315671
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -6092,7 +6118,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.009887695}
+  m_AnchoredPosition: {x: 0, y: -0.010009766}
   m_SizeDelta: {x: 0, y: 5.020447}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1293924628
@@ -6930,7 +6956,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b208391e92cb3d64499a9e9e4ce32441,
         type: 3}
       propertyPath: m_Name
-      value: katana
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b208391e92cb3d64499a9e9e4ce32441,
         type: 3}
@@ -8196,7 +8222,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702917816}
-  m_LocalRotation: {x: 0.27568254, y: -0.000000023120595, z: -0.000000011055018, w: 0.96124876}
+  m_LocalRotation: {x: 0.2756825, y: 0.000000005526854, z: -0.000000019270999, w: 0.96124876}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -8733,7 +8759,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b208391e92cb3d64499a9e9e4ce32441,
         type: 3}
       propertyPath: m_Name
-      value: katana
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b208391e92cb3d64499a9e9e4ce32441,
         type: 3}
@@ -8822,7 +8848,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b208391e92cb3d64499a9e9e4ce32441,
         type: 3}
       propertyPath: m_Name
-      value: katana
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b208391e92cb3d64499a9e9e4ce32441,
         type: 3}
@@ -8918,6 +8944,7 @@ MonoBehaviour:
   turnSmooth: 0.1
   horizontalVelocity: 0
   _sprinting: 0
+  moveKeyPressed: 0
   verticalVelocity: 0
   myController: {fileID: 0}
   isOnKnockBack: 0
@@ -9008,6 +9035,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 0}
+  animatorController: {fileID: 0}
+  collider: {fileID: 0}
 --- !u!114 &1837587366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9020,6 +9049,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c61ec64e5a4e58946a2b4fc6be808ad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  onHoldTime: 0
+  sprintCD: 0
+  sprintTrigger: 0
 --- !u!114 &1837587367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10014,7 +10046,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1933622809}
-  m_LocalRotation: {x: -0.16637518, y: 0.0000000011646588, z: -0.000000006902632,
+  m_LocalRotation: {x: -0.16637516, y: 0.0000000011646594, z: -0.000000006902632,
     w: -0.9860626}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -10057,7 +10089,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.009887695}
+  m_AnchoredPosition: {x: 0, y: -0.010009766}
   m_SizeDelta: {x: 0, y: 5.020447}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1951096986
@@ -10121,6 +10153,7 @@ MonoBehaviour:
   action: 4
   isPerfectBlock: 0
   isKeepBlocking: 0
+  isInPerfectBlockOnly: 0
 --- !u!114 &1973117158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10164,6 +10197,13 @@ MonoBehaviour:
   enemyController: {fileID: 1973117163}
   HP: 0
   hpUI: {fileID: 34841502}
+  stamina: 0
+  staminaUI: {fileID: 0}
+  speed: 0
+  hitStunValue: 0
+  hitStunRestoreSecond: 0
+  isStunRestoreTimeFinished: 1
+  readyToRestoreStaminaTime: 0
 --- !u!114 &1973117161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12710,7 +12750,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b208391e92cb3d64499a9e9e4ce32441,
         type: 3}
       propertyPath: m_Name
-      value: katana
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b208391e92cb3d64499a9e9e4ce32441,
         type: 3}
@@ -12758,6 +12798,13 @@ MonoBehaviour:
   enemyController: {fileID: 2130066468}
   HP: 0
   hpUI: {fileID: 2094465676}
+  stamina: 0
+  staminaUI: {fileID: 0}
+  speed: 0
+  hitStunValue: 0
+  hitStunRestoreSecond: 0
+  isStunRestoreTimeFinished: 1
+  readyToRestoreStaminaTime: 0
 --- !u!114 &2130066465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12801,6 +12848,7 @@ MonoBehaviour:
   action: 0
   isPerfectBlock: 0
   isKeepBlocking: 0
+  isInPerfectBlockOnly: 0
 --- !u!143 &2130066468
 CharacterController:
   m_ObjectHideFlags: 0

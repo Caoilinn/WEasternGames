@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityTemplateProjects.Utilities;
 
-public class EnemyAction : UnityTemplateProjects.Utilities.EnemyAction
+public class DemoEnemyAction : EnemyAction
 {
     public enum EnemyActionType
     {
@@ -61,23 +62,24 @@ public class EnemyAction : UnityTemplateProjects.Utilities.EnemyAction
         }
     }
 
-    void override HeavyAttack()
+    private void HeavyAttack()
     {
         _anim.SetTrigger("HeavyAttack");
         isInPerfectBlockOnly = false;
     }
 
-    void LightAttack()
+    private void LightAttack()
     {
         _anim.SetTrigger("LightAttack");
         isInPerfectBlockOnly = false;
     }
 
-    void Block()
+    private void Block()
     {
         isKeepBlocking = true;
     }
-    void PBlockOnly()
+
+    private void PBlockOnly()
     {
         _anim.SetTrigger("PerfectBlockOnly");
         isInPerfectBlockOnly = true;

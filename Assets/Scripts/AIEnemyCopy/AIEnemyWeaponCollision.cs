@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityTemplateProjects.Utilities;
 
-public class EnemyWeaponCollisionCopy : MonoBehaviour
+public class AIEnemyWeaponCollision : MonoBehaviour
 {
     public GameObject enemy;
-    public EnemyAction2.EnemyActionType enemyActionType;
-    EnemyAction2 enemyAction;
+    public EnemyAction.EnemyActionType enemyActionType;
+    EnemyAction enemyAction;
 
     void Start()
     {
-        enemyAction = enemy.GetComponent<EnemyAction2>();
+        enemyAction = enemy.GetComponent<EnemyAction>();
         //enemy = this.transform.root.Find("EnemyHolder/Enemy").gameObject;
     }
 
@@ -26,7 +27,7 @@ public class EnemyWeaponCollisionCopy : MonoBehaviour
         {
             if (collision.transform.root.gameObject.GetComponent<PlayerAction>().isPerfectBlock == true && this.GetComponent<Collider>().isTrigger == false) //get player perfect block
             {
-                enemy.GetComponent<EnemyAnimationCopy>()._anim.SetTrigger("getPlayerPerfectBlockImpact");
+                enemy.GetComponent<AIEnemyAnimation>()._anim.SetTrigger("getPlayerPerfectBlockImpact");
                 
                 // spawn sword clash effect
                 collision.gameObject.GetComponentInParent<SwordEffectSpawner>().SpawnBigSwordClash();
@@ -38,7 +39,7 @@ public class EnemyWeaponCollisionCopy : MonoBehaviour
             //get player perfect block
             if (collision.gameObject.GetComponent<PlayerAction>().isPerfectBlock == true && this.GetComponent<Collider>().isTrigger == false) 
             {
-                enemy.GetComponent<EnemyAnimationCopy>()._anim.SetTrigger("getPlayerPerfectBlockImpact");
+                enemy.GetComponent<AIEnemyAnimation>()._anim.SetTrigger("getPlayerPerfectBlockImpact");
 
                 // spawn sword clash effect
                 collision.gameObject.GetComponent<SwordEffectSpawner>().SpawnBigSwordClash();

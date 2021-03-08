@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityTemplateProjects.Utilities;
 
 namespace AI.States
 {

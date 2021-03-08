@@ -10,15 +10,22 @@ namespace AI.States
         private FieldOfView _fieldOfViewL;
         private Animator _animator;
         private static readonly int Idle = Animator.StringToHash("idle");
+        
+        public readonly AIController aiController;
 
         public IdleState(GameObject go, StateMachine sm) : base(go, sm)
-        {
+        { 
+            //Debug.Log("Enemy with name " + _go.name +  " is printing " + AIManager.current);
+            //AIManager.current.OnAttackStateChangeReq += OnAttackStateChange;
+
+            aiController = _go.GetComponent<AIController>();
             _fieldOfView = _go.GetComponent<FieldOfView>();
             _fieldOfViewR = _go.transform.Find("RightFOV").GetComponent<FieldOfView>();
             _fieldOfViewL = _go.transform.Find("LeftFOV").GetComponent<FieldOfView>();
             
             _animator = _go.GetComponent<Animator>();
-
+            
+            
             _fieldOfView.PlayerSpotted = false;
             _fieldOfViewR.PlayerSpotted = false;
             _fieldOfViewL.PlayerSpotted = false;

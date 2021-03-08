@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using AI;
 using AI.States;
 using UnityEngine;
+using UnityTemplateProjects.Utilities;
 
 public class BlockingState : State
 {
     private Animator _anim;
-    private EnemyAction2 _enemyAction;
+    private EnemyAction _enemyAction;
     private Transform _player;
     private float _blockingCountDown;
     private bool _alreadyBlocking;
@@ -22,7 +23,7 @@ public class BlockingState : State
     {
         base.Enter();
         _anim = _go.GetComponent<Animator>();
-        _enemyAction = _go.GetComponent<EnemyAction2>();
+        _enemyAction = _go.GetComponent<EnemyAction>();
         _alreadyBlocking = false;
         _blockingCountDown = 5f;
         _player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -65,7 +66,7 @@ public class BlockingState : State
     private void DoBlock()
     {
        _enemyAction.isKeepBlocking = true;
-       _enemyAction.action = EnemyAction2.EnemyActionType.Block;
+       _enemyAction.action = EnemyAction.EnemyActionType.Block;
     }
 
     private void Blocking()
