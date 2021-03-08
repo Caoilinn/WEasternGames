@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAction : MonoBehaviour
+public class EnemyAction : UnityTemplateProjects.Utilities.EnemyAction
 {
     public enum EnemyActionType
     {
@@ -61,7 +61,7 @@ public class EnemyAction : MonoBehaviour
         }
     }
 
-    void HeavyAttack()
+    void override HeavyAttack()
     {
         _anim.SetTrigger("HeavyAttack");
         isInPerfectBlockOnly = false;
