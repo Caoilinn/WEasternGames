@@ -109,7 +109,6 @@ public class EvasiveState : State
     private Vector3 Position()
     {
         Vector3 position = _go.transform.position;
-        return  new Vector3(position.x, position.y, position.z + 5f); 
-        //return _go.transform.position - (_go.transform.position * 10);
+        return  new Vector3(position.x, position.y, position.z - 5f); 
     }
 }

@@ -108,7 +108,7 @@ public class AttackingState : State
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        
+
         if (_isReadyNextAtk)
         {
             _collider.radius = _colliderRadius;
@@ -129,8 +129,9 @@ public class AttackingState : State
         //TODO: Change how the Attacking State transitions to blocking, make it transition based on health
         if (_attackStateCountDown <= 0)
         {
-            int action = Random.Range(0,2);
-
+            //int action = Random.Range(0,2);
+            int action = 0;
+            
             if (action == 0)
                 _sm._CurState = new EvasiveState(_go, _sm);
             else
@@ -139,7 +140,6 @@ public class AttackingState : State
 
         if (Vector3.Distance(_playerTransform.position, _go.transform.position) > 3f && !_rolling)
         {
-            Debug.Log("Enter Follow from attack");
             _sm._CurState = new FollowState(_go, _sm, _sequenceCount);
         }
     }
@@ -182,8 +182,8 @@ public class AttackingState : State
             case "roll":
                 _go.transform.Rotate(new Vector3(0, 90,0));
                 _anim.SetTrigger(CombatRoll);
-                _collider.radius = 0.51f;
-                _collider.height = 0;
+                //_collider.radius = 0.51f;
+                //_collider.height = 0;
                 animClipLength = currentAction.AnimationClipLength;
                 DoCombatRoll();
                 _rolling = true;
