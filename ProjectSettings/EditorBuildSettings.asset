@@ -17,7 +17,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Debug_CombatMovement_Scene.unity
     guid: 91cec428d8697954b97054aafd9f9297
-  - enabled: 1
+  - enabled: 0
     path: Assets/T-CA2/Scenes/T-CA2.unity
     guid: a9d43d10dbac01a43a1318870a29bcde
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 11a9267650e763b469b67714d8876991
+  - enabled: 1
+    path: Assets/Scenes/Production Release/Sprint 12/Sprint12.unity
+    guid: 680d7420729e6d147ad5afa48c76e3c6
   m_configObjects: {}
