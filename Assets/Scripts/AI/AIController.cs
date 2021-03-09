@@ -59,9 +59,8 @@ public class AIController : MonoBehaviour
     
     public void AttackStateChange(AIController controller)
     {
-        Debug.Log("Enter Attack State From AttackStateChange");
-        if (controller == this)
-            _sm._CurState = new AttackingState(gameObject, _sm);
+       if (controller == this) 
+           _sm._CurState = new AttackingState(gameObject, _sm);
         //Debug.Log("AI Controller ID is: " + controller.id);
     }
 }

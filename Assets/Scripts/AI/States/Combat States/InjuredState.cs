@@ -26,7 +26,6 @@ public class InjuredState : State
         _anim = _go.GetComponent<Animator>();
         _enemyAction = _go.GetComponent<EnemyAction>();
         
-        Debug.Log("Entering Injured State");
         _enemyAction.action = EnemyAction.EnemyActionType.Injured;
         
         foreach (AnimationClip clip in _anim.runtimeAnimatorController.animationClips)

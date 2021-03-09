@@ -25,7 +25,6 @@ public class EnemyCollision : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("PlayerWeapon")) return;
         
-        Debug.Log("Collided");
         _isInjured = true;
             
         //Stops repeated stun locking

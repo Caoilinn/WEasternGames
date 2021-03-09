@@ -129,10 +129,11 @@ public class AttackingState : State
         //TODO: Change how the Attacking State transitions to blocking, make it transition based on health
         if (_attackStateCountDown <= 0)
         {
-            int action = Random.Range(0,2);
-
+            //int action = Random.Range(0,2);
+            int action = 0;
+            
             if (action == 0)
-                _sm._CurState = new CombatWalk(_go, _sm, false);
+                _sm._CurState = new EvasiveState(_go, _sm);
             else
                 _sm._CurState = new BlockingState(_go, _sm);
         }
@@ -181,8 +182,8 @@ public class AttackingState : State
             case "roll":
                 _go.transform.Rotate(new Vector3(0, 90,0));
                 _anim.SetTrigger(CombatRoll);
-                _collider.radius = 0.51f;
-                _collider.height = 0;
+                //_collider.radius = 0.51f;
+                //_collider.height = 0;
                 animClipLength = currentAction.AnimationClipLength;
                 DoCombatRoll();
                 _rolling = true;

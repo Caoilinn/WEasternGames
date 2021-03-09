@@ -52,7 +52,6 @@ public class BlockingState : State
 
         if (_blockingCountDown <= 0)
         {
-            Debug.Log("Exit Block");
             _enemyAction.isKeepBlocking = false;
             _sm._CurState = new AttackingState(_go, _sm);
         }
@@ -88,22 +87,19 @@ public class BlockingState : State
         
         if (crossY ==  0.1)
         {
-            Debug.Log("it's 0.1");
             //_anim.SetBool("Blocking", true);
             //_anim.SetTrigger("Blocking1");
             _anim.SetFloat("EnemyX", 1);
         }
         else if(crossY == -0.1)
         {
-            Debug.Log("it's -0.1");
-            //_anim.SetBool("Blocking", true);
+           //_anim.SetBool("Blocking", true);
             //_anim.SetTrigger("Blocking1");
             _anim.SetFloat("EnemyX", -1);
         }
         else if(crossY == 0)
         {
-            Debug.Log("it's 0");
-            _anim.SetFloat("EnemyZ", -1);
+           _anim.SetFloat("EnemyZ", -1);
         }
     }
 
