@@ -52,9 +52,9 @@ public class EvasiveState : State
         }
 
         // for triggering trash talk dialogue
-        /*if (_sm.playableDirector.state == PlayState.Playing) { return; }
+        if (_sm.playableDirector.state == PlayState.Playing) { return; }
         _sm.playableDirector.playableAsset = _sm.trashTalkDialogue;
-        _sm.playableDirector.Play();*/
+        _sm.playableDirector.Play();
     }
 
     public override void FixedUpdate()
