@@ -20,6 +20,7 @@ namespace Utilities
         public bool Demo;
     
         public EnemyActionType action;
+        public EnemyActionType debugAction;
     
         private Animator _anim;
         EnemyBehaviour enemyBehaviour;
@@ -41,8 +42,7 @@ namespace Utilities
     
         void Update()
         {
-    
-            switch (action)
+            switch (debugAction)
             {
                 case EnemyActionType.Idle:
                     isInPerfectBlockOnly = false;
