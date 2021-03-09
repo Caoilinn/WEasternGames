@@ -37,7 +37,6 @@ public class EnemyCollision : MonoBehaviour
 
         if (other.gameObject.CompareTag("Environment"))
         {
-            Debug.Log("Collided with envrinment");
             _aiController.EvasionEnvironmentCollided();
         }
     }
