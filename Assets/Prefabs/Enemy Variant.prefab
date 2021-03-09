@@ -555,6 +555,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 1
+  trashTalkDialogue: {fileID: 0}
+  playableDirector: {fileID: 0}
   initialAIState: 0
 --- !u!114 &919132147564110499
 MonoBehaviour:
@@ -602,6 +604,7 @@ MonoBehaviour:
   _anim: {fileID: 0}
   player: {fileID: 0}
   enemy: {fileID: 6233473333443631871}
+  enemyWeapon: {fileID: 0}
 --- !u!114 &919132147564110502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,6 +626,9 @@ MonoBehaviour:
   hitStunValue: 0
   hitStunRestoreSecond: 0
   isStunRestoreTimeFinished: 1
+  enemyTransform: {fileID: 0}
+  maxAngle: 0
+  id: 0
   readyToRestoreStaminaTime: 0
 --- !u!114 &919132147564110503
 MonoBehaviour:
@@ -661,7 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa91f620e9f9364f81817aafacbeee9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 6233473333443631871}
+  enemy: {fileID: 0}
   enemyActionType: 0
 --- !u!1001 &4396607264742102945
 PrefabInstance:
@@ -688,22 +694,22 @@ PrefabInstance:
     - target: {fileID: 6974260905474103268, guid: e34c831e0e8ac2d41aaffe9228d32cf0,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6974260905474103268, guid: e34c831e0e8ac2d41aaffe9228d32cf0,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.9994142
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6974260905474103268, guid: e34c831e0e8ac2d41aaffe9228d32cf0,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6974260905474103268, guid: e34c831e0e8ac2d41aaffe9228d32cf0,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.03422557
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6974260905474103268, guid: e34c831e0e8ac2d41aaffe9228d32cf0,
         type: 3}
@@ -718,7 +724,7 @@ PrefabInstance:
     - target: {fileID: 6974260905474103268, guid: e34c831e0e8ac2d41aaffe9228d32cf0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -183.92299
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6974260905474103268, guid: e34c831e0e8ac2d41aaffe9228d32cf0,
         type: 3}
@@ -738,7 +744,7 @@ PrefabInstance:
     - target: {fileID: 7746857642640657758, guid: e34c831e0e8ac2d41aaffe9228d32cf0,
         type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Enemy Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7746857642640657758, guid: e34c831e0e8ac2d41aaffe9228d32cf0,
         type: 3}
