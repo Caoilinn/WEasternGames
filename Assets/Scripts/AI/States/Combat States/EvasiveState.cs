@@ -36,7 +36,7 @@ public class EvasiveState : State
         base.Enter();
         _anim = _go.GetComponent<Animator>();
         _player = GameObject.FindGameObjectWithTag("Player").transform;
-        _timer = 60f;
+        _timer = 5f;
         _rotationalSpeed = 30f;
         _flipped = false;
         _flipPosition = Position();

@@ -9,6 +9,7 @@ public class AIController : MonoBehaviour
 {
     private StateMachine _sm;
     private EnemyAction _enemyAction;
+    private Animator _anim;
     private int _attacked;    
     public int id;
     
@@ -27,7 +28,8 @@ public class AIController : MonoBehaviour
     private void Awake()
     {
         _sm = new StateMachine();
-        _enemyAction = this.GetComponent<EnemyAction>();
+        _enemyAction = GetComponent<EnemyAction>();
+        _anim = GetComponent<Animator>();
         _attacked = 0;
         _sm.SetTrashTalkDialogue(trashTalkDialogue);
         _sm.SetPlayableDirector(playableDirector);
@@ -62,5 +64,11 @@ public class AIController : MonoBehaviour
        if (controller == this) 
            _sm._CurState = new AttackingState(gameObject, _sm);
         //Debug.Log("AI Controller ID is: " + controller.id);
+    }
+
+    public void EvasionEnvironmentCollided()
+    {
+        _anim.SetFloat("EnemyX", 0);
+        _sm._CurState = new CombatWalk(gameObject, _sm, true);
     }
 }

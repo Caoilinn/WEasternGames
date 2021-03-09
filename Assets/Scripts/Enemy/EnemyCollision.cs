@@ -9,11 +9,13 @@ public class EnemyCollision : MonoBehaviour
     private bool _isInjured;
     private EnemyAction.EnemyActionType _enemyActionType;
     private EnemyAction _enemyAction;
+    private AIController _aiController;
 
     private void Start()
     {
         _isInjured = false;
         _enemyAction = this.GetComponent<EnemyAction>();
+        _aiController = this.GetComponent<AIController>();
     }
 
     private void FixedUpdate()
@@ -23,13 +25,20 @@ public class EnemyCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (!other.gameObject.CompareTag("PlayerWeapon")) return;
-        
-        _isInjured = true;
+        if (other.gameObject.CompareTag("PlayerWeapon"))
+        {
+            _isInjured = true;
             
-        //Stops repeated stun locking
-        if(_enemyAction.action != EnemyAction.EnemyActionType.Injured || 
-           _enemyAction.action != EnemyAction.EnemyActionType.EnterInjured)
-            _enemyAction.action = EnemyAction.EnemyActionType.EnterInjured;
+            //Stops repeated stun locking
+            if(_enemyAction.action != EnemyAction.EnemyActionType.Injured || 
+               _enemyAction.action != EnemyAction.EnemyActionType.EnterInjured)
+                _enemyAction.action = EnemyAction.EnemyActionType.EnterInjured;
+        }
+
+        if (other.gameObject.CompareTag("Environment"))
+        {
+            Debug.Log("Collided with envrinment");
+            _aiController.EvasionEnvironmentCollided();
+        }
     }
 }

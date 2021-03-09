@@ -17,6 +17,7 @@ TagManager:
   - PlayerCamera
   - GameSetting
   - LockCursor
+  - Environment
   layers:
   - Default
   - TransparentFX

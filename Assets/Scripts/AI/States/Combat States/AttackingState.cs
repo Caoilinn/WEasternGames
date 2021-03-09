@@ -75,7 +75,7 @@ public class AttackingState : State
         if (sequence != 0)
             _sequenceCount = sequence;
 
-        _attackStateCountDown = timeRemaining != 0 ? timeRemaining : Random.Range(1,2);
+        _attackStateCountDown = timeRemaining != 0 ? timeRemaining : Random.Range(8,12);
     }
 
     public override void Enter()
@@ -95,7 +95,8 @@ public class AttackingState : State
 
         
         AnimationClip[] clips = _anim.runtimeAnimatorController.animationClips;
-       
+       _go.transform.LookAt(_playerTransform);
+        
         foreach (AnimationClip clip in clips)
         {
             if (clip.name.Contains("Attack") || clip.name.Contains("roll"))
