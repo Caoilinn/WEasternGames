@@ -45,7 +45,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ILMTex:
-        m_Texture: {fileID: 2800000, guid: f693e3270b369464da13a0dfb3c2a8ea, type: 3}
+        m_Texture: {fileID: 2800000, guid: e43312671410dc24185ed757308ebe3d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadedTex:
-        m_Texture: {fileID: 2800000, guid: f693e3270b369464da13a0dfb3c2a8ea, type: 3}
+        m_Texture: {fileID: 2800000, guid: e43312671410dc24185ed757308ebe3d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -72,7 +72,7 @@ Material:
     - _AlphaClip: 0
     - _AmbientLight: 0
     - _Blend: 0
-    - _Brightness: 1
+    - _Brightness: 0.666
     - _BumpScale: 1
     - _Cull: 2
     - _Cutoff: 0.5
