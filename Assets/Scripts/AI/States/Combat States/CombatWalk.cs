@@ -67,11 +67,11 @@ public class CombatWalk : State
         }
 
         //The AI is walking away from the player to enter an evasive state
-        if (distanceToPlayer >= 5.0f && !_forward)
+        if (distanceToPlayer >= 10.0f && !_forward)
         {
             _zVel = 0;
             _anim.SetFloat(_zVelHash, _zVel);
-            _sm._CurState = new EvasiveState(_go, _sm);
+            _sm._CurState = new CombatWalk(_go, _sm, true);
         }
         
     }

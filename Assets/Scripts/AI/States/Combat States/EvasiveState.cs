@@ -69,7 +69,7 @@ public class EvasiveState : State
         
         if (_flippedTime > 0)
         {
-            float step = 3 * Time.fixedDeltaTime;
+            float step = 4 * Time.fixedDeltaTime;
             Vector3 position = _go.transform.position;
             position = Vector3.MoveTowards(position, Position(), step);
             _go.transform.position = position;
@@ -78,7 +78,7 @@ public class EvasiveState : State
         }
         else
         {
-            _timer -= Time.fixedDeltaTime;
+            /*_timer -= Time.fixedDeltaTime;
             
             //Rotates the enemy around the player
             _go.transform.position =
@@ -90,7 +90,9 @@ public class EvasiveState : State
         
             //Updates the blend tree to perform a walk animation
             _xVel = -2f;
-            _anim.SetFloat(_xVelHash, _xVel);
+            _anim.SetFloat(_xVelHash, _xVel);*/
+            
+            _sm._CurState = new CombatWalk(_go, _sm, true);
         }
 
         if (!(_timer <= 0)) return;
@@ -109,6 +111,6 @@ public class EvasiveState : State
     private Vector3 Position()
     {
         Vector3 position = _go.transform.position;
-        return  new Vector3(position.x, position.y, position.z - 5f); 
+        return  new Vector3(position.x, position.y, position.z - 10f); 
     }
 }

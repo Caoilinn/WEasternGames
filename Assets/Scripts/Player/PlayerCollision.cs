@@ -34,7 +34,13 @@ public class PlayerCollision : MonoBehaviour
         {
             Enemy enemy = collision.gameObject.GetComponent<EnemyWeaponCollision>().enemy.GetComponent<Enemy>();
             EnemyWeaponCollision enemyWeaponCollision = collision.gameObject.GetComponent<EnemyWeaponCollision>();
+            Animator enemyAnimator = collision.gameObject.GetComponent<Animator>();
             bool isInPlayerFov = this.GetComponent<BlockRadius>().EnemyInFOV(enemy);
+            
+            Debug.Log(enemyAnimator.GetCurrentAnimatorStateInfo(0).tagHash);
+
+            
+            
             #region Player Blocking Collision Logic
             // player is blocking and get hit by enemy
             if (collision.gameObject.GetComponent<Collider>().isTrigger == false &&

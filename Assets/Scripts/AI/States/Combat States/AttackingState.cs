@@ -48,11 +48,13 @@ public class AttackingState : State
     private bool _isReadyNextAtk = true;
     private float _attackCd;
     private bool _isCdOn = false;
+
+    private bool _seqEnd = false;
     
-    private readonly int[] _sequence1 = {0, 1, 3, 4, 1, 3, 1, 1, 1};
-    private readonly int[] _sequence2 = {0, 1, 2, 4, 1, 2, 1, 2, 1};
-    private readonly int[] _sequence3 = {0, 1, 2, 4, 1, 2, 1, 1, 1};
-    private readonly int[] _sequence4 = {0, 1, 2, 4, 1, 3, 3, 2, 4};
+    private readonly int[] _sequence1 = {0, 1, 2, 3};
+    private readonly int[] _sequence2 = {0, 0, 2};
+    private readonly int[] _sequence3 = {1, 0, 1, 3};
+    private readonly int[] _sequence4 = {0, 1, 0, 2, 3};
     
     
     //This is how long the AI will remain in this state during combat
@@ -75,7 +77,8 @@ public class AttackingState : State
         if (sequence != 0)
             _sequenceCount = sequence;
 
-        _attackStateCountDown = timeRemaining != 0 ? timeRemaining : Random.Range(8,12);
+
+        _attackStateCountDown = timeRemaining != 0 ? timeRemaining : Random.Range(5,10);
     }
 
     public override void Enter()
@@ -91,12 +94,11 @@ public class AttackingState : State
         _collider = _go.GetComponent<CapsuleCollider>();
         _colliderRadius = _collider.radius;
         _colliderHeight = _collider.height;
-        _rigidBody = _go.GetComponent<Rigidbody>();
+        //_rigidBody = _go.GetComponent<Rigidbody>();
 
         
         AnimationClip[] clips = _anim.runtimeAnimatorController.animationClips;
-       _go.transform.LookAt(_playerTransform);
-        
+       
         foreach (AnimationClip clip in clips)
         {
             if (clip.name.Contains("Attack") || clip.name.Contains("roll"))
@@ -109,13 +111,13 @@ public class AttackingState : State
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-
+        
         if (_isReadyNextAtk)
         {
             _collider.radius = _colliderRadius;
             _collider.height = _colliderHeight;
             _rolling = false;
-            _rigidBody.velocity = Vector3.zero;
+            //_rigidBody.velocity = Vector3.zero;
             PerformActions(); 
         }
 
@@ -128,12 +130,14 @@ public class AttackingState : State
         
         //Currently Changes state to blocking 
         //TODO: Change how the Attacking State transitions to blocking, make it transition based on health
-        if (_attackStateCountDown <= 0)
+        //if (_attackStateCountDown <= 0)
+        if (_seqEnd)
         {
-            //int action = Random.Range(0,2);
-            int action = 0;
-            
+            int action = Random.Range(0,2);
+            action = 0;
+
             if (action == 0)
+                //_sm._CurState = new EvasiveState(_go, _sm);
                 _sm._CurState = new EvasiveState(_go, _sm);
             else
                 _sm._CurState = new BlockingState(_go, _sm);
@@ -141,6 +145,7 @@ public class AttackingState : State
 
         if (Vector3.Distance(_playerTransform.position, _go.transform.position) > 3f && !_rolling)
         {
+            //Debug.Log("Enter Follow from attack");
             _sm._CurState = new FollowState(_go, _sm, _sequenceCount);
         }
     }
@@ -150,7 +155,7 @@ public class AttackingState : State
     {
         if (_isNextSequenceReady)
         {
-            GetNextSequence();
+            GetSequence();
             return;
         }
 
@@ -161,6 +166,9 @@ public class AttackingState : State
         _enemyAction.action = EnemyAction.EnemyActionType.LightAttack;
 
         float animClipLength = 0f;
+
+        if (_seqEnd)
+            return;
         
         switch (currentAction.AnimationClipName)
         {
@@ -183,14 +191,11 @@ public class AttackingState : State
             case "roll":
                 _go.transform.Rotate(new Vector3(0, 90,0));
                 _anim.SetTrigger(CombatRoll);
-                //_collider.radius = 0.51f;
-                //_collider.height = 0;
+                _collider.radius = 0.51f;
+                _collider.height = 0;
                 animClipLength = currentAction.AnimationClipLength;
                 DoCombatRoll();
                 _rolling = true;
-                break;
-            default:
-                //Step forward code here 
                 break;
         }
         
@@ -200,32 +205,20 @@ public class AttackingState : State
 
     private AnimationAction GetNextAction(List<AnimationAction> actions)
     {
-        //Debug.Log("Actions Count: " + actions.Count);
-        //Debug.Log("Sequence Count: " + _sequenceCount);
-       
-        /*if (_origionalSequence != 0)
-        {
-            _sequenceCount = _origionalSequence -1;
-            _origionalSequence = 0;
-        }*/
+        if (_sequenceCount < actions.Count)
+            return actions[_sequenceCount];
         
-        if (_sequenceCount >= actions.Count)
-        {
-            //Debug.Log("Resetting for Next Sequence");
-            _sequenceCount = 0;
-            _isNextSequenceReady = true;
-            return null;
-        }
-        
-        return actions[_sequenceCount];
+        _sequenceCount = 0;
+        _seqEnd = true;
+        return null;
     }
 
     //Returns the next sequence that the AI needs to use
-    private void GetNextSequence()
+    private void GetSequence()
     {
         int rnd = Random.Range(0, 3);
         int[] seq = new int[] { };
-
+  
         switch (rnd)
         {
             case 0:
@@ -243,6 +236,12 @@ public class AttackingState : State
         }
 
         _actionSequence.Clear();
+
+        //Debug.Log("Sequence Start");
+        foreach (int atk in seq)
+        {
+            //Debug.Log(atk);
+        }
         
         foreach (int action in seq)
         {

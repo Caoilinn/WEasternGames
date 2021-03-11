@@ -53,7 +53,7 @@ public class InjuredState : State
         _anim.SetTrigger(IsInjured);
         _animTime -= Time.fixedDeltaTime;
 
-        if (_animTime <= 0.5f)
+        if (_animTime <= 0f)
             _complete = true;
     }
 }
