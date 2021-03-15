@@ -45,7 +45,7 @@ public class ObjectiveSystem : MonoBehaviour
         this.objectives[4].SetNextObjective(this.objectives[5]);
 
         // start the first objective
-        //this.objectives[0]?.ObjectiveStart();
-        this.objectives[5]?.ObjectiveStart();
+        this.objectives[0]?.ObjectiveStart();
+        // this.objectives[5]?.ObjectiveStart();
     }
 }
