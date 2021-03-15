@@ -9,6 +9,10 @@ public class PlayerStats : MonoBehaviour
     public float health;
     public float stamina;
     public float speed;
+    public float baseAtk = 10;
+    public float criticalCoefficient = 1;
+    public float comboCoefficient;
+    public float criticalResetTime = 0;
     public HP hpUI;
     public Stamina staminaUI;
     private float maxStamina;
@@ -33,6 +37,7 @@ public class PlayerStats : MonoBehaviour
         health = 100;
         stamina = 100;
         speed = 4;
+        comboCoefficient = 0;
         hitStunValue = 100;
         hitStunRestoreSecond = 0f;
         maxStamina = stamina;
@@ -54,6 +59,19 @@ public class PlayerStats : MonoBehaviour
         setHealthUI();
         setStaminaUI();
         isDead();
+        resetCriticalCoefficient();
+    }
+
+    private void resetCriticalCoefficient()
+    {
+        if(criticalResetTime > 0)
+        {
+            criticalResetTime -= Time.deltaTime;
+        }
+        if(criticalResetTime <= 0)
+        {
+            criticalCoefficient = 1.0f;
+        }
     }
 
     private void isDead()
@@ -147,12 +165,9 @@ public class PlayerStats : MonoBehaviour
         {
             stamina = 0;
             speed = 4;
-            // GetComponent<PlayerMovement>().isSprinting = false;
-            // GetComponent<PlayerMovement>()._sprinting = false;
             GetComponent<PlayerMovementV2>().OnRunningKeyReleased();
 
         }
-        //Debug.Log(readyToRestoreStaminaTime);
     }
 
     public float setReadyToRestoreStaminaTime(float num)

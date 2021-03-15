@@ -87,6 +87,7 @@ public class PlayerControl : MonoBehaviour
                 cameraManager.isLockOnMode = true;
                 cameraManager.playerCamera.gameObject.GetComponent<AudioListener>().enabled = false;
                 cameraManager.lockOnCamera.gameObject.GetComponent<AudioListener>().enabled = true;
+                cameraManager.sortEnemyListFromNearToFar();
                 playerMovement.playerCameraTransform = cameraManager.lockOnCamera.transform;
             }
             else
@@ -183,7 +184,7 @@ public class PlayerControl : MonoBehaviour
                 sprintTrigger = true;
                 playerMovement.isRunning = true;
                 playerMovement.isDodging = true;
-                playerMovement.DodgeTime = 0.3f;
+                playerMovement.DodgeTime = 0.5f;
                 playerAction.action = ActionType.Dodge;
             }
         }
