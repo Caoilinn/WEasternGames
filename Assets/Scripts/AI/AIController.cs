@@ -10,6 +10,7 @@ public class AIController : MonoBehaviour, IAIAttribute
 {
     private StateMachine _sm;
     private EnemyAction _enemyAction;
+    private Enemy _enemy;
     private Animator _anim;
     private List<IAIAttribute> _aiAttributes;
     
@@ -41,12 +42,13 @@ public class AIController : MonoBehaviour, IAIAttribute
         _sm.SetPlayableDirector(playableDirector);
         //AIManager.current.OnAttackStateChangeReq += OnAttackStateChange;
         _aiAttributes = new List<IAIAttribute>();
+        _enemy = GetComponent<Enemy>();
         
         //AI Attributes to be passed to all of the states so that GetComponent needn't be called in every state once it's entered 
         _aiAttributes.Add(this);
         _aiAttributes.Add(GetComponent<FieldOfView>());
         _aiAttributes.Add(GetComponent<EnemyAnimation>());
-        _aiAttributes.Add(GetComponent<Enemy>());
+        _aiAttributes.Add(_enemy);
         _aiAttributes.Add(GetComponent<EnemyCollision>());
         _aiAttributes.Add(_enemyAction);
 
@@ -78,7 +80,7 @@ public class AIController : MonoBehaviour, IAIAttribute
         if (_attacked == 5)
             _sm._CurState = new BlockingState(gameObject, _sm, _aiAttributes, _anim);
 
-        if (playerAction.isPlayerAttacking && !done)
+        if (playerAction.isPlayerAttacking && !done && _enemy.stamina <= 0)
         {
             done = true;
             _sm._CurState = new QuickBlock(gameObject, _sm, _aiAttributes, _anim);

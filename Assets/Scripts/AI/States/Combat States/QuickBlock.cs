@@ -24,9 +24,6 @@ public class QuickBlock : State
                 _animator = _go.GetComponent<Animator>();
                 
                 _aiController = (AIController) _attributes.Find(x => x.GetType() == typeof(AIController));
-                //_aiController = _go.GetComponent<AIController>();
-                
-                Debug.Log("AIController ID: " + _aiController.id);
                 
                 foreach (AnimationClip clip in _animator.runtimeAnimatorController.animationClips)
                 {
