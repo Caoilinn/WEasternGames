@@ -7,22 +7,20 @@ using Utilities;
 
 public class BlockingState : State
 {
-    private Animator _anim;
     private EnemyAction _enemyAction;
     private Transform _player;
     private float _blockingCountDown;
     private bool _alreadyBlocking;
     private float _moveSpeed = 1f;
     
-    public BlockingState(GameObject go, StateMachine sm, List<IAIAttribute> attributes) : base(go, sm, attributes)
+    public BlockingState(GameObject go, StateMachine sm, List<IAIAttribute> attributes, Animator animator) : base(go, sm, attributes, animator)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        _anim = _go.GetComponent<Animator>();
-        _enemyAction = _go.GetComponent<EnemyAction>();
+        _enemyAction = (EnemyAction) _attributes.Find(x => x.GetType() == typeof(EnemyAction));
         _alreadyBlocking = false;
         _blockingCountDown = 5f;
         _player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -49,7 +47,7 @@ public class BlockingState : State
         if (_blockingCountDown <= 0)
         {
             _enemyAction.isKeepBlocking = false;
-            _sm._CurState = new AttackingState(_go, _sm, _attributes);
+            _sm._CurState = new AttackingState(_go, _sm, _attributes, _animator);
         }
 
         if (_alreadyBlocking && Vector3.Distance(_go.transform.position , _player.position) < 2f)
@@ -66,16 +64,16 @@ public class BlockingState : State
 
     private void Blocking()
     {
-        _anim.SetBool("Blocking", true);
-        _anim.SetTrigger("Blocking1");
-        _anim.SetFloat("EnemyZ", -1);
+        _animator.SetBool("Blocking", true);
+        _animator.SetTrigger("Blocking1");
+        _animator.SetFloat("EnemyZ", -1);
     }
 
     //Potentially revisit for blocking based off of the player position
     private void Move(bool left)
     {
-        _anim.SetFloat("EnemyX", 0);
-        _anim.SetFloat("EnemyZ", 0);
+        _animator.SetFloat("EnemyX", 0);
+        _animator.SetFloat("EnemyZ", 0);
         
    
         Vector3 cross = Vector3.Cross(_go.transform.transform.forward, _go.transform.position - _player.position);
@@ -85,17 +83,17 @@ public class BlockingState : State
         {
             //_anim.SetBool("Blocking", true);
             //_anim.SetTrigger("Blocking1");
-            _anim.SetFloat("EnemyX", 1);
+            _animator.SetFloat("EnemyX", 1);
         }
         else if(crossY == -0.1)
         {
            //_anim.SetBool("Blocking", true);
             //_anim.SetTrigger("Blocking1");
-            _anim.SetFloat("EnemyX", -1);
+            _animator.SetFloat("EnemyX", -1);
         }
         else if(crossY == 0)
         {
-           _anim.SetFloat("EnemyZ", -1);
+            _animator.SetFloat("EnemyZ", -1);
         }
     }
 

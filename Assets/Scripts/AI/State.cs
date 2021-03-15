@@ -9,12 +9,14 @@ namespace AI
         protected GameObject _go;
         protected StateMachine _sm;
         protected List<IAIAttribute> _attributes;
+        protected Animator _animator;
 
-        protected State(GameObject go, StateMachine sm, List<IAIAttribute> attributes)
+        protected State(GameObject go, StateMachine sm, List<IAIAttribute> attributes, Animator animator)
         {
             _go = go;
             _sm = sm;
             _attributes = attributes;
+            _animator = animator;
         }
 
         //Called when the state is entered

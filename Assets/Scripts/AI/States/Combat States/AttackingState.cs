@@ -23,7 +23,7 @@ public class AttackingState : State
     private float _startDashTime = 0.1f;
     
     private Rigidbody _rigidBody;
-    private Animator _anim;
+    //private Animator _anim;
     private List<int> _attackPatterns;
     private CombatActionType _actionType;
     private EnemyAction _enemyAction;
@@ -70,7 +70,7 @@ public class AttackingState : State
     
     #endregion
     
-    public AttackingState(GameObject go, StateMachine sm, List<IAIAttribute> attributes,  int sequence = 0, float timeRemaining = 0) : base(go, sm, attributes)
+    public AttackingState(GameObject go, StateMachine sm, List<IAIAttribute> attributes, Animator animator,  int sequence = 0, float timeRemaining = 0) : base(go, sm, attributes, animator)
     {
         //These checks are in place to make sure the attacking state picks back up where it left off in the case of a roll
         if (sequence != 0)
@@ -83,18 +83,17 @@ public class AttackingState : State
     public override void Enter()
     {
         base.Enter();
-        _anim = _go.GetComponent<Animator>();
-        _enemyAction = _go.GetComponent<EnemyAction>();
+        _collider = _go.GetComponent<CapsuleCollider>();
+        _enemyAction = (EnemyAction) _attributes.Find(x => x.GetType() == typeof(EnemyAction));
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _actions = new List<AnimationAction>();
         _actionSequence = new List<AnimationAction>();
-        _collider = _go.GetComponent<CapsuleCollider>();
         _colliderRadius = _collider.radius;
         _colliderHeight = _collider.height;
         //_rigidBody = _go.GetComponent<Rigidbody>();
 
         
-        AnimationClip[] clips = _anim.runtimeAnimatorController.animationClips;
+        AnimationClip[] clips = _animator.runtimeAnimatorController.animationClips;
        
         foreach (AnimationClip clip in clips)
         {
@@ -131,15 +130,15 @@ public class AttackingState : State
             int action = Random.Range(0,2);
 
             if (action == 0)
-                _sm._CurState = new EvasiveState(_go, _sm, _attributes);
+                _sm._CurState = new EvasiveState(_go, _sm, _attributes, _animator);
             else
-                _sm._CurState = new BlockingState(_go, _sm, _attributes);
+                _sm._CurState = new BlockingState(_go, _sm, _attributes, _animator);
         }
 
         if (Vector3.Distance(_playerTransform.position, _go.transform.position) > 3f && !_rolling)
         {
             //Debug.Log("Enter Follow from attack");
-            _sm._CurState = new FollowState(_go, _sm, _attributes, _sequenceCount);
+            _sm._CurState = new FollowState(_go, _sm, _attributes, _animator, _sequenceCount);
         }
     }
 
@@ -166,24 +165,24 @@ public class AttackingState : State
         switch (currentAction.AnimationClipName)
         {
             case "Attack 1":
-                _anim.SetTrigger(Attack1);
+                _animator.SetTrigger(Attack1);
                 animClipLength = currentAction.AnimationClipLength;
                 break;
             case "Attack 2":
-                _anim.SetTrigger(Attack2);
+                _animator.SetTrigger(Attack2);
                 animClipLength = currentAction.AnimationClipLength;
                 break;
             case "Attack 3":
-                _anim.SetTrigger(Attack3);
+                _animator.SetTrigger(Attack3);
                 animClipLength = currentAction.AnimationClipLength;
                 break;
             case "Attack 4":
-                _anim.SetTrigger(MassiveAttack);
+                _animator.SetTrigger(MassiveAttack);
                 animClipLength = currentAction.AnimationClipLength;
                 break;
             case "roll":
                 _go.transform.Rotate(new Vector3(0, 90,0));
-                _anim.SetTrigger(CombatRoll);
+                _animator.SetTrigger(CombatRoll);
                 _collider.radius = 0.51f;
                 _collider.height = 0;
                 animClipLength = currentAction.AnimationClipLength;

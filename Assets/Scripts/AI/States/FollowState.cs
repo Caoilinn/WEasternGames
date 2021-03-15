@@ -10,8 +10,6 @@ namespace AI.States
         
         private FieldOfView _fieldOfView;
         
-        private Animator _animator;
-        
         #region Animation Triggers
         
         private static readonly int IsWalking = Animator.StringToHash("isWalking");
@@ -25,8 +23,8 @@ namespace AI.States
         
         #endregion
 
-        public FollowState(GameObject go, StateMachine sm, List<IAIAttribute> attributes, int sequence = 0, float timeRemaining = 0) 
-            : base(go, sm, attributes)
+        public FollowState(GameObject go, StateMachine sm, List<IAIAttribute> attributes, Animator animator, int sequence = 0, float timeRemaining = 0) 
+            : base(go, sm, attributes, animator)
         {
             _sequence = sequence;
             timeRemaining = timeRemaining;
@@ -37,8 +35,7 @@ namespace AI.States
         public override void Enter()
         {
             base.Enter();
-            _fieldOfView = _go.GetComponent<FieldOfView>();
-            _animator = _go.GetComponent<Animator>();
+            _fieldOfView = (FieldOfView) _attributes.Find(x => x.GetType() == typeof(FieldOfView));
             _moveSpeed = 8f;
             _zVelHash = Animator.StringToHash("enemyVelZ");
         }
@@ -62,7 +59,7 @@ namespace AI.States
             {
                 _zVel = 0;
                 _animator.SetFloat(_zVelHash, _zVel);
-                _sm._CurState = new AttackingState(_go, _sm, _attributes, _sequence, _timeRemaining);
+                _sm._CurState = new AttackingState(_go, _sm, _attributes, _animator, _sequence, _timeRemaining);
             }
         }
 

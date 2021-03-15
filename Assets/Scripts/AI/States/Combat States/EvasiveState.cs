@@ -9,7 +9,6 @@ using UnityEngine.Playables;
 //Resource used to calculate new circular motion that did not lock the Y 
 public class EvasiveState : State
 {
-    private Animator _anim;
     private Transform _player;
     private float _moveSpeed = 1f;
     private Vector3 _centre;
@@ -31,21 +30,20 @@ public class EvasiveState : State
     private static readonly int BackFlip = Animator.StringToHash("CombatFlip");
     #endregion
     
-    public EvasiveState(GameObject go, StateMachine sm, List<IAIAttribute> attributes) : base(go, sm, attributes)
+    public EvasiveState(GameObject go, StateMachine sm, List<IAIAttribute> attributes, Animator animator) : base(go, sm, attributes, animator)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
-        _anim = _go.GetComponent<Animator>();
         _player = GameObject.FindGameObjectWithTag("Player").transform;
         _timer = 5f;
         _rotationalSpeed = 5f;
         _flipped = false;
         _flipPosition = Position();
         
-        AnimationClip[] clips = _anim.runtimeAnimatorController.animationClips;
+        AnimationClip[] clips = _animator.runtimeAnimatorController.animationClips;
         
         foreach (AnimationClip clip in clips)
         {
@@ -90,26 +88,26 @@ public class EvasiveState : State
             float distanceToPlayer = Vector3.Distance(_go.transform.position, _player.position);
             if (distanceToPlayer < _maxDistance)
             {
-                _anim.SetFloat(_zVelHash, -1f);
+                _animator.SetFloat(_zVelHash, -1f);
                 _go.transform.position -= _go.transform.forward * (4 * Time.fixedDeltaTime);
 
             }
             else
             {
-                _anim.SetFloat(_zVelHash, 0f);
+                _animator.SetFloat(_zVelHash, 0f);
             }
         }
 
         if (!(_timer <= 0)) return;
         //Return to a follow state to get back to the player's position to start combat again
         _xVel = 0;
-        _anim.SetFloat(_xVelHash, _xVel);
-        _sm._CurState = new CombatWalk(_go, _sm, _attributes, true);
+        _animator.SetFloat(_xVelHash, _xVel);
+        _sm._CurState = new CombatWalk(_go, _sm, _attributes, _animator, true);
     }
 
     private void DoBackFlip()
     { 
-        _anim.SetTrigger(BackFlip);
+        _animator.SetTrigger(BackFlip);
         _flipped = true;
     }
 

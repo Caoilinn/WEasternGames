@@ -15,7 +15,6 @@ namespace AI.States
     public class CombatState : State
     {
         private Random _rnd;
-        private Animator _anim;
         private EnemyAction _enemyAction;
         private FieldOfView _fieldOfView;
         private State _previous;
@@ -32,7 +31,7 @@ namespace AI.States
         private static readonly int HeavyAttack1 = Animator.StringToHash("HeavyAttack");
         #endregion
         
-        public CombatState(GameObject go, StateMachine sm, List<IAIAttribute> attributes, State previous) : base(go, sm, attributes)
+        public CombatState(GameObject go, StateMachine sm, List<IAIAttribute> attributes, Animator animator, State previous) : base(go, sm, attributes, animator)
         {
             _previous = previous;
         }
@@ -41,7 +40,6 @@ namespace AI.States
         {
             base.Enter();
             _rnd = new Random();
-            _anim = _go.GetComponent<Animator>();
             _enemyAction = _go.GetComponent<EnemyAction>();
             _fieldOfView = _go.GetComponent<FieldOfView>();
         }
@@ -74,7 +72,7 @@ namespace AI.States
 
             if (_fieldOfView.DistanceToPlayer > 5)
             {
-                _sm._CurState = new IdleState(_go, _sm, _attributes);
+                _sm._CurState = new IdleState(_go, _sm, _attributes, _animator);
             }
             
         }
@@ -85,7 +83,7 @@ namespace AI.States
             isReadyNextATK = false;
             isCDOn = true;
             AttackCD = AttackCDVal;
-            _anim.SetTrigger(HeavyAttack1);
+            _animator.SetTrigger(HeavyAttack1);
             
         }
 
@@ -94,7 +92,7 @@ namespace AI.States
             isReadyNextATK = false;
             isCDOn = true;
             AttackCD = AttackCDVal;
-            _anim.SetTrigger(Attack);
+            _animator.SetTrigger(Attack);
         }
 
         private void Defend()
@@ -102,7 +100,7 @@ namespace AI.States
             isReadyNextATK = false;
             isCDOn = true;
             AttackCD = AttackCDVal;
-            _anim.SetTrigger(Block);
+            _animator.SetTrigger(Block);
         }
 
         private void ResetAttackCD()

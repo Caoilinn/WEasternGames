@@ -59,7 +59,7 @@ public class AIController : MonoBehaviour, IAIAttribute
     private void Start()
     {
         //Debug.Log("AIController " + id + " is printing " + AIManager.current);
-        _sm._CurState = new IdleState(gameObject, _sm, _aiAttributes);
+        _sm._CurState = new IdleState(gameObject, _sm, _aiAttributes, _anim);
     }
 
     // Update is called once per frame
@@ -73,15 +73,15 @@ public class AIController : MonoBehaviour, IAIAttribute
         _sm._CurState.FixedUpdate();
 
         if (_enemyAction.action == EnemyAction.EnemyActionType.EnterInjured)
-            _sm._CurState = new InjuredState(gameObject, _sm, _aiAttributes);
+            _sm._CurState = new InjuredState(gameObject, _sm, _aiAttributes, _anim);
 
         if (_attacked == 5)
-            _sm._CurState = new BlockingState(gameObject, _sm, _aiAttributes);
+            _sm._CurState = new BlockingState(gameObject, _sm, _aiAttributes, _anim);
 
         if (playerAction.isPlayerAttacking && !done)
         {
             done = true;
-            _sm._CurState = new QuickBlock(gameObject, _sm, _aiAttributes);
+            _sm._CurState = new QuickBlock(gameObject, _sm, _aiAttributes, _anim);
             //_sm._CurState = new BlockingState(gameObject, _sm);
         }
     }
@@ -89,13 +89,13 @@ public class AIController : MonoBehaviour, IAIAttribute
     public void AttackStateChange(AIController controller)
     {
        if (controller == this) 
-           _sm._CurState = new AttackingState(gameObject, _sm, _aiAttributes);
+           _sm._CurState = new AttackingState(gameObject, _sm, _aiAttributes, _anim);
         //Debug.Log("AI Controller ID is: " + controller.id);
     }
 
     public void EvasionEnvironmentCollided()
     {
         _anim.SetFloat("EnemyX", 0);
-        _sm._CurState = new CombatWalk(gameObject, _sm, _aiAttributes, true);
+        _sm._CurState = new CombatWalk(gameObject, _sm, _aiAttributes, _anim, true);
     }
 }
