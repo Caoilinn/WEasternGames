@@ -25,6 +25,22 @@ public class EnemyWeaponCollision : MonoBehaviour
         collider = this.GetComponent<Collider>();
     }
 
+    float damageCalculation(float atk, float criticalCoefficient, float comboCoefficient, bool isHeavyAtk)
+    {
+        if (!isHeavyAtk)
+        {
+            float dmg;
+            dmg = atk * criticalCoefficient + atk * comboCoefficient;
+            return dmg;
+        }
+        else
+        {
+            float dmg;
+            dmg = 1.5f * atk * (criticalCoefficient + 0.25f) + atk * comboCoefficient;
+            return dmg;
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -36,15 +52,21 @@ public class EnemyWeaponCollision : MonoBehaviour
             PlayerStats playerStats = collision.gameObject.GetComponent<PlayerStats>();
             PlayerMovement playerMovement = collision.gameObject.GetComponent<PlayerMovement>();
             PlayerAction playerAction = collision.gameObject.GetComponent<PlayerAction>();
-
             Enemy enemy = this.enemy.GetComponent<Enemy>();
             bool isInPlayerFov = collision.gameObject.GetComponent<BlockRadius>().EnemyInFOV(enemy);
+            #region damage
+            enemy.criticalCoefficient = Random.Range(0.5f, 1.5f);
+            //float dmg = damageCalculation(enemy.baseAtk, enemy.criticalCoefficient);
+            #endregion
+
             //get player perfect block
             if (collision.gameObject.GetComponent<PlayerAction>().isPerfectBlock == true && this.GetComponent<Collider>().isTrigger == false)
             {
                 if(isInPlayerFov)
                 {
                     TriggerPerfectBlock(collision.gameObject);
+                    playerStats.criticalResetTime = 5;
+                    playerStats.criticalCoefficient = 2.5f;
                 }
                 else
                 {

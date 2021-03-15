@@ -120,7 +120,6 @@ public class PlayerAnimation : MonoBehaviour
 
     public void OnAnimation_isHeavyAttacking()
     {
-
     }
 
     public void OnAnimation_isHeavyAttackingEnd()

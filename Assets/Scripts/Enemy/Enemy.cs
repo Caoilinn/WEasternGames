@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public float HP;
     public HP3D hpUI;
     public float stamina;
+    public float baseAtk = 10;
+    public float criticalCoefficient = 1;
     public Stamina staminaUI;
     private float maxStamina;
     private float restorePerSecond;

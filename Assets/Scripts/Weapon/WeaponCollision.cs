@@ -22,18 +22,40 @@ public class WeaponCollision : MonoBehaviour
         this.GetComponent<Collider>().isTrigger = true;
     }
 
-    void FixedUpdate()
+    float damageCalculation(float atk, float criticalCoefficient, float comboCoefficient, bool isHeavyAtk)
     {
+        if(!isHeavyAtk)
+        {
+            float dmg;
+            dmg = atk * criticalCoefficient + atk * comboCoefficient;
+            return dmg;
+        }
+        else
+        {
+            float dmg;
+            dmg = 1.5f * atk * (criticalCoefficient + 0.25f) + atk * comboCoefficient;
+            return dmg;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
+            #region Initial Condition
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             EnemyAction enemyAction = collision.gameObject.GetComponent<EnemyAction>();
             EnemyAnimation enemyAnimation = collision.gameObject.GetComponent<EnemyAnimation>();
             bool isInEnemyFOV = enemy.PlayerInFOV(player);
+
+            #region damage
+            if (playerStats.criticalCoefficient <= 2)
+            {
+                playerStats.criticalCoefficient = Random.Range(0.5f, 1.5f);
+            }
+            float dmg = damageCalculation(playerStats.baseAtk, playerStats.criticalCoefficient, playerStats.comboCoefficient, playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("HT"));
+            #endregion
+            #endregion
 
             #region Enemy Blocking Collision Logic
             // enemy is blocking and get hit by player
@@ -49,7 +71,7 @@ public class WeaponCollision : MonoBehaviour
                     playerStats.hitStunValue -= 100;
                     if (playerStats.hitStunValue <= 0)
                     {
-                        enemy.DecreaseHPStamina(10, 10);
+                        enemy.DecreaseHPStamina(dmg, dmg);
                         enemy.readyToRestoreStaminaTime = 5.0f;
                         enemyAnimation._anim.ResetTrigger("isInjured");
                         enemyAnimation._anim.SetTrigger("isInjured");
@@ -63,7 +85,7 @@ public class WeaponCollision : MonoBehaviour
                     playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT") &&
                     isInEnemyFOV)
                 {
-                    enemy.DecreaseHPStamina(1.25f, 1.25f);
+                    enemy.DecreaseHPStamina(2.5f, 2.5f);
                     enemy.hitStunValue -= 10;
                     enemy.hitStunRestoreSecond = 5.0f;
                     enemy.readyToRestoreStaminaTime = 5.0f;
@@ -79,7 +101,7 @@ public class WeaponCollision : MonoBehaviour
 
                     else if (enemy.hitStunValue <= 0)
                     {
-                        enemy.DecreaseHPStamina(5, 5);
+                        enemy.DecreaseHPStamina(dmg, dmg);
                         enemy.readyToRestoreStaminaTime = 5.0f;
                         enemyAnimation._anim.ResetTrigger("isInjured");
                         enemyAnimation._anim.SetTrigger("isInjured");
@@ -89,7 +111,7 @@ public class WeaponCollision : MonoBehaviour
                     playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT") &&
                     !isInEnemyFOV)
                 {
-                    enemy.DecreaseHPStamina(5, 5);
+                    enemy.DecreaseHPStamina(dmg, dmg);
                     enemy.readyToRestoreStaminaTime = 5.0f;
                     enemyAnimation._anim.ResetTrigger("isInjured");
                     enemyAnimation._anim.SetTrigger("isInjured");
@@ -143,7 +165,7 @@ public class WeaponCollision : MonoBehaviour
                enemyAction.isPerfectBlock == false)
             {
                 this.GetComponent<Collider>().isTrigger = true;
-                enemy.DecreaseHPStamina(10, 10); 
+                enemy.DecreaseHPStamina(dmg, dmg); 
                 enemy.readyToRestoreStaminaTime = 5.0f;
                 //playerMovement.isSprinting = false;
                 enemyAnimation._anim.ResetTrigger("isInjured");
@@ -157,7 +179,7 @@ public class WeaponCollision : MonoBehaviour
                      enemyAction.isPerfectBlock == false)
             {
                 this.GetComponent<Collider>().isTrigger = true;
-                enemy.DecreaseHPStamina(5, 5);  //  actual is 10
+                enemy.DecreaseHPStamina(dmg, dmg); 
                 enemy.readyToRestoreStaminaTime = 5.0f;
                 enemyAnimation._anim.ResetTrigger("isInjured");
                 enemyAnimation._anim.SetTrigger("isInjured");
@@ -171,7 +193,7 @@ public class WeaponCollision : MonoBehaviour
                 enemyAction.isPerfectBlock == false &&
                 playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("HT"))
             {
-                enemy.DecreaseHPStamina(10, 10);  //  actual is 20
+                enemy.DecreaseHPStamina(dmg, dmg);
                 enemy.readyToRestoreStaminaTime = 5.0f;
                 enemyAnimation._anim.ResetTrigger("isInjured");
                 enemyAnimation._anim.SetTrigger("isInjured");
@@ -189,7 +211,7 @@ public class WeaponCollision : MonoBehaviour
             {
                 if(isInEnemyFOV)
                 {
-                    enemy.DecreaseHPStamina(5, 5);
+                    enemy.DecreaseHPStamina(dmg, dmg);
                     enemy.hitStunValue -= 5;
                     enemyAnimation._anim.ResetTrigger("isGetBlockingImpact");
                     enemyAnimation._anim.SetTrigger("isGetBlockingImpact");
@@ -201,7 +223,7 @@ public class WeaponCollision : MonoBehaviour
                 else
                 {
                     this.GetComponent<Collider>().isTrigger = true;
-                    enemy.DecreaseHPStamina(5, 5);
+                    enemy.DecreaseHPStamina(dmg, dmg);
                     enemy.readyToRestoreStaminaTime = 5.0f;
                     enemyAnimation._anim.ResetTrigger("isInjured");
                     enemyAnimation._anim.SetTrigger("isInjured");
@@ -212,11 +234,11 @@ public class WeaponCollision : MonoBehaviour
             {
                 if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT"))
                 {
-                    enemy.DecreaseHPStamina(5, 5);   //  actual is 10
+                    enemy.DecreaseHPStamina(dmg, dmg);  
                 }
                 else if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("HT"))
                 {
-                    enemy.DecreaseHPStamina(10, 10);   //  actual is 20
+                    enemy.DecreaseHPStamina(dmg, dmg);  
                 }
                 enemyAnimation._anim.ResetTrigger("isInjured");
                 enemyAnimation._anim.SetTrigger("isInjured");
@@ -242,11 +264,11 @@ public class WeaponCollision : MonoBehaviour
                 {
                     if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("LT"))
                     {
-                        enemy.DecreaseHPStamina(5, 5);  
+                        enemy.DecreaseHPStamina(dmg, dmg);  
                     }
                     else if (playerAnimation._anim.GetCurrentAnimatorStateInfo(0).IsTag("HT"))
                     {
-                        enemy.DecreaseHPStamina(10, 10); 
+                        enemy.DecreaseHPStamina(dmg, dmg); 
                     }
                     enemyAnimation._anim.ResetTrigger("isInjured");
                     enemyAnimation._anim.SetTrigger("isInjured");
