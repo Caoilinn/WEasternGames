@@ -11,7 +11,7 @@ namespace AI.States
         
         public readonly AIController aiController;
 
-        public IdleState(GameObject go, StateMachine sm) : base(go, sm)
+        public IdleState(GameObject go, StateMachine sm, List<IAIAttribute> attributes) : base(go, sm, attributes)
         { 
             //Debug.Log("Enemy with name " + _go.name +  " is printing " + AIManager.current);
             //AIManager.current.OnAttackStateChangeReq += OnAttackStateChange;
@@ -42,7 +42,7 @@ namespace AI.States
             {
                 _animator.SetBool(Idle, false);
                 //Debug.Log("Enter Follow from Idle");
-                _sm._CurState = new FollowState(_go, _sm);
+                _sm._CurState = new FollowState(_go, _sm, _attributes);
             }
         }
     }

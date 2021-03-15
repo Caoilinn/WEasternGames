@@ -16,7 +16,7 @@ public class InjuredState : State
     private EnemyAction _enemyAction;
     private static readonly int IsInjured = Animator.StringToHash("isInjured");
 
-    public InjuredState(GameObject go, StateMachine sm) : base(go, sm)
+    public InjuredState(GameObject go, StateMachine sm, List<IAIAttribute> attributes) : base(go, sm, attributes)
     {
     }
 
@@ -45,7 +45,7 @@ public class InjuredState : State
             PlayInjured();
         
         if (_complete)
-            _sm._CurState = new AttackingState(_go, _sm);
+            _sm._CurState = new AttackingState(_go, _sm, _attributes);
     }
 
     private void PlayInjured()

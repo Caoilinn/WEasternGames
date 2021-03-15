@@ -25,7 +25,6 @@ public class AttackingState : State
     private Rigidbody _rigidBody;
     private Animator _anim;
     private List<int> _attackPatterns;
-    private Random _rnd;
     private CombatActionType _actionType;
     private EnemyAction _enemyAction;
     private Transform _playerTransform;
@@ -71,9 +70,9 @@ public class AttackingState : State
     
     #endregion
     
-    public AttackingState(GameObject go, StateMachine sm, int sequence = 0, float timeRemaining = 0) : base(go, sm)
+    public AttackingState(GameObject go, StateMachine sm, List<IAIAttribute> attributes,  int sequence = 0, float timeRemaining = 0) : base(go, sm, attributes)
     {
-        //These checks are in place to make sure the attakcing state picks back up where it left off in the case of a roll
+        //These checks are in place to make sure the attacking state picks back up where it left off in the case of a roll
         if (sequence != 0)
             _sequenceCount = sequence;
 
@@ -87,8 +86,6 @@ public class AttackingState : State
         _anim = _go.GetComponent<Animator>();
         _enemyAction = _go.GetComponent<EnemyAction>();
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        _rnd = new Random();
-        //_attackStateCountDown = 7f;
         _actions = new List<AnimationAction>();
         _actionSequence = new List<AnimationAction>();
         _collider = _go.GetComponent<CapsuleCollider>();
@@ -125,28 +122,24 @@ public class AttackingState : State
             DoCombatRoll();
            
         ResetAttackCD();
-
-        _attackStateCountDown -= Time.fixedDeltaTime;
         
         //Currently Changes state to blocking 
         //TODO: Change how the Attacking State transitions to blocking, make it transition based on health
-        //if (_attackStateCountDown <= 0)
+
         if (_seqEnd)
         {
             int action = Random.Range(0,2);
-            action = 0;
 
             if (action == 0)
-                //_sm._CurState = new EvasiveState(_go, _sm);
-                _sm._CurState = new EvasiveState(_go, _sm);
+                _sm._CurState = new EvasiveState(_go, _sm, _attributes);
             else
-                _sm._CurState = new BlockingState(_go, _sm);
+                _sm._CurState = new BlockingState(_go, _sm, _attributes);
         }
 
         if (Vector3.Distance(_playerTransform.position, _go.transform.position) > 3f && !_rolling)
         {
             //Debug.Log("Enter Follow from attack");
-            _sm._CurState = new FollowState(_go, _sm, _sequenceCount);
+            _sm._CurState = new FollowState(_go, _sm, _attributes, _sequenceCount);
         }
     }
 

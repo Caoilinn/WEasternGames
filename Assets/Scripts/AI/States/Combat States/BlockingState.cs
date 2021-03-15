@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using AI;
-using AI.States;
 using UnityEngine;
 using Utilities;
 
@@ -15,7 +14,7 @@ public class BlockingState : State
     private bool _alreadyBlocking;
     private float _moveSpeed = 1f;
     
-    public BlockingState(GameObject go, StateMachine sm) : base(go, sm)
+    public BlockingState(GameObject go, StateMachine sm, List<IAIAttribute> attributes) : base(go, sm, attributes)
     {
     }
 
@@ -32,9 +31,6 @@ public class BlockingState : State
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        //bool isLeft = IsLeft();
-        //Move(isLeft);
         
         if (!_alreadyBlocking)
         {
@@ -53,7 +49,7 @@ public class BlockingState : State
         if (_blockingCountDown <= 0)
         {
             _enemyAction.isKeepBlocking = false;
-            _sm._CurState = new AttackingState(_go, _sm);
+            _sm._CurState = new AttackingState(_go, _sm, _attributes);
         }
 
         if (_alreadyBlocking && Vector3.Distance(_go.transform.position , _player.position) < 2f)

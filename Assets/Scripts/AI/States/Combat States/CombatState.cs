@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Utilities;
@@ -31,7 +32,7 @@ namespace AI.States
         private static readonly int HeavyAttack1 = Animator.StringToHash("HeavyAttack");
         #endregion
         
-        public CombatState(GameObject go, StateMachine sm, State previous) : base(go, sm)
+        public CombatState(GameObject go, StateMachine sm, List<IAIAttribute> attributes, State previous) : base(go, sm, attributes)
         {
             _previous = previous;
         }
@@ -73,7 +74,7 @@ namespace AI.States
 
             if (_fieldOfView.DistanceToPlayer > 5)
             {
-                _sm._CurState = new IdleState(_go, _sm);
+                _sm._CurState = new IdleState(_go, _sm, _attributes);
             }
             
         }

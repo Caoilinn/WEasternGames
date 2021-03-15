@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AI
 {
-    public class FieldOfView : MonoBehaviour
+    public class FieldOfView : MonoBehaviour, IAIAttribute
     {
         
         public float fieldOfViewAngle;

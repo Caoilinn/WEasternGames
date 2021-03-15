@@ -1,4 +1,5 @@
-﻿using AI;
+﻿using System.Collections.Generic;
+using AI;
 using AI.States;
 using TMPro;
 using UnityEngine;
@@ -18,16 +19,19 @@ public class EvasiveState : State
     private float _rotationalSpeed;
     private bool _flipped;
     private float _flippedTime;
+    private float _maxDistance;
     private Vector3 _flipPosition; 
+    
     
     
     #region Animations
     private float _xVel;
     private int _xVelHash = Animator.StringToHash("EnemyX");
+    private int _zVelHash = Animator.StringToHash("enemyVelZ");
     private static readonly int BackFlip = Animator.StringToHash("CombatFlip");
     #endregion
     
-    public EvasiveState(GameObject go, StateMachine sm) : base(go, sm)
+    public EvasiveState(GameObject go, StateMachine sm, List<IAIAttribute> attributes) : base(go, sm, attributes)
     {
     }
 
@@ -73,33 +77,34 @@ public class EvasiveState : State
             Vector3 position = _go.transform.position;
             position = Vector3.MoveTowards(position, Position(), step);
             _go.transform.position = position;
-            _centre = _player.transform.position;
-            _radius = Vector3.Distance(position, _player.position);
+            
+            //_centre = _player.transform.position;
+            //This is the distance the AI will reach when the finish flipping away from the player
+            _maxDistance = Vector3.Distance(_go.transform.position, _player.position);
         }
         else
         {
-            /*_timer -= Time.fixedDeltaTime;
+            _timer -= Time.fixedDeltaTime;          
+            _go.transform.LookAt(_player);
             
-            //Rotates the enemy around the player
-            _go.transform.position =
-                _centre + (_go.transform.position - _centre).normalized * _radius;
-            _go.transform.RotateAround(_centre, Vector3.up, _rotationalSpeed * Time.fixedDeltaTime);
-   
-            //Makes sure that the enemy is still facing the player
-            _go.transform.LookAt(_centre);
-        
-            //Updates the blend tree to perform a walk animation
-            _xVel = -2f;
-            _anim.SetFloat(_xVelHash, _xVel);*/
-            
-            _sm._CurState = new CombatWalk(_go, _sm, true);
+            float distanceToPlayer = Vector3.Distance(_go.transform.position, _player.position);
+            if (distanceToPlayer < _maxDistance)
+            {
+                _anim.SetFloat(_zVelHash, -1f);
+                _go.transform.position -= _go.transform.forward * (4 * Time.fixedDeltaTime);
+
+            }
+            else
+            {
+                _anim.SetFloat(_zVelHash, 0f);
+            }
         }
 
         if (!(_timer <= 0)) return;
         //Return to a follow state to get back to the player's position to start combat again
         _xVel = 0;
         _anim.SetFloat(_xVelHash, _xVel);
-        _sm._CurState = new CombatWalk(_go, _sm, true);
+        _sm._CurState = new CombatWalk(_go, _sm, _attributes, true);
     }
 
     private void DoBackFlip()

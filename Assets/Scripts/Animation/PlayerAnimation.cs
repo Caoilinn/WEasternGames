@@ -131,6 +131,7 @@ public class PlayerAnimation : MonoBehaviour
     public void OnAnimation_IsLightAttackActive()
     {
         collider.isTrigger = false;
+        
     }
 
     public void OnAnimation_IsLightAttackDeactive()

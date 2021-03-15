@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AI;
 using UnityEngine;
 using Utilities;
 
-public class EnemyAnimation : MonoBehaviour
+public class EnemyAnimation : MonoBehaviour, IAIAttribute
 {
     public Animator _anim;
     private EnemyAction enemyAction;

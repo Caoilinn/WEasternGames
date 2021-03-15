@@ -20,7 +20,7 @@ public class CombatWalk : State
     #endregion
     
 
-    public CombatWalk(GameObject go, StateMachine sm, bool forward) : base(go, sm)
+    public CombatWalk(GameObject go, StateMachine sm, List<IAIAttribute> attributes, bool forward) : base(go, sm, attributes)
     {
         _forward = forward;
     }
@@ -63,7 +63,7 @@ public class CombatWalk : State
         {
             _zVel = 0;
             _anim.SetFloat(_zVelHash, _zVel);
-            _sm._CurState = new AttackingState(_go, _sm);
+            _sm._CurState = new AttackingState(_go, _sm, _attributes);
         }
 
         //The AI is walking away from the player to enter an evasive state
@@ -71,7 +71,7 @@ public class CombatWalk : State
         {
             _zVel = 0;
             _anim.SetFloat(_zVelHash, _zVel);
-            _sm._CurState = new CombatWalk(_go, _sm, true);
+            _sm._CurState = new CombatWalk(_go, _sm, _attributes, true);
         }
         
     }

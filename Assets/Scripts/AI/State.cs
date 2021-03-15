@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 //Using the state pattern from: https://www.udemy.com/course/ai-in-unity
 //All subsequent states will follow this design pattern however their implementation will be unique  
 namespace AI
@@ -7,11 +8,13 @@ namespace AI
     {
         protected GameObject _go;
         protected StateMachine _sm;
+        protected List<IAIAttribute> _attributes;
 
-        protected State(GameObject go, StateMachine sm)
+        protected State(GameObject go, StateMachine sm, List<IAIAttribute> attributes)
         {
             _go = go;
             _sm = sm;
+            _attributes = attributes;
         }
 
         //Called when the state is entered

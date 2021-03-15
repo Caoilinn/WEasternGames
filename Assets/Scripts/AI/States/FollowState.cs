@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AI.States
@@ -24,7 +25,8 @@ namespace AI.States
         
         #endregion
 
-        public FollowState(GameObject go, StateMachine sm, int sequence = 0, float timeRemaining = 0) : base(go, sm)
+        public FollowState(GameObject go, StateMachine sm, List<IAIAttribute> attributes, int sequence = 0, float timeRemaining = 0) 
+            : base(go, sm, attributes)
         {
             _sequence = sequence;
             timeRemaining = timeRemaining;
@@ -60,7 +62,7 @@ namespace AI.States
             {
                 _zVel = 0;
                 _animator.SetFloat(_zVelHash, _zVel);
-                _sm._CurState = new AttackingState(_go, _sm, _sequence, _timeRemaining);
+                _sm._CurState = new AttackingState(_go, _sm, _attributes, _sequence, _timeRemaining);
             }
         }
 

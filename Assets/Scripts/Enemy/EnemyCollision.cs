@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using AI;
 using UnityEngine;
 using Utilities;
 
-public class EnemyCollision : MonoBehaviour
+public class EnemyCollision : MonoBehaviour, IAIAttribute
 {
     private bool _isInjured;
     private EnemyAction.EnemyActionType _enemyActionType;
