@@ -27,6 +27,7 @@ public class AttackingState : State
     private List<int> _attackPatterns;
     private CombatActionType _actionType;
     private EnemyAction _enemyAction;
+    private Enemy _enemy;
     private Transform _playerTransform;
     private CapsuleCollider _collider;
     private float _colliderRadius;
@@ -49,11 +50,25 @@ public class AttackingState : State
     private bool _isCdOn = false;
 
     private bool _seqEnd = false;
+
+
+    #region Attack Sequences
     
+    //Normal Sequences - AI Health >= 50% 
     private readonly int[] _sequence1 = {0, 1, 2, 3};
     private readonly int[] _sequence2 = {0, 0, 2};
     private readonly int[] _sequence3 = {1, 0, 1, 3};
     private readonly int[] _sequence4 = {0, 1, 0, 2, 3};
+    private readonly int[] _sequence5 = {0, 1, 0, 2, 3};
+
+    //Aggressive Sequences - AI Health < 50%
+    private readonly int[] _sequence6 = {0, 1, 0, 2, 3};
+    private readonly int[] _sequence7 = {0, 1, 0, 2, 3};
+    private readonly int[] _sequence8 = {0, 1, 0, 2, 3};
+    private readonly int[] _sequence9 = {0, 1, 0, 2, 3};
+    
+    #endregion'
+
     
     
     //This is how long the AI will remain in this state during combat
@@ -85,6 +100,7 @@ public class AttackingState : State
         base.Enter();
         _collider = _go.GetComponent<CapsuleCollider>();
         _enemyAction = (EnemyAction) _attributes.Find(x => x.GetType() == typeof(EnemyAction));
+        _enemy = (Enemy) _attributes.Find(x => x.GetType() == typeof(Enemy));
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _actions = new List<AnimationAction>();
         _actionSequence = new List<AnimationAction>();
@@ -142,7 +158,10 @@ public class AttackingState : State
         }
     }
 
-
+    /// <summary>
+    /// Sets up the attack sequence that will be use and retrieves the
+    /// action from the sequence array and performs said action
+    /// </summary>
     private void PerformActions()
     {
         if (_isNextSequenceReady)
@@ -205,12 +224,14 @@ public class AttackingState : State
         return null;
     }
 
-    //Returns the next sequence that the AI needs to use
+    /// <summary>
+    /// Sets the sequence that the AI will use
+    /// </summary>
     private void GetSequence()
     {
         int rnd = Random.Range(0, 3);
         int[] seq = new int[] { };
-  
+
         switch (rnd)
         {
             case 0:
@@ -261,6 +282,9 @@ public class AttackingState : State
         }
     }
 
+    /// <summary>
+    /// Resets the animation timer so the next attack can begin
+    /// </summary>
     private void ResetAttackCD()
     {
         if (_attackCd > 0 && _isCdOn)
@@ -273,5 +297,31 @@ public class AttackingState : State
             _isCdOn = false;
             _isReadyNextAtk = true;
         }
+    }
+
+    /// <summary>
+    /// Gets a sequence number based on random numbers and probability  
+    /// </summary>
+    /// <returns>Sequence Number</returns>
+    private int GetSequenceValue()
+    {
+        float rnd = Random.value;
+
+        if (_enemy.HP >= 50)
+        {
+            if (rnd <= 0.5f)
+                return 1;
+            if (rnd <= 0.8f)
+                return Random.Range(2, 3);
+        
+            return Random.Range(4, 5);
+        }
+        
+        if (rnd <= 0.5f)
+            return Random.Range(6, 7);
+        if (rnd <= 0.8f)
+            return 8;
+
+        return 9;
     }
 }
